@@ -14,7 +14,7 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden; /* Prevent horizontal scroll */
-            color: #333; /* Darker text for readability (default for non-hero/special sections) */
+            color: #333; /* Darker text for readability */
         }
         h1, h2, h3, h4 {
             font-family: 'Playfair Display', serif;
@@ -77,6 +77,7 @@
             position: absolute;
             bottom: 30px; /* Distance from the bottom of the screen */
             left: 50%;
+            /* Make it smaller */
             width: 20px; /* Size of the V */
             height: 20px;
             border-bottom: 2px solid white; /* Bottom line of the V */
@@ -99,52 +100,26 @@
             }
         }
 
-        /* Specific styling for the main 'about' section with animated background */
-        .about-section-bg {
-            background-color: #28282B; /* Deep gray base for text contrast */
-            position: relative;
-            overflow: hidden; /* Important for containing pseudo-elements */
-            z-index: 1; /* Ensures this section stacks correctly */
-        }
-
-        .about-section-bg::before {
-            content: '';
+        /* Specific styling for the 'about' section's video background */
+        .about-section-video {
             position: absolute;
-            top: -50%; /* Start higher */
-            left: -50%; /* Start more left */
-            width: 200%; /* Wider than container */
-            height: 200%; /* Taller than container */
-            background: radial-gradient(circle at 50% 50%,
-                rgba(255, 255, 255, 0.05) 0%,   /* Very subtle light center */
-                rgba(255, 255, 255, 0.1) 20%,   /* A bit brighter */
-                rgba(255, 255, 255, 0.05) 40%,  /* Fades out */
-                rgba(255, 255, 255, 0) 60%      /* Transparent */
-            ),
-            linear-gradient(135deg,
-                rgba(255, 255, 255, 0.03) 0%,
-                rgba(255, 255, 255, 0.08) 25%,
-                rgba(255, 255, 255, 0.03) 50%,
-                rgba(255, 255, 255, 0) 75%
-            );
-            background-repeat: repeat; /* Allows the gradient to tile if needed for effect */
-            background-size: 150% 150%; /* For animating position within a larger background */
-            animation: curtainMovement 20s infinite ease-in-out alternate, shimmerEffect 10s infinite linear;
-            filter: blur(15px); /* Soften the effect to make it ethereal */
-            opacity: 0.7; /* Overall transparency of the effect */
-            z-index: -1; /* Keep behind main content */
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1; /* Puts video behind content and overlay */
+            transform: translate(-50%, -50%);
+            object-fit: cover; /* Ensures video covers the entire area without distortion */
+            filter: brightness(0.7); /* Slightly dim the video for text readability */
         }
 
-        @keyframes curtainMovement {
-            0% { transform: translate(0%, 0%) rotate(0deg) scale(1); }
-            25% { transform: translate(-5%, 5%) rotate(1deg) scale(1.02); }
-            50% { transform: translate(0%, 0%) rotate(0deg) scale(1); }
-            75% { transform: translate(5%, -5%) rotate(-1deg) scale(0.98); }
-            100% { transform: translate(0%, 0%) rotate(0deg) scale(1); }
-        }
-
-        @keyframes shimmerEffect {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
+        .about-section-video-overlay {
+            background-color: rgba(0, 0, 0, 0.3); /* Dark overlay for text readability */
+            position: absolute;
+            inset: 0;
+            z-index: 0; /* Above video, below content */
         }
     </style>
 </head>
@@ -186,15 +161,23 @@
         <div class="scroll-indicator"></div>
     </header>
 
-    <!-- "What We Do" Section: Redesigned for clear explanation with aesthetic background -->
-    <section id="about" class="container mx-auto px-4 section-py flex flex-col items-center text-center about-section-bg rounded-3xl shadow-2xl">
-        <h2 class="text-5xl md:text-6xl font-extrabold mb-8 text-white leading-tight max-w-4xl drop-shadow-md">
+    <!-- "What We Do" Section: Redesigned for clear explanation with video background -->
+    <section id="about" class="container mx-auto px-4 section-py flex flex-col items-center text-center relative overflow-hidden">
+        <!-- Video Background for this section -->
+        <video autoplay loop muted playsinline class="about-section-video">
+            <source src="curtain.mp4" type="video/mp4">
+            <!-- Fallback for browsers that don't support video or if video fails to load -->
+            <img src="https://placehold.co/1920x1080/28282B/28282B?text=Dark+Background" alt="Subtle Textured Background Fallback" class="w-full h-full object-cover">
+        </video>
+        <div class="about-section-video-overlay"></div>
+
+        <h2 class="text-5xl md:text-6xl font-extrabold mb-8 text-white leading-tight max-w-4xl drop-shadow-md relative z-10">
             Tropicalluxuries: Curating Your Next Breakthrough
         </h2>
-        <p class="text-xl leading-relaxed mb-6 max-w-3xl text-white drop-shadow">
+        <p class="text-xl leading-relaxed mb-6 max-w-3xl text-white drop-shadow relative z-10">
             We hand-select and curate **exclusive villa retreats worldwide**, designed specifically for visionary entrepreneurs and CEOs. Our mission is to provide unparalleled luxury accommodations where like-minded individuals connect, collaborate, and rejuvenate.
         </p>
-        <p class="text-xl leading-relaxed max-w-3xl text-white drop-shadow">
+        <p class="text-xl leading-relaxed max-w-3xl text-white drop-shadow relative z-10">
             Experience high-end living blended with focused environments for personal and professional growth. Every Tropicalluxuries retreat is crafted to unlock new levels of creativity, foster powerful connections, and inspire your path to success.
         </p>
     </section>
