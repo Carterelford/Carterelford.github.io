@@ -22,12 +22,10 @@
 
         /* Hero section with video background */
         .hero-video-container {
-            position: relative;
+            position: relative; /* Make it a positioning context for absolute children */
             min-height: 100vh; /* Full viewport height */
-            display: flex; /* Make it a flex container */
-            align-items: center; /* Vertically centers direct child content */
-            justify-content: center; /* Horizontally centers direct child content */
             overflow: hidden; /* Ensures video doesn't spill out */
+            /* Removed flex centering here to allow independent absolute positioning of logo, content, and arrow */
         }
 
         .hero-video {
@@ -74,6 +72,34 @@
         .md\:aspect-h-10 {
             padding-bottom: 62.5%; /* Adjusts height to 10/16 aspect ratio */
         }
+
+        /* CSS for the animated scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px; /* Distance from the bottom of the screen */
+            left: 50%;
+            /* Make it smaller */
+            width: 20px; /* Size of the V */
+            height: 20px;
+            border-bottom: 2px solid white; /* Bottom line of the V */
+            border-right: 2px solid white; /* Right line of the V */
+            transform: translateX(-50%) rotate(45deg); /* Rotates to make a V shape pointing down */
+            animation: bounce 2s infinite; /* Apply the bounce animation */
+            z-index: 20; /* Ensure it's above the video and overlay */
+        }
+
+        /* Keyframes for the subtle up-and-down bounce animation */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) rotate(45deg) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) rotate(45deg) translateY(-8px); /* Move up slightly less */
+            }
+            60% {
+                transform: translateX(-50%) rotate(45deg) translateY(-4px); /* Move up slightly less */
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -97,8 +123,8 @@
             <img src="imageedit_95_9159867146.png" onerror="this.onerror=null;this.src='https://placehold.co/120x120/000000/FFFFFF?text=Logo';" alt="Tropical Luxuries Logo" class="w-28 h-28 md:w-36 md:h-36 mx-auto rounded-full shadow-lg">
         </div>
 
-        <!-- Main Heading Content - Centered Horizontally and Vertically -->
-        <div class="relative z-10 text-center px-4 md:px-8">
+        <!-- Main Heading Content - Exactly as it was before this arrow (vertically centered) -->
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 md:px-8 z-10">
             <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight text-white drop-shadow-lg leading-tight">
                 Tropicalluxuries
             </h1>
@@ -109,6 +135,9 @@
                 Explore
             </a>
         </div>
+
+        <!-- Scroll Indicator (New Element) -->
+        <div class="scroll-indicator"></div>
     </header>
 
     <!-- About/Vision Section: Enhanced for seamless flow and visual impact -->
