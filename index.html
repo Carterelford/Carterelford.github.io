@@ -25,8 +25,8 @@
             position: relative;
             min-height: 100vh; /* Full viewport height */
             display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: center; /* Centers main content block vertically */
+            justify-content: center; /* Centers main content block horizontally */
             overflow: hidden; /* Ensures video doesn't spill out */
         }
 
@@ -81,7 +81,7 @@
     <!-- Navbar (REMOVED as per your request for a simpler, seamless experience) -->
     <!-- The previous <nav> element has been entirely removed from here. -->
 
-    <!-- Hero Section: With Video Background (from your provided code - now without nav above it) -->
+    <!-- Hero Section: With Video Background -->
     <header class="hero-video-container">
         <!-- Video Element -->
         <video autoplay loop muted playsinline class="hero-video">
@@ -92,10 +92,13 @@
         </video>
         <div class="hero-overlay"></div> <!-- Overlay for content readability -->
 
-        <div class="relative z-10 text-center px-4 md:px-8">
-            <!-- Large Logo for Hero -->
-            <img src="imageedit_95_9159867146.png" onerror="this.onerror=null;this.src='https://placehold.co/150x150/000000/FFFFFF?text=YOUR+LOGO';" alt="Tropical Luxuries Logo" class="w-36 h-36 md:w-48 md:h-48 mx-auto mb-8 rounded-full shadow-lg">
-            
+        <!-- Logo at Top Middle -->
+        <div class="absolute top-8 left-1/2 -translate-x-1/2 z-20">
+            <img src="imageedit_95_9159867146.png" onerror="this.onerror=null;this.src='https://placehold.co/100x100/000000/FFFFFF?text=Logo';" alt="Tropical Luxuries Logo" class="w-24 h-24 md:w-32 md:h-32 mx-auto rounded-full shadow-lg">
+        </div>
+
+        <!-- Main Heading Content - Vertically and Horizontally Centered -->
+        <div class="relative z-10 text-center px-4 md:px-8 flex flex-col items-center justify-center h-full w-full max-w-4xl">
             <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight text-white drop-shadow-lg leading-tight">
                 Tropicalluxuries
             </h1>
