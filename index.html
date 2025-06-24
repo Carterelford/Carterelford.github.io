@@ -77,7 +77,6 @@
             position: absolute;
             bottom: 30px; /* Distance from the bottom of the screen */
             left: 50%;
-            /* Make it smaller */
             width: 20px; /* Size of the V */
             height: 20px;
             border-bottom: 2px solid white; /* Bottom line of the V */
@@ -112,7 +111,7 @@
             z-index: -1; /* Puts video behind content and overlay */
             transform: translate(-50%, -50%);
             object-fit: cover; /* Ensures video covers the entire area without distortion */
-            /* Removed filter: brightness(0.7); to keep original brightness */
+            /* No brightness filter as per user request */
         }
 
         /* Removed .about-section-video-overlay as per request to not dim the background */
@@ -157,7 +156,7 @@
     </header>
 
     <!-- "What We Do" Section: Redesigned for clear explanation with video background -->
-    <section id="about" class="section-py flex flex-col items-center text-center relative overflow-hidden">
+    <section id="about" class="section-py flex flex-col items-center relative overflow-hidden">
         <!-- Video Background for this section -->
         <video autoplay loop muted playsinline class="about-section-video">
             <source src="curtain.mp4" type="video/mp4">
@@ -166,8 +165,8 @@
         </video>
         <!-- Removed .about-section-video-overlay div as per request to not dim the background -->
 
-        <!-- Content div to apply padding for text -->
-        <div class="container mx-auto px-4">
+        <!-- Content div to apply padding for text and now also centering -->
+        <div class="container mx-auto px-4 text-center">
             <h2 class="text-5xl md:text-6xl font-extrabold mb-8 text-gray-900 leading-tight max-w-4xl drop-shadow-md relative z-10">
                 Tropicalluxuries: Curating Your Next Breakthrough
             </h2>
@@ -214,7 +213,7 @@
     <!-- "Our Curated Destinations" Section: Renamed and focused on retreats -->
     <section id="properties" class="px-4 section-py">
         <div class="container mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 leading-tight">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 leading-tight max-w-4xl mx-auto">
                 Our Curated Retreat Experiences
             </h2>
 
