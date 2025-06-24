@@ -111,10 +111,15 @@
             z-index: -1; /* Puts video behind content and overlay */
             transform: translate(-50%, -50%);
             object-fit: cover; /* Ensures video covers the entire area without distortion */
-            /* No brightness filter as per user request */
+            filter: brightness(0.7); /* Added back brightness filter for dimming */
         }
 
-        /* Removed .about-section-video-overlay as per request to not dim the background */
+        .about-section-video-overlay {
+            background-color: rgba(0, 0, 0, 0.3); /* Re-added dark overlay for readability */
+            position: absolute;
+            inset: 0;
+            z-index: 0; /* Above video, below content */
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -159,18 +164,18 @@
     <section id="about" class="section-py relative overflow-hidden">
         <!-- Video Background for this section -->
         <video autoplay loop muted playsinline class="about-section-video">
-            <source src="curtain.mp4" type="video/mp4">
+            <source src="perfect villa backround.mp4" type="video/mp4">
             <!-- Fallback for browsers that don't support video or if video fails to load -->
             <img src="https://placehold.co/1920x1080/28282B/28282B?text=Dark+Background" alt="Subtle Textured Background Fallback" class="w-full h-full object-cover">
         </video>
-        <!-- Removed .about-section-video-overlay div as per request to not dim the background -->
+        <div class="about-section-video-overlay"></div> <!-- Re-added dark overlay for readability -->
 
         <!-- Content div to apply padding for text and center its contents -->
         <div class="container mx-auto px-4 text-center">
-            <h2 class="text-5xl md:text-6xl font-extrabold mb-8 text-gray-900 leading-tight max-w-4xl drop-shadow-md relative z-10 mx-auto">
+            <h2 class="text-5xl md:text-6xl font-extrabold mb-8 text-white leading-tight max-w-4xl drop-shadow-md relative z-10 mx-auto">
                 <span class="hidden md:inline">Tropicalluxuries: </span>Curating Your Next Breakthrough
             </h2>
-            <p class="text-xl leading-relaxed max-w-3xl text-gray-900 drop-shadow relative z-10 mx-auto">
+            <p class="text-xl leading-relaxed max-w-3xl text-white drop-shadow relative z-10 mx-auto">
                 Tropicalluxuries hosts exclusive villas for entrepreneurs at every stage—whether you’re just beginning or building your empire. In stunning locations around the world, you’ll live, train, think, and build alongside like-minded individuals who push you forward. With luxury surroundings, deep focus, movement, and shared ambition, every stay is your launchpad for clarity, creativity, and growth.
             </p>
         </div>
