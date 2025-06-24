@@ -112,15 +112,10 @@
             z-index: -1; /* Puts video behind content and overlay */
             transform: translate(-50%, -50%);
             object-fit: cover; /* Ensures video covers the entire area without distortion */
-            filter: brightness(0.7); /* Slightly dim the video for text readability */
+            /* Removed filter: brightness(0.7); to keep original brightness */
         }
 
-        .about-section-video-overlay {
-            background-color: rgba(0, 0, 0, 0.3); /* Dark overlay for text readability */
-            position: absolute;
-            inset: 0;
-            z-index: 0; /* Above video, below content */
-        }
+        /* Removed .about-section-video-overlay as per request to not dim the background */
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -162,27 +157,30 @@
     </header>
 
     <!-- "What We Do" Section: Redesigned for clear explanation with video background -->
-    <section id="about" class="container mx-auto px-4 section-py flex flex-col items-center text-center relative overflow-hidden">
+    <section id="about" class="section-py flex flex-col items-center text-center relative overflow-hidden">
         <!-- Video Background for this section -->
         <video autoplay loop muted playsinline class="about-section-video">
             <source src="curtain.mp4" type="video/mp4">
             <!-- Fallback for browsers that don't support video or if video fails to load -->
             <img src="https://placehold.co/1920x1080/28282B/28282B?text=Dark+Background" alt="Subtle Textured Background Fallback" class="w-full h-full object-cover">
         </video>
-        <div class="about-section-video-overlay"></div>
+        <!-- Removed .about-section-video-overlay div as per request to not dim the background -->
 
-        <h2 class="text-5xl md:text-6xl font-extrabold mb-8 text-white leading-tight max-w-4xl drop-shadow-md relative z-10">
-            Tropicalluxuries: Curating Your Next Breakthrough
-        </h2>
-        <p class="text-xl leading-relaxed mb-6 max-w-3xl text-white drop-shadow relative z-10">
-            We hand-select and curate **exclusive villa retreats worldwide**, designed specifically for visionary entrepreneurs and CEOs. Our mission is to provide unparalleled luxury accommodations where like-minded individuals connect, collaborate, and rejuvenate.
-        </p>
-        <p class="text-xl leading-relaxed max-w-3xl text-white drop-shadow relative z-10">
-            Experience high-end living blended with focused environments for personal and professional growth. Every Tropicalluxuries retreat is crafted to unlock new levels of creativity, foster powerful connections, and inspire your path to success.
-        </p>
+        <!-- Content div to apply padding for text -->
+        <div class="container mx-auto px-4">
+            <h2 class="text-5xl md:text-6xl font-extrabold mb-8 text-gray-900 leading-tight max-w-4xl drop-shadow-md relative z-10">
+                Tropicalluxuries: Curating Your Next Breakthrough
+            </h2>
+            <p class="text-xl leading-relaxed mb-6 max-w-3xl text-gray-900 drop-shadow relative z-10">
+                We hand-select and curate **exclusive villa retreats worldwide**, designed specifically for visionary entrepreneurs and CEOs. Our mission is to provide unparalleled luxury accommodations where like-minded individuals connect, collaborate, and rejuvenate.
+            </p>
+            <p class="text-xl leading-relaxed max-w-3xl text-gray-900 drop-shadow relative z-10">
+                Experience high-end living blended with focused environments for personal and professional growth. Every Tropicalluxuries retreat is crafted to unlock new levels of creativity, foster powerful connections, and inspire your path to success.
+            </p>
+        </div>
     </section>
 
-    <!-- NEW POSITION: How Our Retreats Work Section -->
+    <!-- How Our Retreats Work Section -->
     <section id="how-it-works" class="bg-light-cream px-4 section-py">
         <div class="container mx-auto">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 leading-tight max-w-4xl mx-auto">
