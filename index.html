@@ -52,21 +52,33 @@
             z-index: 0; /* Above video, below content */
         }
 
-        /* General section padding */
+        /* General section padding for consistent spacing */
         .section-py {
-            padding-top: 5rem; /* Equivalent to py-20 */
-            padding-bottom: 5rem; /* Equivalent to py-20 */
+            padding-top: 6rem; /* Increased from 5rem for more breathing room */
+            padding-bottom: 6rem; /* Increased from 5rem */
         }
 
         /* For sections that need a more subtle background */
         .bg-light-cream {
             background-color: #FDFDF7; /* A very light, almost off-white cream */
         }
+
+        /* Custom styling for sleek lines and modern dividers, if needed later */
+        .divider {
+            height: 1px;
+            background-color: #ccc;
+            width: 50%;
+            margin: 2rem auto;
+        }
+        /* New aspect ratio for images in redesigned sections */
+        .md\:aspect-h-10 {
+            padding-bottom: 62.5%; /* Adjusts height to 10/16 aspect ratio */
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- Navbar (Simplified Brando Style) -->
+    <!-- Navbar (from your provided code) -->
     <nav class="fixed top-0 left-0 right-0 z-40 bg-transparent py-4 transition-all duration-300 ease-in-out">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <!-- Logo - Smaller for navigation -->
@@ -76,10 +88,10 @@
             </a>
             <!-- Desktop Nav Links (Can be expanded) -->
             <div class="hidden md:flex space-x-8">
-                <a href="#about" class="text-white hover:text-amber-300 transition-colors text-lg font-light">Vision</a>
-                <a href="#properties" class="text-white hover:text-amber-300 transition-colors text-lg font-light">Properties</a>
-                <a href="#experiences" class="text-white hover:text-amber-300 transition-colors text-lg font-light">Experiences</a>
-                <a href="#contact" class="text-white hover:text-amber-300 transition-colors text-lg font-light">Contact</a>
+                <a href="#about" class="text-white hover:text-gray-300 transition-colors text-lg font-light">Vision</a>
+                <a href="#properties" class="text-white hover:text-gray-300 transition-colors text-lg font-light">Properties</a>
+                <a href="#experiences" class="text-white hover:text-gray-300 transition-colors text-lg font-light">Experiences</a>
+                <a href="#contact" class="text-white hover:text-gray-300 transition-colors text-lg font-light">Contact</a>
             </div>
             <!-- Mobile Hamburger (Placeholder for JS toggle) -->
             <button class="md:hidden text-white text-3xl focus:outline-none">
@@ -88,7 +100,7 @@
         </div>
     </nav>
 
-    <!-- Hero Section: With Video Background -->
+    <!-- Hero Section: With Video Background (from your provided code) -->
     <header class="hero-video-container">
         <!-- Video Element -->
         <video autoplay loop muted playsinline class="hero-video">
@@ -103,23 +115,23 @@
             <!-- Large Logo for Hero -->
             <img src="imageedit_95_9159867146.png" onerror="this.onerror=null;this.src='https://placehold.co/150x150/000000/FFFFFF?text=YOUR+LOGO';" alt="Tropical Luxuries Logo" class="w-36 h-36 md:w-48 md:h-48 mx-auto mb-8 rounded-full shadow-lg">
             
-            <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight text-amber-300 drop-shadow-lg leading-tight">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight text-white drop-shadow-lg leading-tight">
                 Tropicalluxuries
             </h1>
             <p class="text-xl md:text-3xl font-light italic mb-10 text-white drop-shadow-md max-w-3xl mx-auto">
                 You've got paradise in the palm of your hand.
             </p>
-            <a href="#about" class="px-8 py-4 bg-amber-400 text-gray-900 font-semibold rounded-full shadow-xl hover:bg-amber-300 transform hover:scale-105 transition-all duration-300 ease-in-out text-lg">
+            <a href="#about" class="px-8 py-4 bg-white text-gray-900 font-semibold rounded-full shadow-xl hover:bg-gray-200 transform hover:scale-105 transition-all duration-300 ease-in-out text-lg">
                 Explore
             </a>
         </div>
     </header>
 
-    <!-- About/Vision Section: Clean layout with large image and text -->
+    <!-- About/Vision Section: Enhanced for seamless flow and visual impact -->
     <section id="about" class="container mx-auto px-4 section-py">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div class="order-2 md:order-1">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-amber-600 leading-tight">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900 leading-tight">
                     A Vision of Unparalleled Escape
                 </h2>
                 <p class="text-lg leading-relaxed mb-6">
@@ -129,20 +141,20 @@
                     Designed for the discerning traveler and visionary entrepreneur, each property is a testament to freedom, creativity, and rejuvenation. Experience breathtaking views and spaces that flow harmoniously with their environment, elevating your journey beyond expectation.
                 </p>
             </div>
-            <div class="order-1 md:order-2 relative overflow-hidden rounded-3xl shadow-2xl aspect-w-16 aspect-h-9">
+            <div class="order-1 md:order-2 relative overflow-hidden rounded-3xl shadow-2xl aspect-w-16 aspect-h-9 md:aspect-h-10">
                 <img src="https://images.unsplash.com/photo-1596701072485-f2a893693f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Luxurious resort interior" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
             </div>
         </div>
     </section>
 
-    <!-- Feng Shui & Architecture Section: Emphasizing design and flow -->
+    <!-- Feng Shui & Architecture Section: Designed for a fluid, aesthetic experience -->
     <section class="bg-light-cream px-4 section-py">
         <div class="container mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-amber-600 leading-tight max-w-4xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 leading-tight max-w-4xl mx-auto">
                 Harmonizing Spaces: Feng Shui & Inspired Architecture
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                <div class="relative overflow-hidden rounded-3xl shadow-2xl aspect-w-16 aspect-h-9">
+                <div class="relative overflow-hidden rounded-3xl shadow-2xl aspect-w-16 aspect-h-9 md:aspect-h-10">
                     <img src="https://images.unsplash.com/photo-1549495147-9759c864b2d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Architectural curves and natural light" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
                 </div>
                 <div>
@@ -157,42 +169,58 @@
         </div>
     </section>
 
-    <!-- Featured Properties / Experiences Section -->
+    <!-- Featured Properties / Destinations Section: Elevated to be more visually engaging and seamless -->
     <section id="properties" class="px-4 section-py">
         <div class="container mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-amber-600 leading-tight">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 leading-tight">
                 Our Curated Destinations
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-3xl shadow-xl overflow-hidden transform hover:scale-102 transition-all duration-300 ease-in-out">
-                    <img src="https://images.unsplash.com/photo-1512918728585-07208d132ce0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Beachfront Villa" class="w-full h-64 object-cover">
-                    <div class="p-8">
-                        <h3 class="text-2xl font-semibold mb-3 text-amber-700">The Azure Coast Villa</h3>
-                        <p class="text-md text-gray-700 leading-relaxed">Nestled on a pristine beach, offering breathtaking ocean views and direct access to serene waters.</p>
-                        <a href="#" class="mt-4 inline-block text-amber-600 hover:text-amber-800 font-medium transition-colors">Learn More &rarr;</a>
-                    </div>
+
+            <!-- Property 1: The Azure Coast Villa -->
+            <div class="mb-24 flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 relative overflow-hidden rounded-3xl shadow-2xl aspect-w-16 aspect-h-9 md:aspect-h-10">
+                    <img src="https://images.unsplash.com/photo-1512918728585-07208d132ce0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Beachfront Villa" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
                 </div>
-                <div class="bg-white rounded-3xl shadow-xl overflow-hidden transform hover:scale-102 transition-all duration-300 ease-in-out">
-                    <img src="https://images.unsplash.com/photo-1506122071727-4a004b901a1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Jungle Retreat" class="w-full h-64 object-cover">
-                    <div class="p-8">
-                        <h3 class="text-2xl font-semibold mb-3 text-amber-700">The Emerald Jungle Retreat</h3>
-                        <p class="text-md text-gray-700 leading-relaxed">An intimate escape deep within lush landscapes, perfect for reflection and reconnecting with nature.</p>
-                        <a href="#" class="mt-4 inline-block text-amber-600 hover:text-amber-800 font-medium transition-colors">Learn More &rarr;</a>
-                    </div>
+                <div class="md:w-1/2 md:pl-12 text-center md:text-left">
+                    <h3 class="text-3xl md:text-4xl font-semibold mb-4 text-gray-900 leading-tight">The Azure Coast Villa</h3>
+                    <p class="text-lg leading-relaxed mb-6 text-gray-700">
+                        Nestled on a pristine beach with an infinity view of the turquoise ocean, this villa offers direct access to serene waters and bespoke service. Every detail is curated for an experience of ultimate relaxation and effortless luxury.
+                    </p>
+                    <a href="#" class="inline-block px-8 py-3 bg-gray-900 text-white font-semibold rounded-full shadow-lg hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out">Discover This Escape &rarr;</a>
                 </div>
-                <div class="bg-white rounded-3xl shadow-xl overflow-hidden transform hover:scale-102 transition-all duration-300 ease-in-out">
-                    <img src="https://images.unsplash.com/photo-1563911302823-fd731210639d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Desert Oasis" class="w-full h-64 object-cover">
-                    <div class="p-8">
-                        <h3 class="text-2xl font-semibold mb-3 text-amber-700">The Golden Desert Oasis</h3>
-                        <p class="text-md text-gray-700 leading-relaxed">A striking architectural marvel amidst serene dunes, offering a unique blend of luxury and adventure.</p>
-                        <a href="#" class="mt-4 inline-block text-amber-600 hover:text-amber-800 font-medium transition-colors">Learn More &rarr;</a>
-                    </div>
+            </div>
+
+            <!-- Property 2: The Emerald Jungle Retreat -->
+            <div class="mb-24 flex flex-col md:flex-row-reverse items-center gap-12">
+                <div class="md:w-1/2 relative overflow-hidden rounded-3xl shadow-2xl aspect-w-16 aspect-h-9 md:aspect-h-10">
+                    <img src="https://images.unsplash.com/photo-1506122071727-4a004b901a1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Jungle Retreat" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
+                </div>
+                <div class="md:w-1/2 md:pr-12 text-center md:text-right">
+                    <h3 class="text-3xl md:text-4xl font-semibold mb-4 text-gray-900 leading-tight">The Emerald Jungle Retreat</h3>
+                    <p class="text-lg leading-relaxed mb-6 text-gray-700">
+                        An intimate sanctuary deep within lush, vibrant landscapes, designed for profound reflection and reconnecting with nature's rhythm. Immerse yourself in a secluded paradise where every breath is peace.
+                    </p>
+                    <a href="#" class="inline-block px-8 py-3 bg-gray-900 text-white font-semibold rounded-full shadow-lg hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out">Explore This Retreat &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Property 3: The Golden Desert Oasis -->
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 relative overflow-hidden rounded-3xl shadow-2xl aspect-w-16 aspect-h-9 md:aspect-h-10">
+                    <img src="https://images.unsplash.com/photo-1563911302823-fd731210639d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Desert Oasis" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
+                </div>
+                <div class="md:w-1/2 md:pl-12 text-center md:text-left">
+                    <h3 class="text-3xl md:text-4xl font-semibold mb-4 text-gray-900 leading-tight">The Golden Desert Oasis</h3>
+                    <p class="text-lg leading-relaxed mb-6 text-gray-700">
+                        A striking architectural marvel rising from serene dunes, offering a unique blend of refined luxury and thrilling adventure under expansive skies. Witness sunsets that paint the horizon in gold.
+                    </p>
+                    <a href="#" class="inline-block px-8 py-3 bg-gray-900 text-white font-semibold rounded-full shadow-lg hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out">Discover This Oasis &rarr;</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Entrepreneurial Connection / Call to Action -->
+    <!-- Entrepreneurial Connection / Call to Action (from your provided code) -->
     <section id="contact" class="gold-gradient-bg px-4 section-py text-center text-gray-900">
         <div class="container mx-auto max-w-3xl">
             <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-md leading-tight">
@@ -208,22 +236,22 @@
                 <div class="mb-8">
                     <input type="email" placeholder="Your Email Address" class="w-full px-5 py-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200 text-lg">
                 </div>
-                <button type="submit" class="w-full px-8 py-5 bg-amber-500 text-white font-bold rounded-full shadow-lg hover:bg-amber-600 transform hover:scale-105 transition-all duration-300 ease-in-out text-xl">
+                <button type="submit" class="w-full px-8 py-5 bg-gray-900 text-white font-bold rounded-full shadow-lg hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out text-xl">
                     Join Our Exclusive List
                 </button>
             </form>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer (from your provided code) -->
     <footer class="bg-gray-900 text-gray-300 px-4 py-12 text-center rounded-t-3xl">
         <div class="container mx-auto">
             <p class="mb-4">&copy; 2025 Tropicalluxuries. All rights reserved.</p>
             <div class="flex justify-center space-x-6 text-lg">
                 <!-- Replace # with your actual social media links -->
-                <a href="https://www.instagram.com/tropicaluxuries/" class="text-gray-400 hover:text-amber-400 transition-colors duration-200">Instagram</a>
-                <a href="https://www.facebook.com/profile.php?id=100082981466707" class="text-gray-400 hover:text-amber-400 transition-colors duration-200">Facebook</a>
-                <a href="#" class="text-gray-400 hover:text-amber-400 transition-colors duration-200">LinkedIn</a>
+                <a href="https://www.instagram.com/tropicaluxuries/" class="text-gray-400 hover:text-gray-200 transition-colors duration-200">Instagram</a>
+                <a href="https://www.facebook.com/profile.php?id=100082981466707" class="text-gray-400 hover:text-gray-200 transition-colors duration-200">Facebook</a>
+                <a href="#" class="text-gray-400 hover:text-gray-200 transition-colors duration-200">LinkedIn</a>
             </div>
         </div>
     </footer>
