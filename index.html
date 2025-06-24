@@ -25,7 +25,6 @@
             position: relative; /* Make it a positioning context for absolute children */
             min-height: 100vh; /* Full viewport height */
             overflow: hidden; /* Ensures video doesn't spill out */
-            /* Removed flex centering here to allow independent absolute positioning of logo, content, and arrow */
         }
 
         .hero-video {
@@ -107,7 +106,7 @@
     <!-- Navbar (REMOVED as per your request for a simpler, seamless experience) -->
     <!-- The previous <nav> element has been entirely removed from here. -->
 
-    <!-- Hero Section: With Video Background -->
+    <!-- Hero Section: With Video Background (PERFECT - NO CHANGES HERE) -->
     <header class="hero-video-container">
         <!-- Video Element -->
         <video autoplay loop muted playsinline class="hero-video">
@@ -123,13 +122,11 @@
             <img src="imageedit_95_9159867146.png" onerror="this.onerror=null;this.src='https://placehold.co/120x120/000000/FFFFFF?text=Logo';" alt="Tropical Luxuries Logo" class="w-28 h-28 md:w-36 md:h-36 mx-auto rounded-full shadow-lg">
         </div>
 
-        <!-- Main Heading Content - Exactly as it was before this arrow (vertically centered) -->
+        <!-- Main Heading Content - Perfectly Centered -->
         <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 md:px-8 z-10">
-            <!-- Main heading is first, then subheading -->
             <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight text-white drop-shadow-lg leading-tight">
                 Tropicalluxuries
             </h1>
-            <!-- Subheading font size adjusted for mobile -->
             <p class="text-base md:text-xl font-extralight italic mb-10 text-white drop-shadow-md max-w-3xl mx-auto">
                 You've got paradise in the palm of your hand.
             </p>
@@ -142,27 +139,20 @@
         <div class="scroll-indicator"></div>
     </header>
 
-    <!-- About/Vision Section: Enhanced for seamless flow and visual impact -->
-    <section id="about" class="container mx-auto px-4 section-py">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div class="order-2 md:order-1">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900 leading-tight">
-                    A Vision of Unparalleled Escape
-                </h2>
-                <p class="text-lg leading-relaxed mb-6">
-                    Tropical Luxuries redefines luxury travel by blending nature's untouched beauty with architectural masterpieces. Our exclusive resorts are more than just destinations; they are havens meticulously crafted to inspire profound tranquility and foster deep connection.
-                </p>
-                <p class="text-lg leading-relaxed">
-                    Designed for the discerning traveler and visionary entrepreneur, each property is a testament to freedom, creativity, and rejuvenation. Experience breathtaking views and spaces that flow harmoniously with their environment, elevating your journey beyond expectation.
-                </p>
-            </div>
-            <div class="order-1 md:order-2 relative overflow-hidden rounded-3xl shadow-2xl aspect-w-16 aspect-h-9 md:aspect-h-10">
-                <img src="https://images.unsplash.com/photo-1596701072485-f2a893693f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Luxurious resort interior" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
-            </div>
-        </div>
+    <!-- "What We Do" Section: Redesigned for clear explanation -->
+    <section id="about" class="container mx-auto px-4 section-py flex flex-col items-center text-center">
+        <h2 class="text-5xl md:text-6xl font-extrabold mb-8 text-gray-900 leading-tight max-w-4xl">
+            Tropicalluxuries: Curating Your Next Breakthrough
+        </h2>
+        <p class="text-xl leading-relaxed mb-6 max-w-3xl text-gray-700">
+            We hand-select and curate **exclusive villa retreats worldwide**, designed specifically for visionary entrepreneurs and CEOs. Our mission is to provide unparalleled luxury accommodations where like-minded individuals connect, collaborate, and rejuvenate.
+        </p>
+        <p class="text-xl leading-relaxed max-w-3xl text-gray-700">
+            Experience high-end living blended with focused environments for personal and professional growth. Every Tropicalluxuries retreat is crafted to unlock new levels of creativity, foster powerful connections, and inspire your path to success.
+        </p>
     </section>
 
-    <!-- Feng Shui & Architecture Section: Designed for a fluid, aesthetic experience -->
+    <!-- Feng Shui & Architecture Section: Emphasizing design and flow in curated villas -->
     <section class="bg-light-cream px-4 section-py">
         <div class="container mx-auto">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 leading-tight max-w-4xl mx-auto">
@@ -174,7 +164,7 @@
                 </div>
                 <div>
                     <p class="text-lg leading-relaxed mb-6">
-                        At the heart of Tropical Luxuries is an unwavering dedication to the ancient art of Feng Shui. We believe that a meticulously designed space is not just beautiful, but profoundly impacts well-being, energy, and success. Our properties are architectural masterpieces, where every curve, natural material, and orientation is chosen to optimize cosmic flow.
+                        At the heart of Tropicalluxuries is an unwavering dedication to the ancient art of Feng Shui. We believe that a meticulously designed space is not just beautiful, but profoundly impacts well-being, energy, and success. **Each villa selected for our curated retreats is chosen or adapted to embody these principles**, where every curve, natural material, and orientation is chosen to optimize cosmic flow.
                     </p>
                     <p class="text-lg leading-relaxed">
                         Drawing inspiration from the organic beauty of Tulum and the timeless elegance of Mediterranean design, we fuse natural elements with exquisite finishes. Envision flowing lines, abundant natural light, rich textures, and subtle golden accents that elevate your experience, creating a space that amazes and restores.
@@ -184,65 +174,96 @@
         </div>
     </section>
 
-    <!-- Featured Properties / Destinations Section: Elevated to be more visually engaging and seamless -->
+    <!-- "Our Curated Destinations" Section: Renamed and focused on retreats -->
     <section id="properties" class="px-4 section-py">
         <div class="container mx-auto">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 leading-tight">
-                Our Curated Destinations
+                Our Curated Retreat Experiences
             </h2>
 
-            <!-- Property 1: The Azure Coast Villa -->
+            <!-- Retreat 1: The Bali Entrepreneurial Sanctuary -->
             <div class="mb-24 flex flex-col md:flex-row items-center gap-12">
                 <div class="md:w-1/2 relative overflow-hidden rounded-3xl shadow-2xl aspect-w-16 aspect-h-9 md:aspect-h-10">
-                    <img src="https://images.unsplash.com/photo-1512918728585-07208d132ce0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Beachfront Villa" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
+                    <img src="https://images.unsplash.com/photo-1512918728585-07208d132ce0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Bali Retreat Villa" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
                 </div>
                 <div class="md:w-1/2 md:pl-12 text-center md:text-left">
-                    <h3 class="text-3xl md:text-4xl font-semibold mb-4 text-gray-900 leading-tight">The Azure Coast Villa</h3>
+                    <h3 class="text-3xl md:text-4xl font-semibold mb-4 text-gray-900 leading-tight">The Bali Entrepreneurial Sanctuary</h3>
                     <p class="text-lg leading-relaxed mb-6 text-gray-700">
-                        Nestled on a pristine beach with an infinity view of the turquoise ocean, this villa offers direct access to serene waters and bespoke service. Every detail is curated for an experience of ultimate relaxation and effortless luxury.
+                        An immersive 30-day retreat for digital innovators in a breathtaking Balinese mansion. Foster deep work, collaboration, and rejuvenation amidst lush rice paddies and vibrant culture. Includes dedicated co-working spaces and wellness sessions.
                     </p>
-                    <a href="#" class="inline-block px-8 py-3 bg-gray-900 text-white font-semibold rounded-full shadow-lg hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out">Discover This Escape &rarr;</a>
+                    <a href="#" class="inline-block px-8 py-3 bg-gray-900 text-white font-semibold rounded-full shadow-lg hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out">Inquire About Bali &rarr;</a>
                 </div>
             </div>
 
-            <!-- Property 2: The Emerald Jungle Retreat -->
+            <!-- Retreat 2: The Coastal Mastermind Escape (e.g., Phuket/Mediterranean style) -->
             <div class="mb-24 flex flex-col md:flex-row-reverse items-center gap-12">
                 <div class="md:w-1/2 relative overflow-hidden rounded-3xl shadow-2xl aspect-w-16 aspect-h-9 md:aspect-h-10">
-                    <img src="https://images.unsplash.com/photo-1506122071727-4a004b901a1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Jungle Retreat" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
+                    <img src="https://images.unsplash.com/photo-1506122071727-4a004b901a1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Coastal Retreat Villa" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
                 </div>
                 <div class="md:w-1/2 md:pr-12 text-center md:text-right">
-                    <h3 class="text-3xl md:text-4xl font-semibold mb-4 text-gray-900 leading-tight">The Emerald Jungle Retreat</h3>
+                    <h3 class="text-3xl md:text-4xl font-semibold mb-4 text-gray-900 leading-tight">The Coastal Mastermind Escape</h3>
                     <p class="text-lg leading-relaxed mb-6 text-gray-700">
-                        An intimate sanctuary deep within lush, vibrant landscapes, designed for profound reflection and reconnecting with nature's rhythm. Immerse yourself in a secluded paradise where every breath is peace.
+                        Join a curated group for intense mastermind sessions and strategic planning in a stunning cliffside villa. Experience invigorating ocean views, gourmet dining, and a focused environment for breakthroughs.
                     </p>
-                    <a href="#" class="inline-block px-8 py-3 bg-gray-900 text-white font-semibold rounded-full shadow-lg hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out">Explore This Retreat &rarr;</a>
+                    <a href="#" class="inline-block px-8 py-3 bg-gray-900 text-white font-semibold rounded-full shadow-lg hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out">Discover Coastal Retreats &rarr;</a>
                 </div>
             </div>
 
-            <!-- Property 3: The Golden Desert Oasis -->
+            <!-- Retreat 3: The Serene Desert Innovation Hub -->
             <div class="flex flex-col md:flex-row items-center gap-12">
                 <div class="md:w-1/2 relative overflow-hidden rounded-3xl shadow-2xl aspect-w-16 aspect-h-9 md:aspect-h-10">
-                    <img src="https://images.unsplash.com/photo-1563911302823-fd731210639d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Desert Oasis" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
+                    <img src="https://images.unsplash.com/photo-1563911302823-fd731210639d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Desert Retreat Villa" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
                 </div>
                 <div class="md:w-1/2 md:pl-12 text-center md:text-left">
-                    <h3 class="text-3xl md:text-4xl font-semibold mb-4 text-gray-900 leading-tight">The Golden Desert Oasis</h3>
+                    <h3 class="text-3xl md:text-4xl font-semibold mb-4 text-gray-900 leading-tight">The Serene Desert Innovation Hub</h3>
                     <p class="text-lg leading-relaxed mb-6 text-gray-700">
-                        A striking architectural marvel rising from serene dunes, offering a unique blend of refined luxury and thrilling adventure under expansive skies. Witness sunsets that paint the horizon in gold.
+                        Find clarity and spark new ideas in a striking desert oasis. This retreat offers solitude and structured workshops, perfect for deep creative work and strategic planning in an inspiring, unique landscape.
                     </p>
-                    <a href="#" class="inline-block px-8 py-3 bg-gray-900 text-white font-semibold rounded-full shadow-lg hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out">Discover This Oasis &rarr;</a>
+                    <a href="#" class="inline-block px-8 py-3 bg-gray-900 text-white font-semibold rounded-full shadow-lg hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out">Explore Desert Hubs &rarr;</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Entrepreneurial Connection / Call to Action (from your provided code) -->
+    <!-- New "How It Works" Section -->
+    <section id="how-it-works" class="bg-light-cream px-4 section-py">
+        <div class="container mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 leading-tight max-w-4xl mx-auto">
+                How Our Retreats Work
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-center">
+                <div class="p-6 rounded-2xl bg-white shadow-xl flex flex-col items-center">
+                    <span class="text-6xl text-gray-700 mb-6 font-bold">1</span>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-900">Discover Exclusive Retreats</h3>
+                    <p class="text-md text-gray-700">Browse our upcoming calendar of curated villa retreats designed for connection and growth.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white shadow-xl flex flex-col items-center">
+                    <span class="text-6xl text-gray-700 mb-6 font-bold">2</span>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-900">Inquire & Apply</h3>
+                    <p class="text-md text-gray-700">Submit an inquiry for your chosen retreat. We'll ensure it's a perfect fit for your goals.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white shadow-xl flex flex-col items-center">
+                    <span class="text-6xl text-gray-700 mb-6 font-bold">3</span>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-900">Personalized Onboarding</h3>
+                    <p class="text-md text-gray-700">Our team will guide you through all logistics and details for a seamless preparation.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-white shadow-xl flex flex-col items-center">
+                    <span class="text-6xl text-gray-700 mb-6 font-bold">4</span>
+                    <h3 class="text-2xl font-semibold mb-3 text-gray-900">Experience Paradise</h3>
+                    <p class="text-md text-gray-700">Arrive, relax, connect, and thrive in an inspiring environment crafted just for you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Entrepreneurial Connection / Call to Action (Contact Form - Refined) -->
     <section id="contact" class="gold-gradient-bg px-4 section-py text-center text-gray-900">
         <div class="container mx-auto max-w-3xl">
             <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-md leading-tight">
-                Connect. Create. Thrive.
+                Join Our Exclusive Retreat Community
             </h2>
             <p class="text-lg leading-relaxed mb-10 text-gray-100 drop-shadow">
-                Tropical Luxuries is building a global network where visionary entrepreneurs not only relax in unparalleled comfort but also connect, share ideas, and forge new paths. Join our exclusive community.
+                Be the first to know about upcoming Tropicalluxuries villa retreats, special invitations, and insights for visionary entrepreneurs.
             </p>
             <form class="bg-white p-8 md:p-12 rounded-3xl shadow-2xl">
                 <div class="mb-6">
@@ -252,13 +273,13 @@
                     <input type="email" placeholder="Your Email Address" class="w-full px-5 py-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200 text-lg">
                 </div>
                 <button type="submit" class="w-full px-8 py-5 bg-gray-900 text-white font-bold rounded-full shadow-lg hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out text-xl">
-                    Join Our Exclusive List
+                    Get Retreat Updates
                 </button>
             </form>
         </div>
     </section>
 
-    <!-- Footer (from your provided code) -->
+    <!-- Footer (Unchanged) -->
     <footer class="bg-gray-900 text-gray-300 px-4 py-12 text-center rounded-t-3xl">
         <div class="container mx-auto">
             <p class="mb-4">&copy; 2025 Tropicalluxuries. All rights reserved.</p>
