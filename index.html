@@ -3,23 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Tropical Luxuries</title>
+    <title>Tropical Luxuries - Tanned Skin, Gold Thoughts, Luxury Dreaming</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-            background-color: #f0f8ff;
-            color: #333;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
-        h1 {
-            color: #0056b3;
+        /* Custom styles for a subtle gold gradient background */
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #fceabb 0%, #f8b500 100%); /* Soft gold to deeper gold */
+        }
+        /* Style to subtly shift the background image for sections, creating a dreamy feel */
+        .section-bg-image {
+            /* Updated: Dreamy picture for the hero section */
+            background-image: url('https://images.unsplash.com/photo-1544457788-b77054a1a5b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+        }
+        /* Style to apply a gold filter effect on an element, if needed for SVG or specific elements */
+        .filter-gold {
+            filter: sepia(100%) saturate(200%) brightness(80%) hue-rotate(20deg);
+        }
+        /* Overlay for text readability on background images */
+        .overlay-dark {
+            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+        }
+        .overlay-light {
+            background-color: rgba(255, 255, 255, 0.2); /* Light overlay */
+        }
+
+        /* Responsive adjustments for elements like sections and text for mobile */
+        @media (max-width: 768px) {
+            .hero-text-container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .section-padding {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
         }
     </style>
 </head>
-<body>
-    <h1>Welcome to Tropical Luxuries!</h1>
-    <p>This is your brand new website.</p>
-    <p>More beautiful content coming soon.</p>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header & Hero Section -->
+    <header class="relative min-h-screen flex items-center justify-center section-bg-image text-white">
+        <div class="absolute inset-0 overlay-dark"></div> <!-- Dark overlay -->
+        <div class="container mx-auto px-4 py-16 flex flex-col items-center justify-center text-center relative z-10 hero-text-container">
+            <!-- Logo - Updated to use the direct uploaded file reference -->
+            <img src="uploaded:imageedit_95_9159867146.png-6e238aa7-4ae5-484f-9f4a-6aec68016968" onerror="this.onerror=null;this.src='https://placehold.co/200x200/000000/FFFFFF?text=Tropical+Luxuries+Logo+Fallback';" alt="Tropical Luxuries Logo" class="w-48 h-48 mb-8 rounded-full shadow-lg">
+
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight text-amber-300 drop-shadow-lg">
+                Tropical Luxuries
+            </h1>
+            <p class="text-xl md:text-2xl font-light italic mb-8 text-white drop-shadow-md">
+                "Tanned skin, Gold thoughts, luxury dreaming"
+            </p>
+            <a href="#about" class="px-8 py-3 bg-amber-400 text-gray-900 font-semibold rounded-full shadow-xl hover:bg-amber-300 transform hover:scale-105 transition-all duration-300 ease-in-out">
+                Discover Your Sanctuary
+            </a>
+        </div>
+    </header>
+
+    <!-- About/Vision Section -->
+    <section id="about" class="container mx-auto px-4 py-20 bg-white rounded-2xl shadow-xl -mt-20 relative z-20 section-padding">
+        <h2 class="text-4xl font-bold text-center mb-12 text-amber-600">Our Vision: Curated Escapes & Entrepreneurial Sanctuaries</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                <p class="text-lg leading-relaxed mb-6">
+                    Tropical Luxuries is born from a dream of creating unparalleled resort experiences. We envision a world where the beauty of nature meets exquisite, thoughtfully designed spaces. More than just a luxury destination, our goal is to cultivate an environment where guests, particularly visionary entrepreneurs, find inspiration, connection, and profound tranquility.
+                </p>
+                <p class="text-lg leading-relaxed">
+                    Our properties will be exclusive havens around the globe, each meticulously crafted to foster an atmosphere of freedom, creativity, and rejuvenation. Imagine waking up to breathtaking views, surrounded by architecture that flows seamlessly with its natural environment – a true embodiment of luxury travel.
+                </p>
+            </div>
+            <div class="relative overflow-hidden rounded-2xl shadow-lg aspect-w-16 aspect-h-9">
+                <img src="https://placehold.co/600x400/D4AF37/FFFFFF?text=Dreamy+Tulum+Vibe" alt="Tulum-inspired architecture" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-2xl">
+            </div>
+        </div>
+    </section>
+
+    <!-- Feng Shui & Architecture Section -->
+    <section class="bg-gray-100 px-4 py-20 section-padding">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12 text-amber-600">Feng Shui & Harmonious Design</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="relative overflow-hidden rounded-2xl shadow-lg aspect-w-16 aspect-h-9">
+                    <img src="https://placehold.co/600x400/EAD9A8/8D6E63?text=Medit.+Curves" alt="Mediterranean-inspired curves" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-2xl">
+                </div>
+                <div>
+                    <p class="text-lg leading-relaxed mb-6">
+                        Central to the Tropical Luxuries philosophy is an unwavering commitment to Feng Shui. We believe that a meticulously designed space can profoundly impact well-being, creativity, and abundance. Our villas and accommodations will be architectural marvels, where every curve, every material, and every orientation is chosen to optimize energy flow and create a sense of awe and balance.
+                    </p>
+                    <p class="text-lg leading-relaxed">
+                        Inspired by the organic beauty of Tulum and the timeless elegance of Mediterranean design, we blend natural elements with luxurious finishes. Picture flowing lines, natural light, rich textures, and subtle golden accents that elevate your experience, leaving you feeling truly amazing in your surroundings.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Offerings/Features Section -->
+    <section class="gold-gradient-bg px-4 py-20 text-gray-900 section-padding">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-12 text-white drop-shadow-md">The Tropical Luxuries Experience</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-xl text-center transform hover:scale-105 transition-all duration-300 ease-in-out">
+                    <div class="text-5xl text-amber-500 mb-4">&#127796;</div> <!-- Palm Tree Emoji -->
+                    <h3 class="text-2xl font-semibold mb-4">Exclusive Global Retreats</h3>
+                    <p class="text-md text-gray-700">Access to a curated collection of luxury villas and accommodations in the world's most desirable locations.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-xl text-center transform hover:scale-105 transition-all duration-300 ease-in-out">
+                    <div class="text-5xl text-amber-500 mb-4">&#128187;</div> <!-- Laptop/Computer Emoji -->
+                    <h3 class="text-2xl font-semibold mb-4">Entrepreneurial Connection Hubs</h3>
+                    <p class="text-md text-gray-700">Environments designed to inspire productivity and facilitate connections among like-minded visionaries.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-xl text-center transform hover:scale-105 transition-all duration-300 ease-in-out">
+                    <div class="text-5xl text-amber-500 mb-4">&#127963;</div> <!-- Building/Villa Emoji -->
+                    <h3 class="text-2xl font-semibold mb-4">Feng Shui Masterpiece Properties</h3>
+                    <p class="text-md text-gray-700">Villas where every design element is harmonized for well-being, energy, and aesthetic delight.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action / Contact Section -->
+    <section class="container mx-auto px-4 py-20 text-center section-padding">
+        <h2 class="text-4xl font-bold mb-6 text-amber-600">Ready to Experience True Luxury?</h2>
+        <p class="text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
+            Join our exclusive mailing list to receive updates on our upcoming resort locations, private events, and unique entrepreneurial retreats. Prepare to elevate your travels and expand your horizons.
+        </p>
+        <form class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-xl">
+            <div class="mb-6">
+                <input type="text" placeholder="Your Name" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200">
+            </div>
+            <div class="mb-6">
+                <input type="email" placeholder="Your Email Address" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200">
+            </div>
+            <button type="submit" class="w-full px-8 py-4 bg-amber-500 text-white font-bold rounded-full shadow-lg hover:bg-amber-600 transform hover:scale-105 transition-all duration-300 ease-in-out">
+                Join Our Exclusive List
+            </button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 px-4 py-12 text-center rounded-t-2xl">
+        <div class="container mx-auto">
+            <p class="mb-4">&copy; 2025 Tropical Luxuries. All rights reserved.</p>
+            <div class="flex justify-center space-x-6">
+                <!-- Replace # with your actual social media links -->
+                <a href="#" class="text-gray-400 hover:text-amber-400 transition-colors duration-200">Instagram</a>
+                <a href="#" class="text-gray-400 hover:text-amber-400 transition-colors duration-200">Facebook</a>
+                <a href="#" class="text-gray-400 hover:text-amber-400 transition-colors duration-200">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
