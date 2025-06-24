@@ -15,6 +15,8 @@
             padding: 0;
             overflow-x: hidden; /* Prevent horizontal scroll */
             color: #333; /* Darker text for readability */
+            position: relative; /* Crucial: Establishes a stacking context for body */
+            z-index: 1; /* Crucial: Ensures body content is above fixed backgrounds with negative z-index */
         }
         h1, h2, h3, h4 {
             font-family: 'Playfair Display', serif;
@@ -25,6 +27,7 @@
             position: relative; /* Make it a positioning context for absolute children */
             min-height: 100vh; /* Full viewport height */
             overflow: hidden; /* Ensures video doesn't spill out */
+            /* No z-index needed here, as body's z-index now handles stacking */
         }
 
         .hero-video {
@@ -35,7 +38,7 @@
             min-height: 100%;
             width: auto;
             height: auto;
-            z-index: -1; /* Puts video behind content */
+            z-index: -1; /* Puts video behind content within its container */
             transform: translate(-50%, -50%);
             object-fit: cover; /* Ensures video covers the entire area without distortion */
             filter: brightness(0.6); /* Slightly dim the video for text readability */
@@ -99,35 +102,32 @@
             }
         }
 
-        /* Specific styling for the 'about' section's video background - NOW FIXED FOR PARALLAX */
+        /* Specific styling for the 'about' section's video background for PARALLAX effect */
         .about-section-video {
-            position: fixed; /* Changed from absolute to fixed for parallax */
+            position: fixed; /* Fixed to viewport for parallax */
             top: 0;
             left: 0;
             width: 100vw;   /* Cover full viewport width */
             height: 100vh;  /* Cover full viewport height */
-            z-index: -1;
+            z-index: -1; /* Behind body content */
             object-fit: cover;
             filter: brightness(0.7); /* Keep brightness filter for dimming */
         }
 
         .about-section-video-overlay {
             background-color: rgba(0, 0, 0, 0.3); /* Keep dark overlay for readability */
-            position: fixed; /* Changed from absolute to fixed for parallax, matches video */
+            position: fixed; /* Fixed to viewport, matches video */
             top: 0;
             left: 0;
             width: 100vw;   /* Cover full viewport width */
             height: 100vh;  /* Cover full viewport height */
-            z-index: 0; /* Above video, below content */
+            z-index: -0.5; /* Above video, but still behind body content */
         }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- Navbar (REMOVED as per your request for a simpler, seamless experience) -->
-    <!-- The previous <nav> element has been entirely removed from here. -->
-
-    <!-- Hero Section: With Video Background (PERFECT - NO CHANGES HERE) -->
+    <!-- Hero Section: With Video Background -->
     <header class="hero-video-container">
         <!-- Video Element -->
         <video autoplay loop muted playsinline class="hero-video">
@@ -162,7 +162,7 @@
 
     <!-- "What We Do" Section: Redesigned for clear explanation with video background -->
     <section id="about" class="section-py relative overflow-hidden">
-        <!-- Video Background for this section - Now with Parallax effect -->
+        <!-- Video Background for this section - Now correctly layered fixed effect -->
         <video autoplay loop muted playsinline class="about-section-video">
             <source src="perfect villa backround.mp4" type="video/mp4">
             <!-- Fallback for browsers that don't support video or if video fails to load -->
