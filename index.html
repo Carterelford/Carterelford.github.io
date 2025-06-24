@@ -99,25 +99,25 @@
             }
         }
 
-        /* Specific styling for the 'about' section's video background */
+        /* Specific styling for the 'about' section's video background - NOW FIXED FOR PARALLAX */
         .about-section-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -1; /* Puts video behind content and overlay */
-            transform: translate(-50%, -50%);
-            object-fit: cover; /* Ensures video covers the entire area without distortion */
-            filter: brightness(0.7); /* Added back brightness filter for dimming */
+            position: fixed; /* Changed from absolute to fixed for parallax */
+            top: 0;
+            left: 0;
+            width: 100vw;   /* Cover full viewport width */
+            height: 100vh;  /* Cover full viewport height */
+            z-index: -1;
+            object-fit: cover;
+            filter: brightness(0.7); /* Keep brightness filter for dimming */
         }
 
         .about-section-video-overlay {
-            background-color: rgba(0, 0, 0, 0.3); /* Re-added dark overlay for readability */
-            position: absolute;
-            inset: 0;
+            background-color: rgba(0, 0, 0, 0.3); /* Keep dark overlay for readability */
+            position: fixed; /* Changed from absolute to fixed for parallax, matches video */
+            top: 0;
+            left: 0;
+            width: 100vw;   /* Cover full viewport width */
+            height: 100vh;  /* Cover full viewport height */
             z-index: 0; /* Above video, below content */
         }
     </style>
@@ -162,7 +162,7 @@
 
     <!-- "What We Do" Section: Redesigned for clear explanation with video background -->
     <section id="about" class="section-py relative overflow-hidden">
-        <!-- Video Background for this section -->
+        <!-- Video Background for this section - Now with Parallax effect -->
         <video autoplay loop muted playsinline class="about-section-video">
             <source src="perfect villa backround.mp4" type="video/mp4">
             <!-- Fallback for browsers that don't support video or if video fails to load -->
