@@ -15,40 +15,38 @@
             padding: 0;
             overflow-x: hidden; /* Prevent horizontal scroll */
             color: #333; /* Darker text for readability */
-            /* Removed body z-index as fixed elements will be behind by default if not explicitly on top */
         }
         h1, h2, h3, h4 {
             font-family: 'Playfair Display', serif;
         }
 
-        /* Hero section's video and overlay for GLOBAL PARALLAX */
+        /* Hero section with video background */
+        .hero-video-container {
+            position: relative; /* Make it a positioning context for absolute children */
+            min-height: 100vh; /* Full viewport height */
+            overflow: hidden; /* Ensures video doesn't spill out */
+        }
+
         .hero-video {
-            position: fixed; /* Changed from absolute to fixed for site-wide parallax */
-            top: 0;
-            left: 0;
-            min-width: 100vw; /* Cover full viewport width */
-            min-height: 100vh; /* Cover full viewport height */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
             width: auto;
             height: auto;
-            z-index: -1; /* Puts video behind almost all content */
-            transform: none; /* No translation needed with fixed at 0,0 and 100vw/vh */
+            z-index: -1; /* Puts video behind content */
+            transform: translate(-50%, -50%);
             object-fit: cover; /* Ensures video covers the entire area without distortion */
             filter: brightness(0.6); /* Slightly dim the video for text readability */
         }
 
+        /* Overlay for text readability on hero video */
         .hero-overlay {
             background-color: rgba(0, 0, 0, 0.2); /* Lighter overlay over dimmed video */
-            position: fixed; /* Changed from absolute to fixed */
-            inset: 0; /* Covers full viewport */
-            z-index: 0; /* Above video, still behind content */
-        }
-
-        /* Hero section container - content for the first screen */
-        .hero-video-container {
-            position: relative; /* Stacks its children correctly over the fixed background */
-            min-height: 100vh; /* Full viewport height */
-            overflow: hidden; /* Ensures content doesn't spill */
-            z-index: 1; /* Ensures this container is above the fixed background */
+            position: absolute;
+            inset: 0;
+            z-index: 0; /* Above video, below content */
         }
 
         /* General section padding for consistent spacing */
@@ -101,19 +99,39 @@
             }
         }
 
-        /* Removed specific styling for .about-section-video and .about-section-video-overlay */
+        /* Specific styling for the 'about' section's background and overlay */
+        .about-section-background {
+            position: absolute; /* Relative to its parent #about section */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Behind content */
+            object-fit: cover;
+            filter: brightness(0.6); /* Dim the image for text readability */
+        }
+
+        .about-section-overlay {
+            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay for readability */
+            position: absolute;
+            inset: 0;
+            z-index: 0; /* Above background image, below content */
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- Hero Section: With Fixed Video Background -->
+    <!-- Navbar (REMOVED as per your request for a simpler, seamless experience) -->
+    <!-- The previous <nav> element has been entirely removed from here. -->
+
+    <!-- Hero Section: With Video Background -->
     <header class="hero-video-container">
-        <!-- Video Element (now fixed for parallax effect across multiple sections) -->
+        <!-- Video Element -->
         <video autoplay loop muted playsinline class="hero-video">
             <source src="trimmed.mp4" type="video/mp4">
             <img src="https://images.unsplash.com/photo-1547463569-8973b06c888d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Dreamy Resort View Fallback" class="w-full h-full object-cover">
         </video>
-        <div class="hero-overlay"></div> <!-- Overlay for content readability (now fixed) -->
+        <div class="hero-overlay"></div> <!-- Overlay for content readability -->
 
         <!-- Logo at Top Middle -->
         <div class="absolute top-8 left-1/2 -translate-x-1/2 z-20">
@@ -137,24 +155,27 @@
         <div class="scroll-indicator"></div>
     </header>
 
-    <!-- "What We Do" Section: Now transparent to show fixed hero video background -->
-    <section id="about" class="section-py relative overflow-hidden bg-transparent"> <!-- Added bg-transparent -->
-        <!-- Removed specific video and overlay for this section -->
+    <!-- "What We Do" Section: Redesigned for visual impact and readability -->
+    <section id="about" class="section-py relative overflow-hidden">
+        <!-- New Background Image for this section -->
+        <img src="https://images.unsplash.com/photo-1628590629739-e4d6a66a15b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTIyMjh8MHwxfHNlYXJjaHwyMHx8bHV4dXJ5JTIwcmV0cmVhdCUyMHZpbGxhfGVufDB8fHx8fDE3MjAxMjczMTZ8MA&ixlib=rb-4.0.3&q=80&w=1920" alt="Luxury Villa Background" class="about-section-background">
+        <div class="about-section-overlay"></div> <!-- Dark overlay for readability -->
 
         <!-- Content div to apply padding for text and center its contents -->
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-5xl md:text-6xl font-extrabold mb-8 text-white leading-tight max-w-4xl drop-shadow-md relative z-10 mx-auto">
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h2 class="text-5xl md:text-6xl font-extrabold mb-8 text-white leading-tight max-w-4xl drop-shadow-md mx-auto">
                 <span class="hidden md:inline">Tropicalluxuries: </span>Curating Your Next Breakthrough
             </h2>
-            <p class="text-xl leading-relaxed max-w-3xl text-white drop-shadow relative z-10 mx-auto">
+            <p class="text-xl leading-loose max-w-3xl text-white drop-shadow mx-auto">
                 Tropicalluxuries hosts exclusive villas for entrepreneurs at every stage—whether you’re just beginning or building your empire. In stunning locations around the world, you’ll live, train, think, and build alongside like-minded individuals who push you forward. With luxury surroundings, deep focus, movement, and shared ambition, every stay is your launchpad for clarity, creativity, and growth.
             </p>
         </div>
     </section>
 
-    <!-- How Our Retreats Work Section - This section will now cover the fixed video -->
-    <section id="how-it-works" class="bg-light-cream px-4 section-py relative z-10"> <!-- Added relative z-10 to ensure it covers fixed video -->
+    <!-- How Our Retreats Work Section -->
+    <section id="how-it-works" class="bg-light-cream px-4 section-py">
         <div class="container mx-auto">
+            <!-- Removed the h2 title as requested -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-center">
                 <div class="p-6 rounded-2xl bg-white shadow-xl flex flex-col items-center">
                     <span class="text-6xl text-gray-700 mb-6 font-bold">1</span>
@@ -181,7 +202,7 @@
     </section>
 
     <!-- "Our Curated Destinations" Section -->
-    <section id="properties" class="bg-gray-50 px-4 section-py relative z-10"> <!-- Added relative z-10 -->
+    <section id="properties" class="px-4 section-py">
         <div class="container mx-auto">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 leading-tight max-w-4xl mx-auto">
                 Our Curated Retreat Experiences
@@ -232,7 +253,7 @@
     </section>
 
     <!-- NEW POSITION: Feng Shui & Architecture Section -->
-    <section class="bg-light-cream px-4 section-py relative z-10"> <!-- Added relative z-10 -->
+    <section class="bg-light-cream px-4 section-py">
         <div class="container mx-auto">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 leading-tight max-w-4xl mx-auto">
                 Harmonizing Spaces: Feng Shui & Inspired Architecture
@@ -254,7 +275,7 @@
     </section>
 
     <!-- Entrepreneurial Connection / Call to Action (Contact Form - Refined) -->
-    <section id="contact" class="gold-gradient-bg px-4 section-py text-center text-gray-900 relative z-10"> <!-- Added relative z-10 -->
+    <section id="contact" class="gold-gradient-bg px-4 section-py text-center text-gray-900">
         <div class="container mx-auto max-w-3xl">
             <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-md leading-tight">
                 Join Our Exclusive Retreat Community
@@ -277,7 +298,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 px-4 py-12 text-center rounded-t-3xl relative z-10"> <!-- Added relative z-10 -->
+    <footer class="bg-gray-900 text-gray-300 px-4 py-12 text-center rounded-t-3xl">
         <div class="container mx-auto">
             <p class="mb-4">&copy; 2025 Tropicalluxuries. All rights reserved.</p>
             <div class="flex justify-center space-x-6 text-lg">
