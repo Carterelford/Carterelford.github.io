@@ -126,6 +126,24 @@
                 transform: translateX(-50%) rotate(45deg) translateY(-4px);
             }
         }
+
+        /* --- Custom CSS for Step Hover Effect --- */
+        .step-hover-effect {
+            /* Ensures smooth transitions for transform and box-shadow */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            /* Keep existing shadow if shadow-xl is removed from Tailwind classes directly */
+            /* box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); */ /* Re-add if needed */
+        }
+
+        .step-hover-effect:hover {
+            transform: scale(1.02); /* Makes it 2% larger */
+            /* Combines a subtle gold glow with the existing shadow-xl style */
+            /* Adjust the last box-shadow (gold glow) values for desired intensity */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), /* Simulates shadow-xl */
+                        0 10px 10px -5px rgba(0, 0, 0, 0.04), /* Simulates shadow-xl */
+                        0 0 25px 7px rgba(255, 193, 7, 0.6); /* **Subtle gold glow** */
+        }
+        /* --- End Custom CSS --- */
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -177,22 +195,22 @@
     <section id="how-it-works" class="px-4 section-py-how-it-works-adjusted bg-transparent z-10">
         <div class="container mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-center">
-                <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center">
+                <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
                     <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">1</span>
                     <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Discover</h3>
                     <p class="text-md text-white drop-shadow-md">Browse our upcoming calendar of curated villas designed for connection and growth.</p>
                 </div>
-                <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center">
+                <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
                     <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">2</span>
                     <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Inquire & Apply</h3>
                     <p class="text-md text-white drop-shadow-md">Submit an inquiry for your chosen villa. We'll ensure it's a perfect fit for your goals.</p>
                 </div>
-                <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center">
+                <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
                     <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">3</span>
                     <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Personalize</h3>
                     <p class="text-md text-white drop-shadow-md">Our team will guide you through all logistics and details for a seamless preparation.</p>
                 </div>
-                <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center">
+                <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
                     <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">4</span>
                     <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Experience</h3>
                     <p class="text-md text-white drop-shadow-md">Arrive, relax, connect, and thrive in an inspiring environment crafted just for you.</p>
