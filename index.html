@@ -73,7 +73,13 @@
             padding-bottom: 6rem;
         }
 
-        /* Reduced top padding for 'How It Works' section to pull it closer */
+        /* Reduced top padding for 'About' section to pull it closer to Hero */
+        .section-py-about-adjusted {
+            padding-top: 3rem; /* Adjusted for closer spacing */
+            padding-bottom: 6rem; /* Keep original bottom padding */
+        }
+
+        /* Reduced top padding for 'How It Works' section to pull it closer to About */
         .section-py-reduced-top {
             padding-top: 1.5rem; /* Adjusted for closer spacing from 3rem */
             padding-bottom: 6rem; /* Keep original bottom padding */
@@ -134,8 +140,8 @@
     </video>
     <div class="fixed-parallax-overlay"></div>
 
-    <!-- Hero Section: With original video background (NOT parallax) -->
-    <header class="hero-video-container relative z-10"> <!-- Added z-10 to ensure it's above fixed parallax -->
+    <!-- Hero Section: With original video background (NOT parallax) - RESTORED -->
+    <header class="hero-video-container relative z-10">
         <!-- Video Element -->
         <video autoplay loop muted playsinline class="hero-video">
             <source src="trimmed.mp4" type="video/mp4">
@@ -143,7 +149,7 @@
         </video>
         <div class="hero-overlay"></div> <!-- Overlay for content readability -->
 
-        <!-- Logo at Top Middle -->
+        <!-- Logo at Top Middle (RESTORED top-8 spacing) -->
         <div class="absolute top-8 left-1/2 -translate-x-1/2 z-20">
             <img src="imageedit_95_9159867146.png" onerror="this.onerror=null;this.src='https://placehold.co/120x120/000000/FFFFFF?text=Logo';" alt="Tropical Luxuries Logo" class="w-28 h-28 md:w-36 md:h-36 mx-auto rounded-full shadow-lg">
         </div>
@@ -165,12 +171,12 @@
         <div class="scroll-indicator"></div>
     </header>
 
-    <!-- "What We Do" Section: Now transparent to show fixed parallax video background -->
-    <section id="about" class="section-py relative overflow-hidden bg-transparent z-10"> <!-- Added bg-transparent and z-10 -->
+    <!-- "What We Do" Section: Now transparent to show fixed parallax video background, adjusted padding -->
+    <section id="about" class="section-py-about-adjusted relative overflow-hidden bg-transparent z-10"> <!-- Changed padding class here -->
         <!-- Content div to apply padding for text and center its contents -->
         <div class="container mx-auto px-4 text-center">
             <!-- Logo replaces "Tropicalluxuries:" text, made larger -->
-            <img src="imageedit_95_9159867146.png" onerror="this.onerror=null;this.src='https://placehold.co/80x80/000000/FFFFFF?text=Logo';" alt="Tropicalluxuries Logo" class="h-32 md:h-40 mx-auto mb-2 drop-shadow-md">
+            <img src="imageedit_95_9159867146.png" onerror="this.onerror=null;this.src='https://placehold.co/80x80/000000/FFFFFF?text=Logo';" alt="Tropicalluxuries Logo" class="h-56 md:h-72 mx-auto mb-2 drop-shadow-md">
             <h2 class="text-5xl md:text-6xl font-extrabold mb-8 text-white leading-tight max-w-4xl drop-shadow-md relative z-10 mx-auto">
                 Curating Your Next Breakthrough
             </h2>
@@ -181,35 +187,35 @@
     </section>
 
     <!-- How Our Retreats Work Section: Also transparent to show fixed parallax video background -->
-    <section id="how-it-works" class="px-4 section-py-reduced-top bg-transparent z-10"> <!-- Added bg-transparent and z-10, changed padding class -->
+    <section id="how-it-works" class="px-4 section-py-reduced-top bg-transparent z-10">
         <div class="container mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-center">
-                <div class="p-6 rounded-2xl bg-transparent shadow-xl flex flex-col items-center"> <!-- Removed bg-white -->
-                    <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">1</span> <!-- Changed text to white, added drop-shadow -->
-                    <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Discover Exclusive Retreats</h3> <!-- Changed text to white, added drop-shadow -->
-                    <p class="text-md text-white drop-shadow-md">Browse our upcoming calendar of curated villa retreats designed for connection and growth.</p> <!-- Changed text to white, added drop-shadow -->
+                <div class="p-6 rounded-2xl bg-transparent shadow-xl flex flex-col items-center">
+                    <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">1</span>
+                    <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Discover Exclusive Retreats</h3>
+                    <p class="text-md text-white drop-shadow-md">Browse our upcoming calendar of curated villa retreats designed for connection and growth.</p>
                 </div>
-                <div class="p-6 rounded-2xl bg-transparent shadow-xl flex flex-col items-center"> <!-- Removed bg-white -->
-                    <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">2</span> <!-- Changed text to white, added drop-shadow -->
-                    <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Inquire & Apply</h3> <!-- Changed text to white, added drop-shadow -->
-                    <p class="text-md text-white drop-shadow-md">Submit an inquiry for your chosen retreat. We'll ensure it's a perfect fit for your goals.</p> <!-- Changed text to white, added drop-shadow -->
+                <div class="p-6 rounded-2xl bg-transparent shadow-xl flex flex-col items-center">
+                    <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">2</span>
+                    <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Inquire & Apply</h3>
+                    <p class="text-md text-white drop-shadow-md">Submit an inquiry for your chosen retreat. We'll ensure it's a perfect fit for your goals.</p>
                 </div>
-                <div class="p-6 rounded-2xl bg-transparent shadow-xl flex flex-col items-center"> <!-- Removed bg-white -->
-                    <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">3</span> <!-- Changed text to white, added drop-shadow -->
-                    <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Personalized Onboarding</h3> <!-- Changed text to white, added drop-shadow -->
-                    <p class="text-md text-white drop-shadow-md">Our team will guide you through all logistics and details for a seamless preparation.</p> <!-- Changed text to white, added drop-shadow -->
+                <div class="p-6 rounded-2xl bg-transparent shadow-xl flex flex-col items-center">
+                    <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">3</span>
+                    <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Personalized Onboarding</h3>
+                    <p class="text-md text-white drop-shadow-md">Our team will guide you through all logistics and details for a seamless preparation.</p>
                 </div>
-                <div class="p-6 rounded-2xl bg-transparent shadow-xl flex flex-col items-center"> <!-- Removed bg-white -->
-                    <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">4</span> <!-- Changed text to white, added drop-shadow -->
-                    <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Experience Paradise</h3> <!-- Changed text to white, added drop-shadow -->
-                    <p class="text-md text-white drop-shadow-md">Arrive, relax, connect, and thrive in an inspiring environment crafted just for you.</p> <!-- Changed text to white, added drop-shadow -->
+                <div class="p-6 rounded-2xl bg-transparent shadow-xl flex flex-col items-center">
+                    <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">4</span>
+                    <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Experience Paradise</h3>
+                    <p class="text-md text-white drop-shadow-md">Arrive, relax, connect, and thrive in an inspiring environment crafted just for you.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- "Our Curated Destinations" Section - Will cover the fixed video -->
-    <section id="properties" class="px-4 section-py bg-gray-50 z-10"> <!-- Added bg-gray-50 and z-10 -->
+    <section id="properties" class="px-4 section-py bg-gray-50 z-10">
         <div class="container mx-auto">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 leading-tight max-w-4xl mx-auto">
                 Our Curated Retreat Experiences
@@ -260,7 +266,7 @@
     </section>
 
     <!-- NEW POSITION: Feng Shui & Architecture Section -->
-    <section class="bg-light-cream px-4 section-py z-10"> <!-- Added z-10 -->
+    <section class="bg-light-cream px-4 section-py z-10">
         <div class="container mx-auto">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 leading-tight max-w-4xl mx-auto">
                 Harmonizing Spaces: Feng Shui & Inspired Architecture
@@ -282,7 +288,7 @@
     </section>
 
     <!-- Entrepreneurial Connection / Call to Action (Contact Form - Refined) -->
-    <section id="contact" class="gold-gradient-bg px-4 section-py text-center text-gray-900 z-10"> <!-- Added z-10 -->
+    <section id="contact" class="gold-gradient-bg px-4 section-py text-center text-gray-900 z-10">
         <div class="container mx-auto max-w-3xl">
             <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-md leading-tight">
                 Join Our Exclusive Retreat Community
@@ -305,7 +311,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 px-4 py-12 text-center rounded-t-3xl z-10"> <!-- Added z-10 -->
+    <footer class="bg-gray-900 text-gray-300 px-4 py-12 text-center rounded-t-3xl z-10">
         <div class="container mx-auto">
             <p class="mb-4">&copy; 2025 Tropicalluxuries. All rights reserved.</p>
             <div class="flex justify-center space-x-6 text-lg">
