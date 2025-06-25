@@ -20,44 +20,62 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* Hero section with video background */
+        /* Hero section specific styles - RESTORED TO ORIGINAL */
         .hero-video-container {
-            position: relative; /* Make it a positioning context for absolute children */
-            min-height: 100vh; /* Full viewport height */
-            overflow: hidden; /* Ensures video doesn't spill out */
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
         }
 
         .hero-video {
-            position: absolute;
+            position: absolute; /* RESTORED */
             top: 50%;
             left: 50%;
             min-width: 100%;
             min-height: 100%;
             width: auto;
             height: auto;
-            z-index: -1; /* Puts video behind content */
-            transform: translate(-50%, -50%);
-            object-fit: cover; /* Ensures video covers the entire area without distortion */
-            filter: brightness(0.6); /* Slightly dim the video for text readability */
+            z-index: -1;
+            transform: translate(-50%, -50%); /* RESTORED */
+            object-fit: cover;
+            filter: brightness(0.6);
         }
 
-        /* Overlay for text readability on hero video */
         .hero-overlay {
-            background-color: rgba(0, 0, 0, 0.2); /* Lighter overlay over dimmed video */
-            position: absolute;
+            background-color: rgba(0, 0, 0, 0.2);
+            position: absolute; /* RESTORED */
             inset: 0;
-            z-index: 0; /* Above video, below content */
+            z-index: 0;
+        }
+
+        /* Fixed parallax video and overlay for specific sections */
+        .fixed-parallax-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2; /* Lowest layer */
+            object-fit: cover;
+            filter: brightness(0.7); /* Dim the video */
+        }
+
+        .fixed-parallax-overlay {
+            background-color: rgba(0, 0, 0, 0.3); /* Dark overlay for readability */
+            position: fixed;
+            inset: 0;
+            z-index: -1; /* Above video, below content */
         }
 
         /* General section padding for consistent spacing */
         .section-py {
-            padding-top: 6rem; /* Increased from 5rem for more breathing room */
-            padding-bottom: 6rem; /* Increased from 5rem */
+            padding-top: 6rem;
+            padding-bottom: 6rem;
         }
 
         /* For sections that need a more subtle background */
         .bg-light-cream {
-            background-color: #FDFDF7; /* A very light, almost off-white cream */
+            background-color: #FDFDF7;
         }
 
         /* Custom styling for sleek lines and modern dividers, if needed later */
@@ -69,21 +87,21 @@
         }
         /* New aspect ratio for images in redesigned sections */
         .md\:aspect-h-10 {
-            padding-bottom: 62.5%; /* Adjusts height to 10/16 aspect ratio */
+            padding-bottom: 62.5%;
         }
 
         /* CSS for the animated scroll indicator */
         .scroll-indicator {
             position: absolute;
-            bottom: 30px; /* Distance from the bottom of the screen */
+            bottom: 30px;
             left: 50%;
-            width: 20px; /* Size of the V */
+            width: 20px;
             height: 20px;
-            border-bottom: 2px solid white; /* Bottom line of the V */
-            border-right: 2px solid white; /* Right line of the V */
-            transform: translateX(-50%) rotate(45deg); /* Rotates to make a V shape pointing down */
-            animation: bounce 2s infinite; /* Apply the bounce animation */
-            z-index: 20; /* Ensure it's above the video and overlay */
+            border-bottom: 2px solid white;
+            border-right: 2px solid white;
+            transform: translateX(-50%) rotate(45deg);
+            animation: bounce 2s infinite;
+            z-index: 20;
         }
 
         /* Keyframes for the subtle up-and-down bounce animation */
@@ -92,40 +110,26 @@
                 transform: translateX(-50%) rotate(45deg) translateY(0);
             }
             40% {
-                transform: translateX(-50%) rotate(45deg) translateY(-8px); /* Move up slightly less */
+                transform: translateX(-50%) rotate(45deg) translateY(-8px);
             }
             60% {
-                transform: translateX(-50%) rotate(45deg) translateY(-4px); /* Move up slightly less */
+                transform: translateX(-50%) rotate(45deg) translateY(-4px);
             }
-        }
-
-        /* Specific styling for the 'about' section's background and overlay */
-        .about-section-background {
-            position: absolute; /* Relative to its parent #about section */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Behind content */
-            object-fit: cover;
-            filter: brightness(0.6); /* Dim the image for text readability */
-        }
-
-        .about-section-overlay {
-            background-color: rgba(0, 0, 0, 0.4); /* Dark overlay for readability */
-            position: absolute;
-            inset: 0;
-            z-index: 0; /* Above background image, below content */
         }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- Navbar (REMOVED as per your request for a simpler, seamless experience) -->
-    <!-- The previous <nav> element has been entirely removed from here. -->
+    <!-- Fixed Parallax Video Background - Applies to About & How It Works Sections -->
+    <video autoplay loop muted playsinline class="fixed-parallax-video">
+        <source src="perfect villa backround.mp4" type="video/mp4">
+        <!-- Fallback if video fails -->
+        <img src="https://placehold.co/1920x1080/28282B/28282B?text=Fixed+Background" alt="Fixed Parallax Background Fallback" class="w-full h-full object-cover">
+    </video>
+    <div class="fixed-parallax-overlay"></div>
 
-    <!-- Hero Section: With Video Background -->
-    <header class="hero-video-container">
+    <!-- Hero Section: With original video background (NOT parallax) -->
+    <header class="hero-video-container relative z-10"> <!-- Added z-10 to ensure it's above fixed parallax -->
         <!-- Video Element -->
         <video autoplay loop muted playsinline class="hero-video">
             <source src="trimmed.mp4" type="video/mp4">
@@ -155,27 +159,22 @@
         <div class="scroll-indicator"></div>
     </header>
 
-    <!-- "What We Do" Section: Redesigned for visual impact and readability -->
-    <section id="about" class="section-py relative overflow-hidden">
-        <!-- New Background Image for this section -->
-        <img src="https://images.unsplash.com/photo-1628590629739-e4d6a66a15b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTIyMjh8MHwxfHNlYXJjaHwyMHx8bHV4dXJ5JTIwcmV0cmVhdCUyMHZpbGxhfGVufDB8fHx8fDE3MjAxMjczMTZ8MA&ixlib=rb-4.0.3&q=80&w=1920" alt="Luxury Villa Background" class="about-section-background">
-        <div class="about-section-overlay"></div> <!-- Dark overlay for readability -->
-
+    <!-- "What We Do" Section: Now transparent to show fixed parallax video background -->
+    <section id="about" class="section-py relative overflow-hidden bg-transparent z-10"> <!-- Added bg-transparent and z-10 -->
         <!-- Content div to apply padding for text and center its contents -->
-        <div class="container mx-auto px-4 text-center relative z-10">
-            <h2 class="text-5xl md:text-6xl font-extrabold mb-8 text-white leading-tight max-w-4xl drop-shadow-md mx-auto">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-5xl md:text-6xl font-extrabold mb-8 text-white leading-tight max-w-4xl drop-shadow-md relative z-10 mx-auto">
                 <span class="hidden md:inline">Tropicalluxuries: </span>Curating Your Next Breakthrough
             </h2>
-            <p class="text-xl leading-loose max-w-3xl text-white drop-shadow mx-auto">
+            <p class="text-xl leading-loose max-w-3xl text-white drop-shadow relative z-10 mx-auto">
                 Tropicalluxuries hosts exclusive villas for entrepreneurs at every stage—whether you’re just beginning or building your empire. In stunning locations around the world, you’ll live, train, think, and build alongside like-minded individuals who push you forward. With luxury surroundings, deep focus, movement, and shared ambition, every stay is your launchpad for clarity, creativity, and growth.
             </p>
         </div>
     </section>
 
-    <!-- How Our Retreats Work Section -->
-    <section id="how-it-works" class="bg-light-cream px-4 section-py">
+    <!-- How Our Retreats Work Section: Also transparent to show fixed parallax video background -->
+    <section id="how-it-works" class="px-4 section-py bg-transparent z-10"> <!-- Added bg-transparent and z-10 -->
         <div class="container mx-auto">
-            <!-- Removed the h2 title as requested -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-center">
                 <div class="p-6 rounded-2xl bg-white shadow-xl flex flex-col items-center">
                     <span class="text-6xl text-gray-700 mb-6 font-bold">1</span>
@@ -201,8 +200,8 @@
         </div>
     </section>
 
-    <!-- "Our Curated Destinations" Section -->
-    <section id="properties" class="px-4 section-py">
+    <!-- "Our Curated Destinations" Section - Will cover the fixed video -->
+    <section id="properties" class="px-4 section-py bg-gray-50 z-10"> <!-- Added bg-gray-50 and z-10 -->
         <div class="container mx-auto">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 leading-tight max-w-4xl mx-auto">
                 Our Curated Retreat Experiences
@@ -253,7 +252,7 @@
     </section>
 
     <!-- NEW POSITION: Feng Shui & Architecture Section -->
-    <section class="bg-light-cream px-4 section-py">
+    <section class="bg-light-cream px-4 section-py z-10"> <!-- Added z-10 -->
         <div class="container mx-auto">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 leading-tight max-w-4xl mx-auto">
                 Harmonizing Spaces: Feng Shui & Inspired Architecture
@@ -275,7 +274,7 @@
     </section>
 
     <!-- Entrepreneurial Connection / Call to Action (Contact Form - Refined) -->
-    <section id="contact" class="gold-gradient-bg px-4 section-py text-center text-gray-900">
+    <section id="contact" class="gold-gradient-bg px-4 section-py text-center text-gray-900 z-10"> <!-- Added z-10 -->
         <div class="container mx-auto max-w-3xl">
             <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-md leading-tight">
                 Join Our Exclusive Retreat Community
@@ -298,7 +297,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 px-4 py-12 text-center rounded-t-3xl">
+    <footer class="bg-gray-900 text-gray-300 px-4 py-12 text-center rounded-t-3xl z-10"> <!-- Added z-10 -->
         <div class="container mx-auto">
             <p class="mb-4">&copy; 2025 Tropicalluxuries. All rights reserved.</p>
             <div class="flex justify-center space-x-6 text-lg">
