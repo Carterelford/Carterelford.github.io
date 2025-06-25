@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tropicalluxuries - Elevated Escapes & Harmonious Design</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter (for body) and Playfair Display (for headings, inspired by Brando's serif) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <style>
         body {
@@ -132,29 +130,21 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- Fixed Parallax Video Background - Applies to About & How It Works Sections -->
     <video autoplay loop muted playsinline class="fixed-parallax-video">
         <source src="perfect villa backround.mp4" type="video/mp4">
-        <!-- Fallback if video fails -->
         <img src="https://placehold.co/1920x1080/28282B/28282B?text=Fixed+Background" alt="Fixed Parallax Background Fallback" class="w-full h-full object-cover">
     </video>
     <div class="fixed-parallax-overlay"></div>
 
-    <!-- Hero Section: With original video background (NOT parallax) - RESTORED -->
     <header class="hero-video-container relative z-10">
-        <!-- Video Element -->
         <video autoplay loop muted playsinline class="hero-video">
             <source src="trimmed.mp4" type="video/mp4">
             <img src="https://images.unsplash.com/photo-1547463569-8973b06c888d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Dreamy Resort View Fallback" class="w-full h-full object-cover">
         </video>
-        <div class="hero-overlay"></div> <!-- Overlay for content readability -->
-
-        <!-- Logo at Top Middle (RESTORED original spacing) -->
-        <div class="absolute top-8 left-1/2 -translate-x-1/2 z-20">
+        <div class="hero-overlay"></div> <div class="absolute top-8 left-1/2 -translate-x-1/2 z-20">
             <img src="imageedit_95_9159867146.png" onerror="this.onerror=null;this.src='https://placehold.co/120x120/000000/FFFFFF?text=Logo';" alt="Tropical Luxuries Logo" class="w-28 h-28 md:w-36 md:h-36 mx-auto rounded-full shadow-lg">
         </div>
 
-        <!-- Main Heading Content - Perfectly Centered -->
         <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 md:px-8 z-10">
             <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight text-white drop-shadow-lg leading-tight">
                 Tropicalluxuries
@@ -167,18 +157,13 @@
             </a>
         </div>
 
-        <!-- Scroll Indicator -->
         <div class="scroll-indicator"></div>
     </header>
 
-    <!-- "What We Do" Section: Now transparent to show fixed parallax video background, adjusted padding -->
     <section id="about" class="section-py-about-adjusted relative overflow-hidden bg-transparent z-10">
-        <!-- Content div to apply padding for text and center its contents -->
         <div class="container mx-auto px-4 text-center">
-            <!-- Logo replaces "Tropicalluxuries:" text, made larger, removed mb-2 -->
-            <img src="imageedit_95_9159867146.png" onerror="this.onerror=null;this.src='https://placehold.co/80x80/000000/FFFFFF?text=Logo';" alt="Tropicalluxuries Logo" class="h-56 md:h-72 mx-auto drop-shadow-md">
-            <h2 class="text-5xl md:text-6xl font-extrabold text-white leading-tight max-w-4xl drop-shadow-md relative z-10 mx-auto mt-0"> <!-- Added mt-0 here -->
-                Curating Your Next Breakthrough
+            <img src="logoooo.png" onerror="this.onerror=null;this.src='https://placehold.co/120x120/000000/FFFFFF?text=Logo';" alt="Tropicalluxuries Logo" class="h-64 md:h-80 mx-auto drop-shadow-md">
+            <h2 class="text-5xl md:text-6xl font-extrabold text-white leading-tight max-w-4xl drop-shadow-md relative z-10 mx-auto mt-0"> Curating Your Next Breakthrough
             </h2>
             <p class="text-xl leading-loose max-w-3xl text-white drop-shadow relative z-10 mx-auto">
                 Tropicalluxuries hosts exclusive villas for entrepreneurs at every stage—whether you’re just beginning or building your empire. In stunning locations around the world, you’ll live, train, think, and build alongside like-minded individuals who push you forward. With luxury surroundings, deep focus, movement, and shared ambition, every stay is your launchpad for clarity, creativity, and growth.
@@ -186,7 +171,6 @@
         </div>
     </section>
 
-    <!-- How Our Retreats Work Section: Also transparent to show fixed parallax video background -->
     <section id="how-it-works" class="px-4 section-py-reduced-top bg-transparent z-10">
         <div class="container mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-center">
@@ -214,14 +198,12 @@
         </div>
     </section>
 
-    <!-- "Our Curated Destinations" Section - Will cover the fixed video -->
     <section id="properties" class="px-4 section-py bg-gray-50 z-10">
         <div class="container mx-auto">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 leading-tight max-w-4xl mx-auto">
                 Our Curated Retreat Experiences
             </h2>
 
-            <!-- Retreat 1: The Bali Entrepreneurial Sanctuary -->
             <div class="mb-24 flex flex-col md:flex-row items-center gap-12">
                 <div class="md:w-1/2 relative overflow-hidden rounded-3xl shadow-2xl aspect-w-16 aspect-h-9 md:aspect-h-10">
                     <img src="https://images.unsplash.com/photo-1512918728585-07208d132ce0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Bali Retreat Villa" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
@@ -235,7 +217,6 @@
                 </div>
             </div>
 
-            <!-- Retreat 2: The Coastal Mastermind Escape (e.g., Phuket/Mediterranean style) -->
             <div class="mb-24 flex flex-col md:flex-row-reverse items-center gap-12">
                 <div class="md:w-1/2 relative overflow-hidden rounded-3xl shadow-2xl aspect-w-16 aspect-h-9 md:aspect-h-10">
                     <img src="https://images.unsplash.com/photo-1506122071727-4a004b901a1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Coastal Retreat Villa" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
@@ -249,7 +230,6 @@
                 </div>
             </div>
 
-            <!-- Retreat 3: The Serene Desert Innovation Hub -->
             <div class="flex flex-col md:flex-row items-center gap-12">
                 <div class="md:w-1/2 relative overflow-hidden rounded-3xl shadow-2xl aspect-w-16 aspect-h-9 md:aspect-h-10">
                     <img src="https://images.unsplash.com/photo-1563911302823-fd731210639d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Desert Retreat Villa" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
@@ -265,7 +245,6 @@
         </div>
     </section>
 
-    <!-- NEW POSITION: Feng Shui & Architecture Section -->
     <section class="bg-light-cream px-4 section-py z-10">
         <div class="container mx-auto">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 leading-tight max-w-4xl mx-auto">
@@ -287,7 +266,6 @@
         </div>
     </section>
 
-    <!-- Entrepreneurial Connection / Call to Action (Contact Form - Refined) -->
     <section id="contact" class="gold-gradient-bg px-4 section-py text-center text-gray-900 z-10">
         <div class="container mx-auto max-w-3xl">
             <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-md leading-tight">
@@ -310,12 +288,10 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-gray-900 text-gray-300 px-4 py-12 text-center rounded-t-3xl z-10">
         <div class="container mx-auto">
             <p class="mb-4">&copy; 2025 Tropicalluxuries. All rights reserved.</p>
             <div class="flex justify-center space-x-6 text-lg">
-                <!-- Replace # with your actual social media links -->
                 <a href="#" class="text-gray-400 hover:text-gray-200 transition-colors duration-200">Instagram</a>
                 <a href="#" class="text-gray-400 hover:text-gray-200 transition-colors duration-200">Facebook</a>
                 <a href="#" class="text-gray-400 hover:text-gray-200 transition-colors duration-200">LinkedIn</a>
