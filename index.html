@@ -73,6 +73,12 @@
             padding-bottom: 6rem;
         }
 
+        /* Reduced top padding for 'How It Works' section to pull it closer */
+        .section-py-reduced-top {
+            padding-top: 3rem; /* Adjusted for closer spacing */
+            padding-bottom: 6rem; /* Keep original bottom padding */
+        }
+
         /* For sections that need a more subtle background */
         .bg-light-cream {
             background-color: #FDFDF7;
@@ -173,28 +179,28 @@
     </section>
 
     <!-- How Our Retreats Work Section: Also transparent to show fixed parallax video background -->
-    <section id="how-it-works" class="px-4 section-py bg-transparent z-10"> <!-- Added bg-transparent and z-10 -->
+    <section id="how-it-works" class="px-4 section-py-reduced-top bg-transparent z-10"> <!-- Added bg-transparent and z-10, changed padding class -->
         <div class="container mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-center">
-                <div class="p-6 rounded-2xl bg-white shadow-xl flex flex-col items-center">
-                    <span class="text-6xl text-gray-700 mb-6 font-bold">1</span>
-                    <h3 class="text-2xl font-semibold mb-3 text-gray-900">Discover Exclusive Retreats</h3>
-                    <p class="text-md text-gray-700">Browse our upcoming calendar of curated villa retreats designed for connection and growth.</p>
+                <div class="p-6 rounded-2xl bg-transparent shadow-xl flex flex-col items-center"> <!-- Removed bg-white -->
+                    <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">1</span> <!-- Changed text to white, added drop-shadow -->
+                    <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Discover Exclusive Retreats</h3> <!-- Changed text to white, added drop-shadow -->
+                    <p class="text-md text-white drop-shadow-md">Browse our upcoming calendar of curated villa retreats designed for connection and growth.</p> <!-- Changed text to white, added drop-shadow -->
                 </div>
-                <div class="p-6 rounded-2xl bg-white shadow-xl flex flex-col items-center">
-                    <span class="text-6xl text-gray-700 mb-6 font-bold">2</span>
-                    <h3 class="text-2xl font-semibold mb-3 text-gray-900">Inquire & Apply</h3>
-                    <p class="text-md text-gray-700">Submit an inquiry for your chosen retreat. We'll ensure it's a perfect fit for your goals.</p>
+                <div class="p-6 rounded-2xl bg-transparent shadow-xl flex flex-col items-center"> <!-- Removed bg-white -->
+                    <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">2</span> <!-- Changed text to white, added drop-shadow -->
+                    <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Inquire & Apply</h3> <!-- Changed text to white, added drop-shadow -->
+                    <p class="text-md text-white drop-shadow-md">Submit an inquiry for your chosen retreat. We'll ensure it's a perfect fit for your goals.</p> <!-- Changed text to white, added drop-shadow -->
                 </div>
-                <div class="p-6 rounded-2xl bg-white shadow-xl flex flex-col items-center">
-                    <span class="text-6xl text-gray-700 mb-6 font-bold">3</span>
-                    <h3 class="text-2xl font-semibold mb-3 text-gray-900">Personalized Onboarding</h3>
-                    <p class="text-md text-gray-700">Our team will guide you through all logistics and details for a seamless preparation.</p>
+                <div class="p-6 rounded-2xl bg-transparent shadow-xl flex flex-col items-center"> <!-- Removed bg-white -->
+                    <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">3</span> <!-- Changed text to white, added drop-shadow -->
+                    <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Personalized Onboarding</h3> <!-- Changed text to white, added drop-shadow -->
+                    <p class="text-md text-white drop-shadow-md">Our team will guide you through all logistics and details for a seamless preparation.</p> <!-- Changed text to white, added drop-shadow -->
                 </div>
-                <div class="p-6 rounded-2xl bg-white shadow-xl flex flex-col items-center">
-                    <span class="text-6xl text-gray-700 mb-6 font-bold">4</span>
-                    <h3 class="text-2xl font-semibold mb-3 text-gray-900">Experience Paradise</h3>
-                    <p class="text-md text-gray-700">Arrive, relax, connect, and thrive in an inspiring environment crafted just for you.</p>
+                <div class="p-6 rounded-2xl bg-transparent shadow-xl flex flex-col items-center"> <!-- Removed bg-white -->
+                    <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">4</span> <!-- Changed text to white, added drop-shadow -->
+                    <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Experience Paradise</h3> <!-- Changed text to white, added drop-shadow -->
+                    <p class="text-md text-white drop-shadow-md">Arrive, relax, connect, and thrive in an inspiring environment crafted just for you.</p> <!-- Changed text to white, added drop-shadow -->
                 </div>
             </div>
         </div>
