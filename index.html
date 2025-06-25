@@ -154,27 +154,7 @@
         }
         /* --- End Fade-in on Scroll CSS --- */
 
-        /* --- Social Icon Styling --- */
-        .social-icon-circle {
-            width: 48px; /* Standard size for social icons */
-            height: 48px;
-            background-color: white; /* White circle */
-            border-radius: 50%; /* Makes it a circle */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Subtle shadow */
-            transition: transform 0.2s ease-in-out; /* Smooth hover effect */
-        }
-        .social-icon-circle:hover {
-            transform: translateY(-3px); /* Lifts slightly on hover */
-        }
-        .social-icon-circle img {
-            width: 28px; /* Size of the logo inside the circle */
-            height: 28px;
-            object-fit: contain; /* Ensures the logo fits without distortion */
-        }
-        /* --- End Social Icon Styling --- */
+        /* No more .social-icon-circle CSS as requested */
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -371,17 +351,17 @@
         <div class="container mx-auto">
             <p class="mb-4">&copy; 2025 Tropicalluxuries. All rights reserved.</p>
             <div class="flex justify-center space-x-6 text-lg mb-8">
-                <a href="#" class="social-icon-circle" aria-label="Instagram">
-                    <img src="logoooo_black.png" onerror="this.onerror=null;this.src='https://placehold.co/28x28/FFFFFF/000000?text=I';" alt="Instagram Logo">
+                <a href="#" aria-label="Instagram" class="transition-transform duration-200 hover:scale-110">
+                    <img src="insta.png" alt="Instagram Logo" class="w-12 h-12 object-contain">
                 </a>
-                <a href="#" class="social-icon-circle" aria-label="Facebook">
-                    <img src="logoooo_black.png" onerror="this.onerror=null;this.src='https://placehold.co/28x28/FFFFFF/000000?text=F';" alt="Facebook Logo">
+                <a href="#" aria-label="X (Twitter)" class="transition-transform duration-200 hover:scale-110">
+                    <img src="X.png" alt="X (Twitter) Logo" class="w-12 h-12 object-contain">
                 </a>
-                <a href="#" class="social-icon-circle" aria-label="LinkedIn">
-                    <img src="logoooo_black.png" onerror="this.onerror=null;this.src='https://placehold.co/28x28/FFFFFF/000000?text=L';" alt="LinkedIn Logo">
+                <a href="#" aria-label="Facebook" class="transition-transform duration-200 hover:scale-110">
+                    <img src="facebook.png" alt="Facebook Logo" class="w-12 h-12 object-contain">
                 </a>
             </div>
-            <img src="logoooo.png" onerror="this.onerror=null;this.src='https://placehold.co/120x120/000000/FFFFFF?text=Logo';" alt="Tropical Luxuries Logo" class="w-28 h-28 md:w-36 md:h-36 mx-auto rounded-full shadow-lg object-contain object-center">
+            <img src="logoooo.png" onerror="this.onerror=null;this.src='https://placehold.co/240x240/000000/FFFFFF?text=Logo';" alt="Tropical Luxuries Logo" class="w-56 h-56 md:w-72 md:h-72 mx-auto rounded-full shadow-lg object-contain object-center">
         </div>
     </footer>
 
