@@ -77,9 +77,9 @@
             padding-bottom: 6rem; /* Keep original bottom padding */
         }
 
-        /* Reduced top padding for 'How It Works' section to pull it closer to About */
-        .section-py-reduced-top {
-            padding-top: 1.5rem; /* Adjusted for closer spacing from 3rem */
+        /* Adjusted top padding for 'How It Works' section to pull it closer to About */
+        .section-py-how-it-works-adjusted {
+            padding-top: 0.5rem; /* Even more reduced from 1.5rem */
             padding-bottom: 6rem; /* Keep original bottom padding */
         }
 
@@ -142,7 +142,7 @@
             <img src="https://images.unsplash.com/photo-1547463569-8973b06c888d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Dreamy Resort View Fallback" class="w-full h-full object-cover">
         </video>
         <div class="hero-overlay"></div> <div class="absolute top-8 left-1/2 -translate-x-1/2 z-20">
-            <img src="imageedit_95_9159867146.png" onerror="this.onerror=null;this.src='https://placehold.co/120x120/000000/FFFFFF?text=Logo';" alt="Tropical Luxuries Logo" class="w-28 h-28 md:w-36 md:h-36 mx-auto rounded-full shadow-lg">
+            <img src="imageedit_95_9159866146.png" onerror="this.onerror=null;this.src='https://placehold.co/120x120/000000/FFFFFF?text=Logo';" alt="Tropical Luxuries Logo" class="w-28 h-28 md:w-36 md:h-36 mx-auto rounded-full shadow-lg">
         </div>
 
         <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 md:px-8 z-10">
@@ -162,16 +162,17 @@
 
     <section id="about" class="section-py-about-adjusted relative overflow-hidden bg-transparent z-10">
         <div class="container mx-auto px-4 text-center">
-            <img src="logoooo.png" onerror="this.onerror=null;this.src='https://placehold.co/120x120/000000/FFFFFF?text=Logo';" alt="Tropicalluxuries Logo" class="h-64 md:h-80 mx-auto drop-shadow-md">
-            <h2 class="text-5xl md:text-6xl font-extrabold text-white leading-tight max-w-4xl drop-shadow-md relative z-10 mx-auto mt-0"> Curating Your Next Breakthrough
+            <img src="logoooo.png" onerror="this.onerror=null;this.src='https://placehold.co/100x100/000000/FFFFFF?text=Logo';" alt="Tropicalluxuries Logo" class="h-48 md:h-64 mx-auto drop-shadow-md">
+            <h2 class="text-5xl md:text-6xl font-extrabold text-white leading-tight max-w-4xl drop-shadow-md relative z-10 mx-auto mt-0">
+                Curating Your Next Breakthrough
             </h2>
-            <p class="text-xl leading-loose max-w-3xl text-white drop-shadow relative z-10 mx-auto">
+            <p class="text-xl leading-loose max-w-3xl text-white drop-shadow relative z-10 mx-auto mt-6">
                 Tropicalluxuries hosts exclusive villas for entrepreneurs at every stage—whether you’re just beginning or building your empire. In stunning locations around the world, you’ll live, train, think, and build alongside like-minded individuals who push you forward. With luxury surroundings, deep focus, movement, and shared ambition, every stay is your launchpad for clarity, creativity, and growth.
             </p>
         </div>
     </section>
 
-    <section id="how-it-works" class="px-4 section-py-reduced-top bg-transparent z-10">
+    <section id="how-it-works" class="px-4 section-py-how-it-works-adjusted bg-transparent z-10">
         <div class="container mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-center">
                 <div class="p-6 rounded-2xl bg-transparent shadow-xl flex flex-col items-center">
@@ -197,6 +198,25 @@
             </div>
         </div>
     </section>
+
+    ---
+
+    <section class="px-4 pt-12 pb-24 bg-transparent z-10">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-white leading-tight drop-shadow-md mb-8">
+                Based on 5-Star Reviews
+            </h2>
+            <div class="flex justify-center items-center space-x-2">
+                <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+            </div>
+        </div>
+    </section>
+
+    ---
 
     <section id="properties" class="px-4 section-py bg-gray-50 z-10">
         <div class="container mx-auto">
