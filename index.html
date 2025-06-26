@@ -49,7 +49,6 @@
         /* --- NEW CSS FOR FIXED IMAGE BACKGROUND CONTAINER --- */
         #curated-intro-section {
             position: relative;
-            /* No specific height; it will adapt to its content */
             z-index: 10; /* Ensures it sits above body but below video sections */
         }
 
@@ -197,14 +196,42 @@
         }
         /* --- End Fade-in on Scroll CSS --- */
 
-        /* --- Custom CSS for New Review Slider --- */
-        #reviews-content {
-            -ms-overflow-style: none; /* IE and Edge */
-            scrollbar-width: none; /* Firefox */
+        /* --- Custom CSS for Review Transition --- */
+        .review-display {
+            position: relative;
+            min-height: 100px; /* Adjust based on your review text length */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 2.5rem; /* Space between review and slider */
         }
 
-        #reviews-content::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
+        .review-text {
+            position: absolute; /* Allows for overlapping and controlled movement */
+            width: 100%;
+            max-width: 600px; /* Limit width of the review text */
+            padding: 0 1rem; /* Add some padding */
+            opacity: 0;
+            transform: translateX(100%); /* Start off-screen right */
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .review-text.active {
+            opacity: 1;
+            transform: translateX(0);
+            z-index: 1; /* Ensure active review is on top */
+        }
+
+        .review-text.fade-out-left {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+
+        .review-text.fade-out-right {
+            opacity: 0;
+            transform: translateX(100%);
         }
 
         .custom-scrollbar-track {
@@ -212,43 +239,27 @@
             height: 6px; /* Thickness of the bar */
             background-color: rgba(255, 255, 255, 0.2); /* Light transparent track */
             border-radius: 3px;
-            margin-top: 2.5rem; /* Space between reviews and the slider */
+            max-width: 400px; /* Limit slider bar width */
+            margin: 0 auto; /* Center the slider */
             cursor: pointer;
         }
 
         .custom-scrollbar-thumb {
             position: absolute;
             height: 100%;
+            width: 25%; /* Example width, adjust as needed */
             background-color: rgba(255, 255, 255, 0.7); /* Brighter thumb */
             border-radius: 3px;
             cursor: grab;
             transition: background-color 0.2s ease-in-out;
-            will-change: left, width;
+            will-change: left;
         }
 
         .custom-scrollbar-thumb:active {
             cursor: grabbing;
             background-color: rgba(255, 255, 255, 0.9);
         }
-
-        .review-card {
-            min-width: 100%; /* Default to full width on small screens */
-            box-sizing: border-box;
-        }
-
-        @media (min-width: 768px) {
-            .review-card {
-                min-width: calc(50% - 1rem); /* 2 reviews with 2rem gap, so 1rem on each side of card */
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .review-card {
-                min-width: calc(33.33% - 1.33rem); /* 3 reviews with 2rem gap, roughly 1.33rem on each side */
-            }
-        }
         /* --- End Custom CSS for New Review Slider --- */
-
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -333,31 +344,27 @@
                     <svg class="w-10 h-10 text-white fill-current step-hover-effect" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
                     <svg class="w-10 h-10 text-white fill-current step-hover-effect" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
                 </div>
-                <p class="text-xl md:text-2xl font-light italic text-white drop-shadow-md mb-12 max-w-2xl mx-auto">
-                    "Every detail was perfect, from the serene setting to the inspiring community. Truly transformative!"
-                </p>
-
-                <div class="relative w-full max-w-4xl mx-auto">
-                    <div id="reviews-content" class="flex overflow-x-auto snap-x snap-mandatory space-x-8 px-4 py-8 md:px-8 md:py-10 rounded-3xl bg-white/5 shadow-2xl min-h-[200px]">
-                        <div class="review-card p-6 md:p-8 rounded-2xl bg-white/10 flex-shrink-0 text-left text-white shadow-xl snap-center">
-                            <p class="text-lg italic leading-relaxed mb-4">"The Bali sanctuary was exactly what I needed to re-focus my business. The co-working space was top-notch and the wellness sessions truly helped."</p>
-                            <p class="font-semibold text-right">- Alex R., Digital Nomad</p>
-                        </div>
-                        <div class="review-card p-6 md:p-8 rounded-2xl bg-white/10 flex-shrink-0 text-left text-white shadow-xl snap-center">
-                            <p class="text-lg italic leading-relaxed mb-4">"Our team's coastal retreat in Italy sparked so many new ideas. The views were incredible, and the mastermind sessions were invaluable."</p>
-                            <p class="font-semibold text-right">- Sarah L., Tech Startup Founder</p>
-                        </div>
-                        <div class="review-card p-6 md:p-8 rounded-2xl bg-white/10 flex-shrink-0 text-left text-white shadow-xl snap-center">
-                            <p class="text-lg italic leading-relaxed mb-4">"The Dubai penthouse exceeded all expectations. It was the perfect blend of luxury and quiet focus, leading to major breakthroughs."</p>
-                            <p class="font-semibold text-right">- Omar K., Entrepreneur</p>
-                        </div>
-                        </div>
-
-                    <div class="custom-scrollbar-track">
-                        <div class="custom-scrollbar-thumb" id="custom-scrollbar-thumb"></div>
-                    </div>
+                
+                <div class="review-display">
+                    <p class="review-text text-xl md:text-2xl font-light italic text-white drop-shadow-md max-w-2xl mx-auto active" data-review-index="0">
+                        "Every detail was perfect, from the serene setting to the inspiring community. Truly transformative!"
+                    </p>
+                    <p class="review-text text-xl md:text-2xl font-light italic text-white drop-shadow-md max-w-2xl mx-auto" data-review-index="1">
+                        "The Bali sanctuary was exactly what I needed to re-focus my business. The co-working space was top-notch and the wellness sessions truly helped."<br><span class="font-semibold not-italic">- Alex R., Digital Nomad</span>
+                    </p>
+                    <p class="review-text text-xl md:text-2xl font-light italic text-white drop-shadow-md max-w-2xl mx-auto" data-review-index="2">
+                        "Our team's coastal retreat in Italy sparked so many new ideas. The views were incredible, and the mastermind sessions were invaluable."<br><span class="font-semibold not-italic">- Sarah L., Tech Startup Founder</span>
+                    </p>
+                    <p class="review-text text-xl md:text-2xl font-light italic text-white drop-shadow-md max-w-2xl mx-auto" data-review-index="3">
+                        "The Dubai penthouse exceeded all expectations. It was the perfect blend of luxury and quiet focus, leading to major breakthroughs."<br><span class="font-semibold not-italic">- Omar K., Entrepreneur</span>
+                    </p>
                 </div>
+
+                <div class="custom-scrollbar-track">
+                    <div class="custom-scrollbar-thumb" id="custom-scrollbar-thumb"></div>
                 </div>
+
+            </div>
         </section>
 
     </section>
@@ -504,60 +511,95 @@
                 observer.observe(element);
             });
 
-            // Custom Review Slider functionality
-            const reviewsContent = document.getElementById('reviews-content');
+            // Review Slider (single review transition) functionality
+            const reviewTexts = document.querySelectorAll('.review-text');
             const customThumb = document.getElementById('custom-scrollbar-thumb');
-            const customTrack = customThumb.parentElement; // The track is the parent of the thumb
+            const customTrack = customThumb.parentElement;
 
+            let currentReviewIndex = 0;
             let isDraggingThumb = false;
             let startXThumb;
-            let startScrollLeft;
+            let thumbOffset = 0; // Current position of the thumb from the left of the track
 
-            // Function to update thumb position and width based on content scroll
-            function updateThumb() {
-                const contentScrollWidth = reviewsContent.scrollWidth;
-                const contentClientWidth = reviewsContent.clientWidth;
-                const contentScrollLeft = reviewsContent.scrollLeft;
-                const trackWidth = customTrack.clientWidth;
+            // Initialize reviews
+            reviewTexts[currentReviewIndex].classList.add('active');
 
-                // Calculate thumb width (proportion of visible content)
-                const thumbWidth = (contentClientWidth / contentScrollWidth) * trackWidth;
-                customThumb.style.width = `${thumbWidth}px`;
+            function updateReviewDisplay(newIndex, direction) {
+                if (newIndex === currentReviewIndex) return;
 
-                // Calculate thumb position (proportion of content scrolled)
-                const thumbLeft = (contentScrollLeft / (contentScrollWidth - contentClientWidth)) * (trackWidth - thumbWidth);
-                customThumb.style.left = `${thumbLeft}px`;
+                const oldReview = reviewTexts[currentReviewIndex];
+                const newReview = reviewTexts[newIndex];
 
-                // Hide thumb if content is not scrollable
-                if (contentScrollWidth <= contentClientWidth) {
-                    customThumb.style.display = 'none';
-                    customTrack.style.display = 'none';
-                } else {
-                    customThumb.style.display = 'block';
-                    customTrack.style.display = 'block';
+                // Determine slide direction for fade-out
+                if (direction === 'left') { // Dragging left, new review comes from right, old goes left
+                    oldReview.classList.add('fade-out-left');
+                } else { // Dragging right, new review comes from left, old goes right
+                    oldReview.classList.add('fade-out-right');
                 }
+
+                oldReview.classList.remove('active');
+
+                // Apply transition for new review coming in
+                newReview.style.transform = (direction === 'left') ? 'translateX(100%)' : 'translateX(-100%)';
+                newReview.style.opacity = '0';
+                newReview.classList.add('active'); // Add active immediately to allow transition
+
+                // Set a small timeout to trigger the slide-in animation
+                setTimeout(() => {
+                    newReview.style.transform = 'translateX(0)';
+                    newReview.style.opacity = '1';
+                }, 50); // A small delay to ensure transform property is applied before transition
+
+                // Clean up old review classes after its transition
+                setTimeout(() => {
+                    oldReview.classList.remove('fade-out-left', 'fade-out-right');
+                    oldReview.style.transform = 'translateX(0)'; // Reset for next use
+                    oldReview.style.opacity = '0';
+                }, 500); // Match CSS transition duration
+
+                currentReviewIndex = newIndex;
+            }
+
+            function updateThumbPositionAndReview(currentX) {
+                const trackWidth = customTrack.clientWidth;
+                const thumbWidth = customThumb.clientWidth;
+                const maxThumbLeft = trackWidth - thumbWidth;
+                const totalReviews = reviewTexts.length;
+
+                // Calculate thumb position based on drag
+                let newThumbLeft = thumbOffset + (currentX - startXThumb);
+                newThumbLeft = Math.max(0, Math.min(newThumbLeft, maxThumbLeft));
+                customThumb.style.left = `${newThumbLeft}px`;
+
+                // Calculate which review should be active based on thumb position
+                const progress = newThumbLeft / maxThumbLeft; // 0 to 1
+                let newIndex = Math.round(progress * (totalReviews - 1));
+
+                // Determine direction for smooth transition
+                let direction = null;
+                if (newIndex > currentReviewIndex) {
+                    direction = 'left'; // Thumb moves right, implies next review (from right)
+                } else if (newIndex < currentReviewIndex) {
+                    direction = 'right'; // Thumb moves left, implies previous review (from left)
+                }
+
+                updateReviewDisplay(newIndex, direction);
             }
 
             // Event listeners for dragging the thumb
             customThumb.addEventListener('mousedown', (e) => {
                 isDraggingThumb = true;
                 startXThumb = e.clientX;
-                startScrollLeft = reviewsContent.scrollLeft;
+                thumbOffset = customThumb.offsetLeft;
                 customThumb.style.cursor = 'grabbing';
                 document.body.style.userSelect = 'none'; // Prevent text selection during drag
+                document.body.style.cursor = 'grabbing'; // Change body cursor during drag
             });
 
             document.addEventListener('mousemove', (e) => {
                 if (!isDraggingThumb) return;
-                const dx = e.clientX - startXThumb;
-                const contentScrollWidth = reviewsContent.scrollWidth;
-                const contentClientWidth = reviewsContent.clientWidth;
-                const trackWidth = customTrack.clientWidth;
-                const thumbWidth = (contentClientWidth / contentScrollWidth) * trackWidth;
-
-                // Calculate how much content should scroll based on thumb movement
-                const scrollRatio = (contentScrollWidth - contentClientWidth) / (trackWidth - thumbWidth);
-                reviewsContent.scrollLeft = startScrollLeft + (dx * scrollRatio);
+                e.preventDefault(); // Prevent default browser drag behaviors
+                updateThumbPositionAndReview(e.clientX);
             });
 
             document.addEventListener('mouseup', () => {
@@ -565,6 +607,7 @@
                     isDraggingThumb = false;
                     customThumb.style.cursor = 'grab';
                     document.body.style.userSelect = ''; // Re-enable text selection
+                    document.body.style.cursor = ''; // Reset body cursor
                 }
             });
 
@@ -572,35 +615,38 @@
             customThumb.addEventListener('touchstart', (e) => {
                 isDraggingThumb = true;
                 startXThumb = e.touches[0].clientX;
-                startScrollLeft = reviewsContent.scrollLeft;
+                thumbOffset = customThumb.offsetLeft;
                 customThumb.style.cursor = 'grabbing';
+                document.body.style.userSelect = 'none';
+                document.body.style.cursor = 'grabbing';
             }, { passive: true });
 
             document.addEventListener('touchmove', (e) => {
                 if (!isDraggingThumb) return;
-                const dx = e.touches[0].clientX - startXThumb;
-                const contentScrollWidth = reviewsContent.scrollWidth;
-                const contentClientWidth = reviewsContent.clientWidth;
-                const trackWidth = customTrack.clientWidth;
-                const thumbWidth = (contentClientWidth / contentScrollWidth) * trackWidth;
-
-                const scrollRatio = (contentScrollWidth - contentClientWidth) / (trackWidth - thumbWidth);
-                reviewsContent.scrollLeft = startScrollLeft + (dx * scrollRatio);
-            }, { passive: false }); // Use passive: false for touchmove to allow preventDefault
+                // e.preventDefault(); // This can break native scrolling in some cases, use with caution
+                updateThumbPositionAndReview(e.touches[0].clientX);
+            }, { passive: false });
 
             document.addEventListener('touchend', () => {
                 if (isDraggingThumb) {
                     isDraggingThumb = false;
                     customThumb.style.cursor = 'grab';
+                    document.body.style.userSelect = '';
+                    document.body.style.cursor = '';
                 }
             });
 
-            // Update thumb when reviews content is scrolled (e.g., by mouse wheel, trackpad)
-            reviewsContent.addEventListener('scroll', updateThumb);
+            // Calculate initial thumb width (fixed for now, can be dynamic later if needed)
+            function setInitialThumbWidth() {
+                const totalReviews = reviewTexts.length;
+                // If each review is considered a "step" or "page"
+                const thumbPercentage = 100 / totalReviews;
+                customThumb.style.width = `${thumbPercentage}%`;
+                updateThumbPositionAndReview(startXThumb || 0); // Position thumb correctly on load
+            }
 
-            // Update thumb initially and on window resize
-            window.addEventListener('resize', updateThumb);
-            updateThumb(); // Initial call
+            window.addEventListener('resize', setInitialThumbWidth);
+            setInitialThumbWidth(); // Initial call to set thumb width
         });
     </script>
 </body>
