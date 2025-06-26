@@ -171,14 +171,12 @@
 
         /* --- Custom CSS for Step Hover Effect --- */
         .step-hover-effect {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out; /* Changed to filter for glow */
         }
 
         .step-hover-effect:hover {
             transform: scale(1.03); /* Makes it 3% larger */
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-                        0 10px 10px -5px rgba(0, 0, 0, 0.04),
-                        0 0 25px 7px rgba(255, 255, 255, 0.6); /* Subtle WHITE glow */
+            /* Removed box-shadow, now using filter for star glow */
         }
         /* --- End Custom CSS --- */
 
@@ -246,6 +244,24 @@
             background-color: rgba(255, 255, 255, 0.9);
         }
         /* --- End Custom CSS for Review Carousel --- */
+
+        /* --- NEW CSS for Star Glow --- */
+        .star-svg-glow {
+            transition: filter 0.3s ease-in-out; /* Smooth transition for the filter */
+            filter: url(#shadow); /* Apply initial filter (no glow) */
+            /* IMPORTANT: The #shadow filter needs to be defined in SVG for this to work */
+        }
+
+        .star-svg-glow:hover {
+            filter: url(#starGlowFilter); /* Apply the glow filter on hover */
+        }
+
+        /* Fallback for browsers that don't support SVG filters well or for a subtle effect */
+        .star-svg-glow:hover {
+            -webkit-filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+        }
+        /* --- END NEW CSS for Star Glow --- */
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -324,11 +340,28 @@
                     Based on 5-Star Reviews
                 </h2>
                 <div class="flex justify-center items-center space-x-6 mb-6">
-                    <svg class="w-10 h-10 text-white fill-current step-hover-effect" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
-                    <svg class="w-10 h-10 text-white fill-current step-hover-effect" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
-                    <svg class="w-10 h-10 text-white fill-current step-hover-effect" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
-                    <svg class="w-10 h-10 text-white fill-current step-hover-effect" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
-                    <svg class="w-10 h-10 text-white fill-current step-hover-effect" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                    <svg height="0" width="0" style="position: absolute; overflow: hidden;">
+                        <filter id="starGlowFilter">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"></feGaussianBlur>
+                            <feComponentTransfer in="blur" result="transfer">
+                                <feFuncA type="linear" slope="1.5" intercept="0"></feFuncA>
+                            </feComponentTransfer>
+                            <feFlood flood-color="white" flood-opacity="0.8" result="color"></feFlood>
+                            <feComposite in="color" in2="transfer" operator="in" result="glow"></feComposite>
+                            <feMerge>
+                                <feMergeNode in="glow"></feMergeNode>
+                                <feMergeNode in="SourceGraphic"></feMergeNode>
+                            </feMerge>
+                        </filter>
+                        <filter id="shadow">
+                           </filter>
+                    </svg>
+
+                    <svg class="w-10 h-10 text-white fill-current star-svg-glow" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                    <svg class="w-10 h-10 text-white fill-current star-svg-glow" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                    <svg class="w-10 h-10 text-white fill-current star-svg-glow" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                    <svg class="w-10 h-10 text-white fill-current star-svg-glow" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                    <svg class="w-10 h-10 text-white fill-current star-svg-glow" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
                 </div>
 
                 <div class="review-display">
@@ -528,7 +561,6 @@
 
                 // Calculate the overall translation offset for all reviews
                 // This value shifts the "carousel" of reviews
-                // Example: If progress is 0, offset = 0. If progress is 0.5 (middle), offset = -200% (shifts 2 reviews left)
                 const offsetPercentage = progress * (totalReviews - 1) * reviewWidthUnit;
 
                 reviewTexts.forEach((review, index) => {
@@ -544,9 +576,6 @@
                     // Reviews are fully opaque when translateX is close to 0 (centered)
                     // And fade out as they move further away (towards -100% or 100%)
                     const distance = Math.abs(translateXValue); // Absolute distance from center
-                    // We want opacity to be 1 around 0%, and 0 around 100% or -100%
-                    // We can map this: opacity = 1 - (distance / 100)
-                    // Clamp opacity between 0 and 1
                     const opacity = Math.max(0, 1 - (distance / (reviewWidthUnit * 0.9))); // Adjust 0.9 for faster/slower fade
 
                     review.style.opacity = opacity.toFixed(2); // Set opacity with 2 decimal places
