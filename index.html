@@ -196,6 +196,36 @@
             transform: translateY(0);
         }
         /* --- End Fade-in on Scroll CSS --- */
+
+        /* --- Custom CSS for Review Slider --- */
+        .reviews-container {
+            overflow-x: scroll; /* Allows horizontal scrolling */
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
+        }
+
+        .reviews-container::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome, Safari, Opera */
+        }
+
+        .review-card {
+            min-width: 100%; /* Each review takes full width of the container on small screens */
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+
+        @media (min-width: 768px) { /* On medium screens and up */
+            .review-card {
+                min-width: 48%; /* Adjust for 2 cards */
+            }
+        }
+
+        @media (min-width: 1024px) { /* On large screens and up */
+            .review-card {
+                min-width: 32%; /* Adjust for 3 cards */
+            }
+        }
+        /* --- End Custom CSS for Review Slider --- */
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -273,14 +303,46 @@
                 <h2 class="text-4xl md:text-5xl font-extrabold text-white leading-tight drop-shadow-md mb-8">
                     Based on 5-Star Reviews
                 </h2>
-                <div class="flex justify-center items-center space-x-6">
-                    <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
-                    <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
-                    <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
-                    <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
-                    <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                <div class="flex justify-center items-center space-x-6 mb-6">
+                    <svg class="w-10 h-10 text-white fill-current step-hover-effect" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                    <svg class="w-10 h-10 text-white fill-current step-hover-effect" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                    <svg class="w-10 h-10 text-white fill-current step-hover-effect" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                    <svg class="w-10 h-10 text-white fill-current step-hover-effect" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                    <svg class="w-10 h-10 text-white fill-current step-hover-effect" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
                 </div>
-            </div>
+                <p class="text-xl md:text-2xl font-light italic text-white drop-shadow-md mb-12 max-w-2xl mx-auto">
+                    "Every detail was perfect, from the serene setting to the inspiring community. Truly transformative!"
+                </p>
+
+                <div class="relative w-full max-w-4xl mx-auto">
+                    <button class="absolute left-0 top-1/2 -translate-y-1/2 bg-white/20 p-3 rounded-full text-white shadow-lg hover:bg-white/40 transition-all duration-300 z-20" aria-label="Previous review" onclick="scrollReviews(-1)">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+
+                    <div id="reviews-slider" class="reviews-container flex space-x-8 px-4 py-8 md:px-8 md:py-10 rounded-3xl bg-white/5 shadow-2xl">
+                        <div class="review-card p-6 md:p-8 rounded-2xl bg-white/10 flex-shrink-0 text-left text-white shadow-xl">
+                            <p class="text-lg italic leading-relaxed mb-4">"The Bali sanctuary was exactly what I needed to re-focus my business. The co-working space was top-notch and the wellness sessions truly helped."</p>
+                            <p class="font-semibold text-right">- Alex R., Digital Nomad</p>
+                        </div>
+                        <div class="review-card p-6 md:p-8 rounded-2xl bg-white/10 flex-shrink-0 text-left text-white shadow-xl">
+                            <p class="text-lg italic leading-relaxed mb-4">"Our team's coastal retreat in Italy sparked so many new ideas. The views were incredible, and the mastermind sessions were invaluable."</p>
+                            <p class="font-semibold text-right">- Sarah L., Tech Startup Founder</p>
+                        </div>
+                        <div class="review-card p-6 md:p-8 rounded-2xl bg-white/10 flex-shrink-0 text-left text-white shadow-xl">
+                            <p class="text-lg italic leading-relaxed mb-4">"The Dubai penthouse exceeded all expectations. It was the perfect blend of luxury and quiet focus, leading to major breakthroughs."</p>
+                            <p class="font-semibold text-right">- Omar K., Entrepreneur</p>
+                        </div>
+                        </div>
+
+                    <button class="absolute right-0 top-1/2 -translate-y-1/2 bg-white/20 p-3 rounded-full text-white shadow-lg hover:bg-white/40 transition-all duration-300 z-20" aria-label="Next review" onclick="scrollReviews(1)">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+                </div>
         </section>
 
     </section>
@@ -405,7 +467,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Select all elements that need to fade in
+            // Fade-in on Scroll functionality
             const fadeElements = document.querySelectorAll('.fade-in-section');
 
             const observerOptions = {
@@ -426,6 +488,64 @@
             fadeElements.forEach(element => {
                 observer.observe(element);
             });
+
+            // Review Slider functionality
+            const reviewsSlider = document.getElementById('reviews-slider');
+            let isDragging = false;
+            let startX;
+            let scrollLeft;
+
+            reviewsSlider.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                reviewsSlider.classList.add('cursor-grabbing');
+                startX = e.pageX - reviewsSlider.offsetLeft;
+                scrollLeft = reviewsSlider.scrollLeft;
+            });
+
+            reviewsSlider.addEventListener('mouseleave', () => {
+                isDragging = false;
+                reviewsSlider.classList.remove('cursor-grabbing');
+            });
+
+            reviewsSlider.addEventListener('mouseup', () => {
+                isDragging = false;
+                reviewsSlider.classList.remove('cursor-grabbing');
+            });
+
+            reviewsSlider.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - reviewsSlider.offsetLeft;
+                const walk = (x - startX) * 2; // Scroll-fastness
+                reviewsSlider.scrollLeft = scrollLeft - walk;
+            });
+
+            // Handle touch events for mobile
+            reviewsSlider.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                startX = e.touches[0].pageX - reviewsSlider.offsetLeft;
+                scrollLeft = reviewsSlider.scrollLeft;
+            }, { passive: true });
+
+            reviewsSlider.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+
+            reviewsSlider.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const x = e.touches[0].pageX - reviewsSlider.offsetLeft;
+                const walk = (x - startX) * 2;
+                reviewsSlider.scrollLeft = scrollLeft - walk;
+            });
+
+            // Navigation buttons for reviews
+            window.scrollReviews = function(direction) {
+                const scrollAmount = reviewsSlider.offsetWidth * 0.8; // Scroll by 80% of current view
+                reviewsSlider.scrollBy({
+                    left: direction * scrollAmount,
+                    behavior: 'smooth'
+                });
+            };
         });
     </script>
 </body>
