@@ -46,24 +46,48 @@
             z-index: 0;
         }
 
-        /* Fixed parallax video and overlay for specific sections */
-        .fixed-parallax-video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -2; /* Lowest layer */
-            object-fit: cover;
-            filter: brightness(0.7); /* Dim the video */
+        /* --- NEW CSS FOR VIDEO SECTIONS --- */
+        .video-section {
+            position: relative;
+            height: 100vh; /* Make each section full viewport height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            z-index: 10; /* Ensure content above other elements */
         }
 
-        .fixed-parallax-overlay {
-            background-color: rgba(0, 0, 0, 0.3); /* Dark overlay for readability */
-            position: fixed;
-            inset: 0;
-            z-index: -1; /* Above video, below content */
+        .video-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1; /* Below the overlay and content */
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: brightness(0.7); /* Slightly dimmed video */
         }
+
+        .video-overlay {
+            background-color: rgba(0, 0, 0, 0.3); /* Dark overlay for readability */
+            position: absolute;
+            inset: 0;
+            z-index: 0; /* Above video, below content */
+        }
+
+        .video-content {
+            position: relative;
+            z-index: 1; /* Above the overlay */
+            max-width: 800px; /* Limit content width */
+            padding: 0 1.5rem; /* Add horizontal padding */
+            margin: auto; /* Center content block */
+        }
+        /* --- END NEW CSS --- */
+
 
         /* General section padding for consistent spacing */
         .section-py {
@@ -79,7 +103,7 @@
 
         /* Adjusted top padding for 'How It Works' section to pull it closer to About */
         .section-py-how-it-works-adjusted {
-            padding-top: 0.5rem;
+            padding-top: 0.5rem; /* Adjusted for closer proximity, can be tweaked */
             padding-bottom: 6rem;
         }
 
@@ -157,12 +181,6 @@
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <video autoplay loop muted playsinline class="fixed-parallax-video">
-        <source src="perfect villa backround.mp4" type="video/mp4">
-        <img src="https://placehold.co/1920x1080/28282B/28282B?text=Fixed+Background" alt="Fixed Parallax Background Fallback" class="w-full h-full object-cover">
-    </video>
-    <div class="fixed-parallax-overlay"></div>
-
     <header class="hero-video-container relative z-10">
         <video autoplay loop muted playsinline class="hero-video">
             <source src="trimmed.mp4" type="video/mp4">
@@ -201,8 +219,6 @@
         </div>
     </section>
 
-    ---
-
     <section id="how-it-works" class="px-4 section-py-how-it-works-adjusted bg-transparent z-10">
         <div class="container mx-auto fade-in-section">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-center">
@@ -230,8 +246,6 @@
         </div>
     </section>
 
-    ---
-
     <section class="px-4 pt-6 pb-32 bg-transparent z-10">
         <div class="container mx-auto text-center fade-in-section">
             <h2 class="text-4xl md:text-5xl font-extrabold text-white leading-tight drop-shadow-md mb-8">
@@ -247,56 +261,62 @@
         </div>
     </section>
 
-    ---
-
-    <section id="properties" class="px-4 section-py bg-gray-50 z-10">
-        <div class="container mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 leading-tight max-w-4xl mx-auto fade-in-section">
-                Our Curated Experiences
+    <section id="bali-sanctuary" class="video-section">
+        <video autoplay loop muted playsinline class="video-background">
+            <source src="bali sanctuary.mp4" type="video/mp4">
+            <img src="https://images.unsplash.com/photo-1571003195204-585a0651804f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Bali Entrepreneurial Sanctuary Fallback" class="w-full h-full object-cover">
+        </video>
+        <div class="video-overlay"></div>
+        <div class="video-content">
+            <h2 class="text-5xl md:text-6xl font-bold mb-4 tracking-tight text-white drop-shadow-lg leading-tight">
+                The Bali Entrepreneurial Sanctuary
             </h2>
-
-            <div class="mb-24 flex flex-col md:flex-row items-center gap-12 fade-in-section">
-                <div class="md:w-1/2 relative overflow-hidden rounded-3xl shadow-2xl aspect-w-16 aspect-h-9 md:aspect-h-10">
-                    <img src="https://images.unsplash.com/photo-1512918728585-07208d132ce0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Bali Retreat Villa" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
-                </div>
-                <div class="md:w-1/2 md:pl-12 text-center md:text-left">
-                    <h3 class="text-3xl md:text-4xl font-semibold mb-4 text-gray-900 leading-tight">The Bali Entrepreneurial Sanctuary</h3>
-                    <p class="text-lg leading-relaxed mb-6 text-gray-700">
-                        An immersive 30-day stay for digital innovators in a breathtaking Balinese mansion. Foster deep work, collaboration, and rejuvenation amidst lush rice paddies and vibrant culture. Includes dedicated co-working spaces and wellness sessions.
-                    </p>
-                    <a href="#" class="inline-block px-8 py-3 bg-gray-900 text-white font-semibold rounded-full shadow-lg hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out">Inquire About Bali &rarr;</a>
-                </div>
-            </div>
-
-            <div class="mb-24 flex flex-col md:flex-row-reverse items-center gap-12 fade-in-section">
-                <div class="md:w-1/2 relative overflow-hidden rounded-3xl shadow-2xl aspect-w-16 aspect-h-9 md:aspect-h-10">
-                    <img src="https://images.unsplash.com/photo-1506122071727-4a004b901a1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Coastal Cliff Villa" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
-                </div>
-                <div class="md:w-1/2 md:pr-12 text-center md:text-right">
-                    <h3 class="text-3xl md:text-4xl font-semibold mb-4 text-gray-900 leading-tight">The Coastal Mastermind Escape</h3>
-                    <p class="text-lg leading-relaxed mb-6 text-gray-700">
-                        Join a curated group for intense mastermind sessions and strategic planning in a stunning cliffside villa. Experience invigorating ocean views, gourmet dining, and a focused environment for breakthroughs.
-                    </p>
-                    <a href="#" class="inline-block px-8 py-3 bg-gray-900 text-white font-semibold rounded-full shadow-lg hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out">Discover Coastal Retreats &rarr;</a>
-                </div>
-            </div>
-
-            <div class="flex flex-col md:flex-row items-center gap-12 fade-in-section">
-                <div class="md:w-1/2 relative overflow-hidden rounded-3xl shadow-2xl aspect-w-16 aspect-h-9 md:aspect-h-10">
-                    <img src="https://images.unsplash.com/photo-1563911302823-fd731210639d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Desert Retreat Villa" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
-                </div>
-                <div class="md:w-1/2 md:pl-12 text-center md:text-left">
-                    <h3 class="text-3xl md:text-4xl font-semibold mb-4 text-gray-900 leading-tight">The Serene Desert Innovation Hub</h3>
-                    <p class="text-lg leading-relaxed mb-6 text-gray-700">
-                        Find clarity and spark new ideas in a striking desert oasis. This retreat offers solitude and structured workshops, perfect for deep creative work and strategic planning in an inspiring, unique landscape.
-                    </p>
-                    <a href="#" class="inline-block px-8 py-3 bg-gray-900 text-white font-semibold rounded-full shadow-lg hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out">Explore Desert Hubs &rarr;</a>
-                </div>
-            </div>
+            <p class="text-base md:text-xl font-extralight italic mb-10 text-white drop-shadow-md max-w-3xl mx-auto">
+                An immersive 30-day stay for digital innovators in a breathtaking Balinese mansion. Foster deep work, collaboration, and rejuvenation amidst lush rice paddies and vibrant culture. Includes dedicated co-working spaces and wellness sessions.
+            </p>
+            <a href="#" class="px-8 py-4 bg-gray-900 text-white font-semibold rounded-full shadow-xl hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out text-lg">
+                Inquire About Bali &rarr;
+            </a>
         </div>
     </section>
 
-    ---
+    <section id="coastal-escape" class="video-section">
+        <video autoplay loop muted playsinline class="video-background">
+            <source src="cliffside italy.mp4" type="video/mp4">
+            <img src="https://images.unsplash.com/photo-1549495147-9759c864b2d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Coastal Mastermind Escape Fallback" class="w-full h-full object-cover">
+        </video>
+        <div class="video-overlay"></div>
+        <div class="video-content">
+            <h2 class="text-5xl md:text-6xl font-bold mb-4 tracking-tight text-white drop-shadow-lg leading-tight">
+                The Coastal Mastermind Escape
+            </h2>
+            <p class="text-base md:text-xl font-extralight italic mb-10 text-white drop-shadow-md max-w-3xl mx-auto">
+                Join a curated group for intense mastermind sessions and strategic planning in a stunning cliffside villa. Experience invigorating ocean views, gourmet dining, and a focused environment for breakthroughs.
+            </p>
+            <a href="#" class="px-8 py-4 bg-gray-900 text-white font-semibold rounded-full shadow-xl hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out text-lg">
+                Discover Coastal Retreats &rarr;
+            </a>
+        </div>
+    </section>
+
+    <section id="desert-hub" class="video-section">
+        <video autoplay loop muted playsinline class="video-background">
+            <source src="Dubai penthouse.mp4" type="video/mp4">
+            <img src="https://images.unsplash.com/photo-1563911302823-fd731210639d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Serene Desert Innovation Hub Fallback" class="w-full h-full object-cover">
+        </video>
+        <div class="video-overlay"></div>
+        <div class="video-content">
+            <h2 class="text-5xl md:text-6xl font-bold mb-4 tracking-tight text-white drop-shadow-lg leading-tight">
+                The Serene Desert Innovation Hub
+            </h2>
+            <p class="text-base md:text-xl font-extralight italic mb-10 text-white drop-shadow-md max-w-3xl mx-auto">
+                Find clarity and spark new ideas in a striking desert oasis. This retreat offers solitude and structured workshops, perfect for deep creative work and strategic planning in an inspiring, unique landscape.
+            </p>
+            <a href="#" class="px-8 py-4 bg-gray-900 text-white font-semibold rounded-full shadow-xl hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out text-lg">
+                Explore Desert Hubs &rarr;
+            </a>
+        </div>
+    </section>
 
     <section class="bg-light-cream px-4 section-py z-10">
         <div class="container mx-auto fade-in-section">
@@ -319,8 +339,6 @@
         </div>
     </section>
 
-    ---
-
     <section id="contact" class="gold-gradient-bg px-4 section-py text-center text-gray-900 z-10 fade-in-section">
         <div class="container mx-auto max-w-3xl">
             <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-md leading-tight">
@@ -342,8 +360,6 @@
             </form>
         </div>
     </section>
-
-    ---
 
     <footer class="bg-black text-gray-300 px-4 py-12 text-center rounded-t-3xl z-10 fade-in-section">
         <div class="container mx-auto">
