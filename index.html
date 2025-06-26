@@ -196,59 +196,31 @@
         }
         /* --- End Fade-in on Scroll CSS --- */
 
-        /* --- Custom CSS for Review Transition --- */
+        /* --- Custom CSS for Review Carousel --- */
         .review-display {
             position: relative;
-            min-height: 120px; /* Increased height to accommodate potential two-line reviews and prevent jumping */
+            min-height: 120px; /* Ensure enough space for reviews */
             display: flex;
-            justify-content: center;
+            justify-content: center; /* Center the reviews horizontally */
             align-items: center;
             text-align: center;
             margin-bottom: 2.5rem; /* Space between review and slider */
-            overflow: hidden; /* CRUCIAL: Clips content outside the container during transition */
+            overflow: hidden; /* Crucial to clip content outside the container */
         }
 
         .review-text {
-            position: absolute; /* Allows for overlapping and controlled movement */
+            position: absolute; /* Allows reviews to layer and move independently */
             width: 100%;
             max-width: 600px; /* Limit width of the review text */
-            padding: 0 1rem; /* Add some padding */
-            opacity: 0;
-            /* Start all reviews off-screen by default */
+            padding: 0 1rem;
+            white-space: normal; /* Allow text to wrap naturally */
+            transition: none; /* Crucial: No CSS transitions here, controlled by JS */
+            will-change: transform, opacity; /* Optimize performance */
+            pointer-events: none; /* Prevent interaction with reviews */
+            /* Start all reviews off-screen initially, overridden by JS */
             transform: translateX(100%);
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* Slightly longer, smoother transition */
-            will-change: opacity, transform;
-            pointer-events: none; /* Prevent interaction with inactive reviews */
-        }
-
-        .review-text.active {
-            opacity: 1;
-            transform: translateX(0);
-            z-index: 1; /* Ensure active review is on top */
-            pointer-events: auto; /* Enable interaction for active review */
-        }
-
-        /* Classes for outgoing reviews (sliding entirely off-screen) */
-        .review-text.slide-out-left {
             opacity: 0;
-            transform: translateX(-100%); /* Move far left */
         }
-
-        .review-text.slide-out-right {
-            opacity: 0;
-            transform: translateX(100%); /* Move far right */
-        }
-
-        /* Classes for incoming reviews (starting far off-screen and sliding in) */
-        .review-text.slide-in-left { /* New review comes from left */
-            transform: translateX(-100%);
-            opacity: 0; /* Start hidden */
-        }
-        .review-text.slide-in-right { /* New review comes from right */
-            transform: translateX(100%);
-            opacity: 0; /* Start hidden */
-        }
-
 
         .custom-scrollbar-track {
             position: relative;
@@ -266,15 +238,14 @@
             background-color: rgba(255, 255, 255, 0.7); /* Brighter thumb */
             border-radius: 3px;
             cursor: grab;
-            transition: background-color 0.2s ease-in-out;
-            will-change: left;
+            will-change: left; /* Optimize for smooth dragging */
         }
 
         .custom-scrollbar-thumb:active {
             cursor: grabbing;
             background-color: rgba(255, 255, 255, 0.9);
         }
-        /* --- End Custom CSS for New Review Slider --- */
+        /* --- End Custom CSS for Review Carousel --- */
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -526,92 +497,67 @@
                 observer.observe(element);
             });
 
-            // Review Slider (single review transition) functionality
+            // --- Review Carousel (Continuous Movement) Functionality ---
             const reviewDisplay = document.querySelector('.review-display');
             const reviewTexts = document.querySelectorAll('.review-text');
             const customThumb = document.getElementById('custom-scrollbar-thumb');
             const customTrack = customThumb.parentElement;
 
-            let currentReviewIndex = 0;
+            let currentSliderProgress = 0; // 0 to 1, representing thumb's position on track
             let isDraggingThumb = false;
             let startXThumb;
-            let thumbOffset = 0; // Current position of the thumb from the left of the track
+            let thumbOffset = 0;
 
-            // Function to update review display with slide and fade
-            function updateReviewDisplay(newIndex, dragDirection) {
-                if (newIndex === currentReviewIndex) {
-                    // If trying to activate the same review, ensure it's fully active and in position.
-                    reviewTexts[currentReviewIndex].classList.add('active');
-                    reviewTexts[currentReviewIndex].classList.remove('slide-out-left', 'slide-out-right', 'slide-in-left', 'slide-in-right');
-                    return;
-                }
+            const totalReviews = reviewTexts.length;
+            const reviewWidthUnit = 100; // Represents the "width" of one review for translation in %
 
-                const oldReview = reviewTexts[currentReviewIndex];
-                const newReview = reviewTexts[newIndex];
-
-                // 1. Start the outgoing review's animation immediately
-                const outDirectionClass = dragDirection === 'right' ? 'slide-out-left' : 'slide-out-right'; // If thumb dragged right, old review goes left. If thumb dragged left, old review goes right.
-                oldReview.classList.remove('active');
-                oldReview.classList.add(outDirectionClass);
-
-                // 2. Prepare the new review for entry (set initial off-screen position)
-                const inDirectionClass = dragDirection === 'right' ? 'slide-in-right' : 'slide-in-left'; // New review comes from the direction the thumb was dragged
-                newReview.classList.add(inDirectionClass);
-                newReview.classList.remove('active'); // Ensure it's not active prematurely
-                newReview.style.opacity = '0'; // Ensure it's fully transparent initially
-
-                // 3. Set a timeout for the incoming review to start its animation
-                // This delay should be less than the outgoing animation duration to create overlap,
-                // but not so short that it causes visual stacking. Fine-tuning needed here.
-                const transitionDelay = 200; // milliseconds. Adjust this value!
-
-                setTimeout(() => {
-                    // Activate new review to trigger its slide-in/fade-in
-                    newReview.classList.add('active');
-                    newReview.classList.remove('slide-in-left', 'slide-in-right'); // Remove initial position class
-                    newReview.style.transform = 'translateX(0)'; // Slide into center
-                    newReview.style.opacity = '1'; // Fade in
-
-                    // Clean up the old review after its animation is visually complete
-                    // This timeout should match or slightly exceed the CSS transition duration
-                    setTimeout(() => {
-                        oldReview.classList.remove(outDirectionClass);
-                        oldReview.style.transform = ''; // Clear inline styles
-                        oldReview.style.opacity = '0'; // Ensure it's fully hidden
-                    }, 500); // Matches CSS transition duration for reviews
-                }, transitionDelay);
-
-                currentReviewIndex = newIndex;
-            }
-
-            // Function to update thumb position and trigger review changes
-            function updateThumbPositionAndReview(currentX) {
+            // Function to update the position and opacity of all reviews based on slider progress
+            function updateReviewPositions() {
                 const trackWidth = customTrack.clientWidth;
                 const thumbWidth = customThumb.clientWidth;
                 const maxThumbLeft = trackWidth - thumbWidth;
-                const totalReviews = reviewTexts.length;
 
-                // Calculate thumb position based on drag
-                let newThumbLeft = thumbOffset + (currentX - startXThumb);
-                newThumbLeft = Math.max(0, Math.min(newThumbLeft, maxThumbLeft));
-                customThumb.style.left = `${newThumbLeft}px`;
+                // Calculate progress (0 to 1) based on current thumb position
+                let progress = customThumb.offsetLeft / maxThumbLeft;
+                progress = isNaN(progress) ? 0 : Math.max(0, Math.min(progress, 1)); // Ensure valid range
 
-                // Calculate which review should be active based on thumb position
-                const progress = newThumbLeft / maxThumbLeft; // Value from 0 to 1
-                let newIndex = Math.round(progress * (totalReviews - 1));
+                currentSliderProgress = progress;
 
-                // Determine direction based on current and new index for the transition
-                let dragDirection = null;
-                if (newIndex > currentReviewIndex) {
-                    dragDirection = 'right'; // Thumb moved right, new review should come from right
-                } else if (newIndex < currentReviewIndex) {
-                    dragDirection = 'left'; // Thumb moved left, new review should come from left
-                }
+                // Determine the "active" review index based on progress
+                const targetIndex = Math.round(progress * (totalReviews - 1));
 
-                // Only update if the index has changed
-                if (newIndex !== currentReviewIndex) {
-                    updateReviewDisplay(newIndex, dragDirection);
-                }
+                // Calculate the overall translation offset for all reviews
+                // This value shifts the "carousel" of reviews
+                // Example: If progress is 0, offset = 0. If progress is 0.5 (middle), offset = -200% (shifts 2 reviews left)
+                const offsetPercentage = progress * (totalReviews - 1) * reviewWidthUnit;
+
+                reviewTexts.forEach((review, index) => {
+                    // Calculate the individual review's position relative to its "slot"
+                    // Then apply the global offset to move the entire carousel
+                    const initialOffset = (index * reviewWidthUnit); // Position if no slider movement
+                    const translateXValue = initialOffset - offsetPercentage;
+
+                    // Apply transform
+                    review.style.transform = `translateX(${translateXValue}%)`;
+
+                    // Calculate opacity based on distance from the center (0% translateX)
+                    // Reviews are fully opaque when translateX is close to 0 (centered)
+                    // And fade out as they move further away (towards -100% or 100%)
+                    const distance = Math.abs(translateXValue); // Absolute distance from center
+                    // We want opacity to be 1 around 0%, and 0 around 100% or -100%
+                    // We can map this: opacity = 1 - (distance / 100)
+                    // Clamp opacity between 0 and 1
+                    const opacity = Math.max(0, 1 - (distance / (reviewWidthUnit * 0.9))); // Adjust 0.9 for faster/slower fade
+
+                    review.style.opacity = opacity.toFixed(2); // Set opacity with 2 decimal places
+
+                    // Optionally, set z-index for the active review to ensure it's on top
+                    if (index === targetIndex && opacity > 0.5) { // Only set if reasonably visible
+                        review.style.zIndex = '1';
+                    } else {
+                        review.style.zIndex = '0';
+                    }
+                });
             }
 
             // Event listeners for dragging the thumb
@@ -627,7 +573,17 @@
             document.addEventListener('mousemove', (e) => {
                 if (!isDraggingThumb) return;
                 e.preventDefault(); // Prevent default browser drag behaviors (like selecting text)
-                updateThumbPositionAndReview(e.clientX);
+
+                const trackWidth = customTrack.clientWidth;
+                const thumbWidth = customThumb.clientWidth;
+                const maxThumbLeft = trackWidth - thumbWidth;
+
+                let newThumbLeft = thumbOffset + (e.clientX - startXThumb);
+                newThumbLeft = Math.max(0, Math.min(newThumbLeft, maxThumbLeft));
+                customThumb.style.left = `${newThumbLeft}px`;
+
+                // Update review positions continuously while dragging
+                updateReviewPositions();
             });
 
             document.addEventListener('mouseup', () => {
@@ -636,10 +592,26 @@
                     customThumb.style.cursor = 'grab';
                     document.body.style.userSelect = ''; // Re-enable text selection
                     document.body.style.cursor = ''; // Reset body cursor
+
+                    // Snap to nearest review center if not exactly there
+                    const totalReviews = reviewTexts.length;
+                    const maxThumbLeft = customTrack.clientWidth - customThumb.clientWidth;
+                    const progress = customThumb.offsetLeft / maxThumbLeft;
+                    const closestReviewIndex = Math.round(progress * (totalReviews - 1));
+
+                    const targetThumbLeft = (closestReviewIndex / (totalReviews - 1)) * maxThumbLeft;
+                    // Add a smooth transition for snapping
+                    customThumb.style.transition = 'left 0.2s ease-out';
+                    customThumb.style.left = `${targetThumbLeft}px`;
+                    // Recalculate positions after snap to ensure perfect alignment
+                    setTimeout(() => {
+                        customThumb.style.transition = 'none'; // Remove transition after snap
+                        updateReviewPositions();
+                    }, 200); // Match snap transition duration
                 }
             });
 
-            // Touch events for mobile
+            // Touch events for mobile (similar logic as mouse events)
             customThumb.addEventListener('touchstart', (e) => {
                 isDraggingThumb = true;
                 startXThumb = e.touches[0].clientX;
@@ -652,7 +624,15 @@
             document.addEventListener('touchmove', (e) => {
                 if (!isDraggingThumb) return;
                 // e.preventDefault(); // Uncomment if touchmove causes issues with scrolling
-                updateThumbPositionAndReview(e.touches[0].clientX);
+                const trackWidth = customTrack.clientWidth;
+                const thumbWidth = customThumb.clientWidth;
+                const maxThumbLeft = trackWidth - thumbWidth;
+
+                let newThumbLeft = thumbOffset + (e.touches[0].clientX - startXThumb);
+                newThumbLeft = Math.max(0, Math.min(newThumbLeft, maxThumbLeft));
+                customThumb.style.left = `${newThumbLeft}px`;
+
+                updateReviewPositions();
             }, { passive: false });
 
             document.addEventListener('touchend', () => {
@@ -661,33 +641,37 @@
                     customThumb.style.cursor = 'grab';
                     document.body.style.userSelect = '';
                     document.body.style.cursor = '';
+
+                    const totalReviews = reviewTexts.length;
+                    const maxThumbLeft = customTrack.clientWidth - customThumb.clientWidth;
+                    const progress = customThumb.offsetLeft / maxThumbLeft;
+                    const closestReviewIndex = Math.round(progress * (totalReviews - 1));
+
+                    const targetThumbLeft = (closestReviewIndex / (totalReviews - 1)) * maxThumbLeft;
+                    customThumb.style.transition = 'left 0.2s ease-out';
+                    customThumb.style.left = `${targetThumbLeft}px`;
+                    setTimeout(() => {
+                        customThumb.style.transition = 'none';
+                        updateReviewPositions();
+                    }, 200);
                 }
             });
 
-            // Set initial thumb width and position the first review
-            function initializeReviewSlider() {
+            // Initial setup and resize handler
+            function initializeCarousel() {
                 const totalReviews = reviewTexts.length;
-                const thumbPercentage = 100 / totalReviews;
-                customThumb.style.width = `${thumbPercentage}%`;
+                if (totalReviews > 0) {
+                    const thumbPercentage = 100 / totalReviews;
+                    customThumb.style.width = `${thumbPercentage}%`;
+                }
 
-                // Ensure only the first review is active and visible on load
-                reviewTexts.forEach((review, index) => {
-                    if (index === 0) {
-                        review.classList.add('active');
-                        review.style.transform = 'translateX(0)';
-                        review.style.opacity = '1';
-                    } else {
-                        review.classList.remove('active', 'slide-out-left', 'slide-out-right', 'slide-in-left', 'slide-in-right');
-                        review.style.transform = 'translateX(100%)'; // Ensure others start off-screen right
-                        review.style.opacity = '0';
-                    }
-                });
-                currentReviewIndex = 0; // Explicitly set current index to 0
-                // No need to call updateThumbPositionAndReview here, as the initial setup is manual.
+                // Initial position: first review centered
+                customThumb.style.left = '0px'; // Ensure thumb is at the start
+                updateReviewPositions(); // Call once to set initial state
             }
 
-            window.addEventListener('resize', initializeReviewSlider);
-            initializeReviewSlider(); // Initial call to set up the slider and show first review
+            window.addEventListener('resize', initializeCarousel);
+            initializeCarousel(); // Initial call to set up the carousel and show first review
         });
     </script>
 </body>
