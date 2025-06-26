@@ -171,12 +171,12 @@
 
         /* --- Custom CSS for Step Hover Effect --- */
         .step-hover-effect {
-            transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out; /* Changed to filter for glow */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added box-shadow to transition */
         }
 
         .step-hover-effect:hover {
             transform: scale(1.03); /* Makes it 3% larger */
-            /* Removed box-shadow, now using filter for star glow */
+            box-shadow: 0 0 25px 7px rgba(255, 255, 255, 0.6); /* Subtle WHITE glow re-added */
         }
         /* --- End Custom CSS --- */
 
