@@ -199,12 +199,13 @@
         /* --- Custom CSS for Review Transition --- */
         .review-display {
             position: relative;
-            min-height: 100px; /* Adjust based on your review text length */
+            min-height: 120px; /* Increased height to accommodate potential two-line reviews and prevent jumping */
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
             margin-bottom: 2.5rem; /* Space between review and slider */
+            overflow: hidden; /* Crucial to clip overlapping content during transition */
         }
 
         .review-text {
@@ -213,23 +214,26 @@
             max-width: 600px; /* Limit width of the review text */
             padding: 0 1rem; /* Add some padding */
             opacity: 0;
-            transform: translateX(100%); /* Start off-screen right */
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            transform: translateX(100%); /* Default to off-screen right */
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out; /* Smoother, slightly faster transition */
             will-change: opacity, transform;
+            pointer-events: none; /* Prevent interaction with inactive reviews */
         }
 
         .review-text.active {
             opacity: 1;
             transform: translateX(0);
             z-index: 1; /* Ensure active review is on top */
+            pointer-events: auto; /* Enable interaction for active review */
         }
 
-        .review-text.fade-out-left {
+        /* Classes for outgoing reviews */
+        .review-text.slide-out-left {
             opacity: 0;
             transform: translateX(-100%);
         }
 
-        .review-text.fade-out-right {
+        .review-text.slide-out-right {
             opacity: 0;
             transform: translateX(100%);
         }
@@ -247,7 +251,6 @@
         .custom-scrollbar-thumb {
             position: absolute;
             height: 100%;
-            width: 25%; /* Example width, adjust as needed */
             background-color: rgba(255, 255, 255, 0.7); /* Brighter thumb */
             border-radius: 3px;
             cursor: grab;
@@ -344,7 +347,7 @@
                     <svg class="w-10 h-10 text-white fill-current step-hover-effect" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
                     <svg class="w-10 h-10 text-white fill-current step-hover-effect" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
                 </div>
-                
+
                 <div class="review-display">
                     <p class="review-text text-xl md:text-2xl font-light italic text-white drop-shadow-md max-w-2xl mx-auto active" data-review-index="0">
                         "Every detail was perfect, from the serene setting to the inspiring community. Truly transformative!"
@@ -512,6 +515,7 @@
             });
 
             // Review Slider (single review transition) functionality
+            const reviewDisplay = document.querySelector('.review-display');
             const reviewTexts = document.querySelectorAll('.review-text');
             const customThumb = document.getElementById('custom-scrollbar-thumb');
             const customTrack = customThumb.parentElement;
@@ -521,45 +525,49 @@
             let startXThumb;
             let thumbOffset = 0; // Current position of the thumb from the left of the track
 
-            // Initialize reviews
-            reviewTexts[currentReviewIndex].classList.add('active');
-
-            function updateReviewDisplay(newIndex, direction) {
-                if (newIndex === currentReviewIndex) return;
+            // Function to update review display with slide and fade
+            function updateReviewDisplay(newIndex, dragDirection) {
+                if (newIndex === currentReviewIndex) {
+                    // Ensure the active review is correctly positioned and visible if it's already the current one.
+                    reviewTexts[currentReviewIndex].classList.add('active');
+                    reviewTexts[currentReviewIndex].classList.remove('slide-out-left', 'slide-out-right');
+                    return;
+                }
 
                 const oldReview = reviewTexts[currentReviewIndex];
                 const newReview = reviewTexts[newIndex];
 
-                // Determine slide direction for fade-out
-                if (direction === 'left') { // Dragging left, new review comes from right, old goes left
-                    oldReview.classList.add('fade-out-left');
-                } else { // Dragging right, new review comes from left, old goes right
-                    oldReview.classList.add('fade-out-right');
-                }
+                // Determine the direction for the outgoing review's slide animation
+                const outDirectionClass = dragDirection === 'right' ? 'slide-out-right' : 'slide-out-left';
 
+                // Add classes for the outgoing animation
                 oldReview.classList.remove('active');
+                oldReview.classList.add(outDirectionClass);
 
-                // Apply transition for new review coming in
-                newReview.style.transform = (direction === 'left') ? 'translateX(100%)' : 'translateX(-100%)';
-                newReview.style.opacity = '0';
-                newReview.classList.add('active'); // Add active immediately to allow transition
-
-                // Set a small timeout to trigger the slide-in animation
+                // Wait for the old review to fade out, then transition in the new one
                 setTimeout(() => {
-                    newReview.style.transform = 'translateX(0)';
-                    newReview.style.opacity = '1';
-                }, 50); // A small delay to ensure transform property is applied before transition
+                    // Reset old review's transform for next potential use
+                    oldReview.classList.remove(outDirectionClass);
+                    oldReview.style.transform = ''; // Reset transform property
+                    oldReview.style.opacity = '0'; // Ensure it's hidden
 
-                // Clean up old review classes after its transition
-                setTimeout(() => {
-                    oldReview.classList.remove('fade-out-left', 'fade-out-right');
-                    oldReview.style.transform = 'translateX(0)'; // Reset for next use
-                    oldReview.style.opacity = '0';
-                }, 500); // Match CSS transition duration
+                    // Set initial state for new review (off-screen, opposite direction of old review's exit)
+                    newReview.style.transform = (dragDirection === 'right' ? 'translateX(-100%)' : 'translateX(100%)');
+                    newReview.style.opacity = '0';
+
+                    // Activate new review after a very short delay to ensure initial transform is applied
+                    setTimeout(() => {
+                        newReview.classList.add('active');
+                        newReview.style.transform = 'translateX(0)'; // Slide in
+                        newReview.style.opacity = '1'; // Fade in
+                    }, 10); // A very small delay
+
+                }, 400); // This timeout matches the CSS transition duration (0.4s)
 
                 currentReviewIndex = newIndex;
             }
 
+            // Function to update thumb position and trigger review changes
             function updateThumbPositionAndReview(currentX) {
                 const trackWidth = customTrack.clientWidth;
                 const thumbWidth = customThumb.clientWidth;
@@ -572,18 +580,21 @@
                 customThumb.style.left = `${newThumbLeft}px`;
 
                 // Calculate which review should be active based on thumb position
-                const progress = newThumbLeft / maxThumbLeft; // 0 to 1
+                const progress = newThumbLeft / maxThumbLeft; // Value from 0 to 1
                 let newIndex = Math.round(progress * (totalReviews - 1));
 
-                // Determine direction for smooth transition
-                let direction = null;
+                // Determine direction based on current and new index for the transition
+                let dragDirection = null;
                 if (newIndex > currentReviewIndex) {
-                    direction = 'left'; // Thumb moves right, implies next review (from right)
+                    dragDirection = 'right'; // Thumb moved right, new review comes from right (slides left)
                 } else if (newIndex < currentReviewIndex) {
-                    direction = 'right'; // Thumb moves left, implies previous review (from left)
+                    dragDirection = 'left'; // Thumb moved left, new review comes from left (slides right)
                 }
 
-                updateReviewDisplay(newIndex, direction);
+                // Only update if the index has changed
+                if (newIndex !== currentReviewIndex) {
+                    updateReviewDisplay(newIndex, dragDirection);
+                }
             }
 
             // Event listeners for dragging the thumb
@@ -598,7 +609,7 @@
 
             document.addEventListener('mousemove', (e) => {
                 if (!isDraggingThumb) return;
-                e.preventDefault(); // Prevent default browser drag behaviors
+                e.preventDefault(); // Prevent default browser drag behaviors (like selecting text)
                 updateThumbPositionAndReview(e.clientX);
             });
 
@@ -623,7 +634,7 @@
 
             document.addEventListener('touchmove', (e) => {
                 if (!isDraggingThumb) return;
-                // e.preventDefault(); // This can break native scrolling in some cases, use with caution
+                // e.preventDefault(); // Uncomment if touchmove causes issues with scrolling
                 updateThumbPositionAndReview(e.touches[0].clientX);
             }, { passive: false });
 
@@ -636,17 +647,28 @@
                 }
             });
 
-            // Calculate initial thumb width (fixed for now, can be dynamic later if needed)
-            function setInitialThumbWidth() {
+            // Set initial thumb width and position the first review
+            function initializeReviewSlider() {
                 const totalReviews = reviewTexts.length;
-                // If each review is considered a "step" or "page"
                 const thumbPercentage = 100 / totalReviews;
                 customThumb.style.width = `${thumbPercentage}%`;
+                // Ensure only the first review is active and visible on load
+                reviewTexts.forEach((review, index) => {
+                    if (index === 0) {
+                        review.classList.add('active');
+                        review.style.transform = 'translateX(0)';
+                        review.style.opacity = '1';
+                    } else {
+                        review.classList.remove('active');
+                        review.style.transform = 'translateX(100%)'; // Ensure others start off-screen
+                        review.style.opacity = '0';
+                    }
+                });
                 updateThumbPositionAndReview(startXThumb || 0); // Position thumb correctly on load
             }
 
-            window.addEventListener('resize', setInitialThumbWidth);
-            setInitialThumbWidth(); // Initial call to set thumb width
+            window.addEventListener('resize', initializeReviewSlider);
+            initializeReviewSlider(); // Initial call to set up the slider and show first review
         });
     </script>
 </body>
