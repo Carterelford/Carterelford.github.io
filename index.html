@@ -46,6 +46,25 @@
             z-index: 0;
         }
 
+        /* --- NEW CSS FOR FIXED IMAGE BACKGROUND CONTAINER --- */
+        #curated-intro-section {
+            position: relative;
+            /* No specific height; it will adapt to its content */
+            z-index: 10; /* Ensures it sits above body but below video sections */
+        }
+
+        .fixed-image-background-overlay {
+            position: absolute;
+            inset: 0; /* Cover the entire parent #curated-intro-section */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), /* Heavy dark overlay */
+                              url('https://images.unsplash.com/photo-1519782158913-73133ae0804b?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Your chosen background image */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Creates the gentle parallax effect */
+            z-index: -1; /* Behind the content of the child sections */
+        }
+        /* --- END NEW CSS FOR FIXED IMAGE BACKGROUND CONTAINER --- */
+
         /* --- NEW CSS FOR VIDEO SECTIONS --- */
         .video-section {
             position: relative;
@@ -205,63 +224,66 @@
         <div class="scroll-indicator"></div>
     </header>
 
-    <section id="about" class="section-py-about-adjusted relative overflow-hidden bg-gray-900 z-10">
-        <div class="container mx-auto px-4 text-center">
-            <img src="logoooo.png" onerror="this.onerror=null;this.src='https://placehold.co/100x100/000000/FFFFFF?text=Logo';" alt="Tropicalluxuries Logo" class="h-36 md:h-48 mx-auto drop-shadow-md fade-in-section">
-            <h2 class="text-5xl md:text-6xl font-extrabold text-white leading-tight max-w-4xl drop-shadow-md relative z-10 mx-auto mt-0 fade-in-section">
-                Curating Your Next Breakthrough
-            </h2>
-            <p class="text-xl leading-loose max-w-3xl text-white drop-shadow relative z-10 mx-auto mt-12 fade-in-section">
-                Tropicalluxuries hosts exclusive villas for entrepreneurs at every stage—whether you’re just beginning or building your empire.
-                <br><br>
-                In stunning locations around the world, you’ll live, train, think, and build alongside like-minded individuals who push you forward. With luxury surroundings, deep focus, movement, and shared ambition, every stay is your launchpad for clarity, creativity, and growth.
-            </p>
-        </div>
-    </section>
+    <section id="curated-intro-section" class="relative overflow-hidden z-10">
+        <div class="fixed-image-background-overlay"></div>
 
-    <section id="how-it-works" class="px-4 section-py-how-it-works-adjusted bg-gray-900 z-10">
-        <div class="container mx-auto fade-in-section">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-center">
-                <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
-                    <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">1</span>
-                    <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Discover</h3>
-                    <p class="text-md text-white drop-shadow-md">Browse our upcoming calendar of curated villas designed for connection and growth.</p>
-                </div>
-                <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
-                    <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">2</span>
-                    <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Inquire & Apply</h3>
-                    <p class="text-md text-white drop-shadow-md">Submit an inquiry for your chosen villa. We'll ensure it's a perfect fit for your goals.</p>
-                </div>
-                <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
-                    <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">3</span>
-                    <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Personalize</h3>
-                    <p class="text-md text-white drop-shadow-md">Our team will guide you through all logistics and details for a seamless preparation.</p>
-                </div>
-                <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
-                    <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">4</span>
-                    <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Experience</h3>
-                    <p class="text-md text-white drop-shadow-md">Arrive, relax, connect, and thrive in an inspiring environment crafted just for you.</p>
+        <section id="about" class="section-py-about-adjusted relative px-4 bg-transparent">
+            <div class="container mx-auto px-4 text-center">
+                <img src="logoooo.png" onerror="this.onerror=null;this.src='https://placehold.co/100x100/000000/FFFFFF?text=Logo';" alt="Tropicalluxuries Logo" class="h-36 md:h-48 mx-auto drop-shadow-md fade-in-section">
+                <h2 class="text-5xl md:text-6xl font-extrabold text-white leading-tight max-w-4xl drop-shadow-md relative z-10 mx-auto mt-0 fade-in-section">
+                    Curating Your Next Breakthrough
+                </h2>
+                <p class="text-xl leading-loose max-w-3xl text-white drop-shadow relative z-10 mx-auto mt-12 fade-in-section">
+                    Tropicalluxuries hosts exclusive villas for entrepreneurs at every stage—whether you’re just beginning or building your empire.
+                    <br><br>
+                    In stunning locations around the world, you’ll live, train, think, and build alongside like-minded individuals who push you forward. With luxury surroundings, deep focus, movement, and shared ambition, every stay is your launchpad for clarity, creativity, and growth.
+                </p>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="px-4 section-py-how-it-works-adjusted bg-transparent z-10">
+            <div class="container mx-auto fade-in-section">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-center">
+                    <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
+                        <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">1</span>
+                        <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Discover</h3>
+                        <p class="text-md text-white drop-shadow-md">Browse our upcoming calendar of curated villas designed for connection and growth.</p>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
+                        <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">2</span>
+                        <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Inquire & Apply</h3>
+                        <p class="text-md text-white drop-shadow-md">Submit an inquiry for your chosen villa. We'll ensure it's a perfect fit for your goals.</p>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
+                        <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">3</span>
+                        <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Personalize</h3>
+                        <p class="text-md text-white drop-shadow-md">Our team will guide you through all logistics and details for a seamless preparation.</p>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
+                        <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">4</span>
+                        <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Experience</h3>
+                        <p class="text-md text-white drop-shadow-md">Arrive, relax, connect, and thrive in an inspiring environment crafted just for you.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="px-4 pt-6 pb-32 bg-gray-900 z-10">
-        <div class="container mx-auto text-center fade-in-section">
-            <h2 class="text-4xl md:text-5xl font-extrabold text-white leading-tight drop-shadow-md mb-8">
-                Based on 5-Star Reviews
-            </h2>
-            <div class="flex justify-center items-center space-x-6">
-                <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
-                <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
-                <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
-                <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
-                <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+        <section class="px-4 pt-6 pb-32 bg-transparent z-10">
+            <div class="container mx-auto text-center fade-in-section">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white leading-tight drop-shadow-md mb-8">
+                    Based on 5-Star Reviews
+                </h2>
+                <div class="flex justify-center items-center space-x-6">
+                    <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                    <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                    <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                    <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                    <svg class="w-10 h-10 text-white fill-current" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="bali-sanctuary" class="video-section">
+    </section> <section id="bali-sanctuary" class="video-section">
         <video autoplay loop muted playsinline class="video-background">
             <source src="bali sanctuary.mp4" type="video/mp4">
             <img src="https://images.unsplash.com/photo-1571003195204-585a0651804f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Bali Entrepreneurial Sanctuary Fallback" class="w-full h-full object-cover">
