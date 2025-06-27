@@ -12,7 +12,8 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden; /* Prevent horizontal scroll */
-            color: #333; /* Darker text for readability */
+            color: #333; /* Darker text for readability - largely overridden by section specific colors */
+            background-color: #1A1A1A; /* Set body background to dark space gray for seamless look */
         }
         h1, h2, h3, h4 {
             font-family: 'Playfair Display', serif;
@@ -46,7 +47,7 @@
             z-index: 0;
         }
 
-        /* --- NEW CSS FOR FIXED IMAGE BACKGROUND CONTAINER --- */
+        /* --- UPDATED CSS FOR FIXED IMAGE BACKGROUND CONTAINER (NOW SOLID COLOR) --- */
         #curated-intro-section {
             position: relative;
             z-index: 10; /* Ensures it sits above body but below video sections */
@@ -55,14 +56,10 @@
         .fixed-image-background-overlay {
             position: absolute;
             inset: 0; /* Cover the entire parent #curated-intro-section */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), /* Heavy dark overlay */
-                               url('https://images.unsplash.com/photo-1519782158913-73133ae0804b?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Your chosen background image */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* Creates the gentle parallax effect */
+            background-color: #1A1A1A; /* Solid dark space gray */
             z-index: -1; /* Behind the content of the child sections */
         }
-        /* --- END NEW CSS FOR FIXED IMAGE BACKGROUND CONTAINER --- */
+        /* --- END UPDATED CSS --- */
 
         /* --- NEW CSS FOR VIDEO SECTIONS --- */
         .video-section {
@@ -270,7 +267,7 @@
         /* --- END NEW GLOBAL DARK SPACE GREY BACKGROUND --- */
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-dark-space-gray text-gray-800">
 
     <header class="hero-video-container relative z-10">
         <video autoplay loop muted playsinline class="hero-video">
