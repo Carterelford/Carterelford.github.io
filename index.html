@@ -56,7 +56,7 @@
             position: absolute;
             inset: 0; /* Cover the entire parent #curated-intro-section */
             background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), /* Heavy dark overlay */
-                              url('https://images.unsplash.com/photo-1519782158913-73133ae0804b?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Your chosen background image */
+                               url('https://images.unsplash.com/photo-1519782158913-73133ae0804b?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Your chosen background image */
             background-size: cover;
             background-position: center;
             background-attachment: fixed; /* Creates the gentle parallax effect */
@@ -262,6 +262,12 @@
             filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
         }
         /* --- END NEW CSS for Star Glow --- */
+
+        /* --- NEW GLOBAL DARK SPACE GREY BACKGROUND --- */
+        .bg-dark-space-gray {
+            background-color: #1A1A1A; /* A deep, dark gray */
+        }
+        /* --- END NEW GLOBAL DARK SPACE GREY BACKGROUND --- */
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -445,9 +451,9 @@
         </div>
     </section>
 
-    <section class="bg-light-cream px-4 section-py z-10">
+    <section class="bg-dark-space-gray px-4 section-py z-10">
         <div class="container mx-auto fade-in-section">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900 leading-tight max-w-4xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-white leading-tight max-w-4xl mx-auto">
                 Harmonizing Spaces: Feng Shui & Inspired Architecture
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
@@ -455,10 +461,10 @@
                     <img src="https://images.unsplash.com/photo-1549495147-9759c864b2d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80" alt="Architectural curves and natural light" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500 rounded-3xl">
                 </div>
                 <div>
-                    <p class="text-lg leading-relaxed mb-6">
+                    <p class="text-lg leading-relaxed mb-6 text-white">
                         At the heart of Tropicalluxuries is an unwavering dedication to the ancient art of Feng Shui. We believe that a meticulously designed space is not just beautiful, but profoundly impacts well-being, energy, and success. **Each villa selected for our curated retreats is chosen or adapted to embody these principles**, where every curve, natural material, and orientation is chosen to optimize cosmic flow.
                     </p>
-                    <p class="text-lg leading-relaxed">
+                    <p class="text-lg leading-relaxed text-white">
                         Drawing inspiration from the organic beauty of Tulum and the timeless elegance of Mediterranean design, we fuse natural elements with exquisite finishes. Envision flowing lines, abundant natural light, rich textures, and subtle golden accents that elevate your experience, creating a space that amazes and restores.
                     </p>
                 </div>
@@ -466,7 +472,7 @@
         </div>
     </section>
 
-    <section id="contact" class="gold-gradient-bg px-4 section-py text-center text-gray-900 z-10 fade-in-section">
+    <section id="contact" class="bg-dark-space-gray px-4 section-py text-center text-gray-900 z-10 fade-in-section">
         <div class="container mx-auto max-w-3xl">
             <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-md leading-tight">
                 Join Our Exclusive Community
@@ -488,7 +494,7 @@
         </div>
     </section>
 
-    <footer class="bg-black text-gray-300 px-4 py-12 text-center rounded-t-3xl z-10 fade-in-section">
+    <footer class="bg-dark-space-gray text-gray-300 px-4 py-12 text-center rounded-t-3xl z-10 fade-in-section">
         <div class="container mx-auto">
             <p class="mb-8">&copy; 2025 Tropicalluxuries. All rights reserved.</p>
             <div class="flex justify-center space-x-8 text-lg mb-8">
@@ -573,134 +579,106 @@
                     review.style.transform = `translateX(${translateXValue}%)`;
 
                     // Calculate opacity based on distance from the center (0% translateX)
-                    // Reviews are fully opaque when translateX is close to 0 (centered)
-                    // And fade out as they move further away (towards -100% or 100%)
-                    const distance = Math.abs(translateXValue); // Absolute distance from center
-                    const opacity = Math.max(0, 1 - (distance / (reviewWidthUnit * 0.9))); // Adjust 0.9 for faster/slower fade
+                    // Reviews are fully opaque when centered, fade out as they move away
+                    const distanceToCenter = Math.abs(index - (progress * (totalReviews - 1)));
+                    const maxDistance = (totalReviews - 1) / 2;
+                    let opacity = 1 - (distanceToCenter / maxDistance) * 0.7; // Fade to 30% opacity
+                    opacity = Math.max(0, Math.min(opacity, 1)); // Ensure valid range
+                    review.style.opacity = opacity;
 
-                    review.style.opacity = opacity.toFixed(2); // Set opacity with 2 decimal places
-
-                    // Optionally, set z-index for the active review to ensure it's on top
-                    if (index === targetIndex && opacity > 0.5) { // Only set if reasonably visible
-                        review.style.zIndex = '1';
-                    } else {
-                        review.style.zIndex = '0';
+                    // Make the target review fully opaque
+                    if (index === targetIndex) {
+                        review.style.opacity = 1;
                     }
                 });
             }
 
-            // Event listeners for dragging the thumb
+            // Initialize thumb width based on number of reviews
+            function initializeThumb() {
+                const trackWidth = customTrack.clientWidth;
+                // Thumb width should be a fraction of the track width based on the number of reviews
+                // For a continuous scroll, thumb represents the visible portion. Let's make it fixed for now,
+                // or dynamic if a fixed number of reviews are 'visible'
+                const fixedThumbWidth = Math.min(100, trackWidth / totalReviews); // Max 100px or trackWidth / count
+                customThumb.style.width = `${fixedThumbWidth}px`;
+                updateReviewPositions(); // Initial position update
+            }
+
+            // Handle thumb dragging
             customThumb.addEventListener('mousedown', (e) => {
                 isDraggingThumb = true;
                 startXThumb = e.clientX;
                 thumbOffset = customThumb.offsetLeft;
                 customThumb.style.cursor = 'grabbing';
-                document.body.style.userSelect = 'none'; // Prevent text selection during drag
-                document.body.style.cursor = 'grabbing'; // Change body cursor during drag
             });
 
             document.addEventListener('mousemove', (e) => {
                 if (!isDraggingThumb) return;
-                e.preventDefault(); // Prevent default browser drag behaviors (like selecting text)
+                e.preventDefault(); // Prevent text selection during drag
 
                 const trackWidth = customTrack.clientWidth;
                 const thumbWidth = customThumb.clientWidth;
                 const maxThumbLeft = trackWidth - thumbWidth;
 
-                let newThumbLeft = thumbOffset + (e.clientX - startXThumb);
-                newThumbLeft = Math.max(0, Math.min(newThumbLeft, maxThumbLeft));
-                customThumb.style.left = `${newThumbLeft}px`;
+                let newLeft = thumbOffset + (e.clientX - startXThumb);
+                newLeft = Math.max(0, Math.min(newLeft, maxThumbLeft)); // Constrain thumb within track
 
-                // Update review positions continuously while dragging
-                updateReviewPositions();
+                customThumb.style.left = `${newLeft}px`;
+                updateReviewPositions(); // Update review positions as thumb moves
             });
 
             document.addEventListener('mouseup', () => {
-                if (isDraggingThumb) {
-                    isDraggingThumb = false;
-                    customThumb.style.cursor = 'grab';
-                    document.body.style.userSelect = ''; // Re-enable text selection
-                    document.body.style.cursor = ''; // Reset body cursor
-
-                    // Snap to nearest review center if not exactly there
-                    const totalReviews = reviewTexts.length;
-                    const maxThumbLeft = customTrack.clientWidth - customThumb.clientWidth;
-                    const progress = customThumb.offsetLeft / maxThumbLeft;
-                    const closestReviewIndex = Math.round(progress * (totalReviews - 1));
-
-                    const targetThumbLeft = (closestReviewIndex / (totalReviews - 1)) * maxThumbLeft;
-                    // Add a smooth transition for snapping
-                    customThumb.style.transition = 'left 0.2s ease-out';
-                    customThumb.style.left = `${targetThumbLeft}px`;
-                    // Recalculate positions after snap to ensure perfect alignment
-                    setTimeout(() => {
-                        customThumb.style.transition = 'none'; // Remove transition after snap
-                        updateReviewPositions();
-                    }, 200); // Match snap transition duration
-                }
+                isDraggingThumb = false;
+                customThumb.style.cursor = 'grab';
             });
 
-            // Touch events for mobile (similar logic as mouse events)
-            customThumb.addEventListener('touchstart', (e) => {
-                isDraggingThumb = true;
-                startXThumb = e.touches[0].clientX;
-                thumbOffset = customThumb.offsetLeft;
-                customThumb.style.cursor = 'grabbing';
-                document.body.style.userSelect = 'none';
-                document.body.style.cursor = 'grabbing';
-            }, { passive: true });
+            // Handle clicking on the track to jump thumb
+            customTrack.addEventListener('click', (e) => {
+                if (e.target === customThumb) return; // Don't trigger if thumb itself is clicked
 
-            document.addEventListener('touchmove', (e) => {
-                if (!isDraggingThumb) return;
-                // e.preventDefault(); // Uncomment if touchmove causes issues with scrolling
-                const trackWidth = customTrack.clientWidth;
+                const trackRect = customTrack.getBoundingClientRect();
+                const clickX = e.clientX - trackRect.left;
                 const thumbWidth = customThumb.clientWidth;
-                const maxThumbLeft = trackWidth - thumbWidth;
+                const maxThumbLeft = trackRect.width - thumbWidth;
 
-                let newThumbLeft = thumbOffset + (e.touches[0].clientX - startXThumb);
-                newThumbLeft = Math.max(0, Math.min(newThumbLeft, maxThumbLeft));
-                customThumb.style.left = `${newThumbLeft}px`;
+                let newLeft = clickX - (thumbWidth / 2); // Center thumb on click
+                newLeft = Math.max(0, Math.min(newLeft, maxThumbLeft));
 
+                customThumb.style.left = `${newLeft}px`;
                 updateReviewPositions();
-            }, { passive: false });
-
-            document.addEventListener('touchend', () => {
-                if (isDraggingThumb) {
-                    isDraggingThumb = false;
-                    customThumb.style.cursor = 'grab';
-                    document.body.style.userSelect = '';
-                    document.body.style.cursor = '';
-
-                    const totalReviews = reviewTexts.length;
-                    const maxThumbLeft = customTrack.clientWidth - customThumb.clientWidth;
-                    const progress = customThumb.offsetLeft / maxThumbLeft;
-                    const closestReviewIndex = Math.round(progress * (totalReviews - 1));
-
-                    const targetThumbLeft = (closestReviewIndex / (totalReviews - 1)) * maxThumbLeft;
-                    customThumb.style.transition = 'left 0.2s ease-out';
-                    customThumb.style.left = `${targetThumbLeft}px`;
-                    setTimeout(() => {
-                        customThumb.style.transition = 'none';
-                        updateReviewPositions();
-                    }, 200);
-                }
             });
 
-            // Initial setup and resize handler
-            function initializeCarousel() {
-                const totalReviews = reviewTexts.length;
-                if (totalReviews > 0) {
-                    const thumbPercentage = 100 / totalReviews;
-                    customThumb.style.width = `${thumbPercentage}%`;
-                }
+            // Recalculate on window resize
+            window.addEventListener('resize', () => {
+                initializeThumb();
+            });
 
-                // Initial position: first review centered
-                customThumb.style.left = '0px'; // Ensure thumb is at the start
-                updateReviewPositions(); // Call once to set initial state
+            initializeThumb(); // Initial setup
+
+            // Ensure reviews are correctly positioned on load
+            updateReviewPositions();
+
+
+            // Fix for Safari and other browsers not playing videos initially
+            // Check if video elements exist before trying to play
+            const heroVideo = document.querySelector('.hero-video');
+            if (heroVideo) {
+                heroVideo.play().catch(error => {
+                    console.error("Hero video autoplay failed:", error);
+                    // Mute and try playing again for browser policies
+                    heroVideo.muted = true;
+                    heroVideo.play().catch(e => console.error("Muted hero video autoplay failed:", e));
+                });
             }
 
-            window.addEventListener('resize', initializeCarousel);
-            initializeCarousel(); // Initial call to set up the carousel and show first review
+            document.querySelectorAll('.video-background').forEach(video => {
+                video.play().catch(error => {
+                    console.error("Background video autoplay failed:", video.src, error);
+                    video.muted = true;
+                    video.play().catch(e => console.error("Muted background video autoplay failed:", video.src, e));
+                });
+            });
+
         });
     </script>
 </body>
