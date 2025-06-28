@@ -194,7 +194,7 @@
         /* --- Custom CSS for Review Carousel --- */
         .review-display {
             position: relative;
-            min-height: 120px; /* Ensure enough space for reviews */
+            min-height: 120px; /* Default for desktop. Will be overridden by media query for mobile. */
             display: flex;
             justify-content: center; /* Center the reviews horizontally */
             align-items: center;
@@ -215,6 +215,8 @@
             /* Start all reviews off-screen initially, overridden by JS */
             transform: translateX(100%);
             opacity: 0;
+            /* Adjust line height for better readability, especially on mobile */
+            line-height: 1.6;
         }
 
         .custom-scrollbar-track {
@@ -277,6 +279,25 @@
             color: #AAAAAA; /* Lighter placeholder text */
         }
         /* --- END NEW Input Field Style --- */
+
+        /* --- Mobile Specific Overrides for Review Section --- */
+        @media (max-width: 768px) { /* Targeting typical mobile devices */
+            .review-display {
+                min-height: 200px; /* Increased height for mobile to prevent clipping */
+                margin-bottom: 2rem; /* Slightly less space for compact layout */
+            }
+
+            .review-text {
+                font-size: 1rem; /* Smaller font size for mobile readability */
+                padding: 0 0.5rem; /* Reduced horizontal padding */
+                /* Ensure review text itself has enough space */
+                max-width: 90%; /* Allow reviews to take up more width on smaller screens */
+            }
+
+            .custom-scrollbar-track {
+                max-width: 80%; /* Adjust track width for mobile */
+            }
+        }
     </style>
 </head>
 <body class="bg-dark-space-gray text-gray-800">
@@ -606,13 +627,10 @@
             function initializeThumb() {
                 const trackWidth = customTrack.clientWidth;
                 // Thumb width should be a fraction of the track width based on the number of reviews
-                // For a continuous scroll, thumb represents the visible portion. Let's make it fixed for now,
-                // or dynamic if a fixed number of reviews are 'visible'
                 const fixedThumbWidth = Math.min(100, trackWidth / totalReviews); // Max 100px or trackWidth / count
                 customThumb.style.width = `${fixedThumbWidth}px`;
 
-                // --- MODIFICATION TO CENTER SLIDER ON LOAD ---
-                // Calculate position for the 3rd review (index 2)
+                // Calculate position for the middle review
                 const initialTargetIndex = Math.floor(totalReviews / 2); // Get the middle index
                 const initialProgress = initialTargetIndex / (totalReviews - 1);
                 const maxThumbLeft = trackWidth - customThumb.clientWidth;
@@ -620,12 +638,11 @@
                 initialLeft = Math.max(0, Math.min(initialLeft, maxThumbLeft)); // Ensure valid range
 
                 customThumb.style.left = `${initialLeft}px`;
-                // --- END MODIFICATION ---
 
                 updateReviewPositions(); // Initial position update
             }
 
-            // Handle thumb dragging
+            // Handle thumb dragging (Mouse events for desktop)
             customThumb.addEventListener('mousedown', (e) => {
                 isDraggingThumb = true;
                 startXThumb = e.clientX;
@@ -649,6 +666,35 @@
             });
 
             document.addEventListener('mouseup', () => {
+                isDraggingThumb = false;
+                customThumb.style.cursor = 'grab';
+            });
+
+            // Handle thumb dragging (Touch events for mobile)
+            customThumb.addEventListener('touchstart', (e) => {
+                isDraggingThumb = true;
+                startXThumb = e.touches[0].clientX; // Use clientX from the first touch
+                thumbOffset = customThumb.offsetLeft;
+                customThumb.style.cursor = 'grabbing';
+                e.preventDefault(); // Prevent scrolling while dragging thumb
+            }, { passive: false }); // Use passive: false to allow preventDefault
+
+            document.addEventListener('touchmove', (e) => {
+                if (!isDraggingThumb) return;
+                
+                const trackWidth = customTrack.clientWidth;
+                const thumbWidth = customThumb.clientWidth;
+                const maxThumbLeft = trackWidth - thumbWidth;
+
+                let newLeft = thumbOffset + (e.touches[0].clientX - startXThumb); // Use clientX from the first touch
+                newLeft = Math.max(0, Math.min(newLeft, maxThumbLeft));
+
+                customThumb.style.left = `${newLeft}px`;
+                updateReviewPositions();
+                e.preventDefault(); // Prevent scrolling while dragging thumb
+            }, { passive: false });
+
+            document.addEventListener('touchend', () => {
                 isDraggingThumb = false;
                 customThumb.style.cursor = 'grab';
             });
