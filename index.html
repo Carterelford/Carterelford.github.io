@@ -298,42 +298,6 @@
                 max-width: 80%; /* Adjust track width for mobile */
             }
         }
-
-        /* --- New CSS for the Fancy Divider (Infinity Symbol) --- */
-        .fancy-divider {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%; /* Take full width of its container */
-            padding: 2.5rem 0; /* Vertical spacing around the divider */
-        }
-
-        .fancy-divider svg {
-            width: 150px; /* Adjust size as needed, but keep it proportional */
-            height: auto;
-            /* Stroke color and width for the symbol line */
-            stroke: rgba(255, 255, 255, 0.6); /* Subtle white */
-            stroke-width: 2; /* Slightly thicker line */
-            fill: none; /* No fill */
-            transition: stroke 0.3s ease-in-out, filter 0.3s ease-in-out; /* Smooth transition on hover */
-            filter: url(#shadow); /* Apply initial filter (does nothing, effectively no filter) */
-        }
-
-        .fancy-divider svg:hover {
-            stroke: rgba(255, 255, 255, 0.9); /* Brighter white on hover */
-            filter: url(#starGlowFilter); /* Apply the glow filter on hover */
-        }
-
-        /* Responsive adjustments for the divider if needed */
-        @media (max-width: 768px) {
-            .fancy-divider {
-                padding: 1.5rem 0; /* Less padding on mobile */
-            }
-            .fancy-divider svg {
-                width: 100px; /* Smaller symbol on mobile */
-            }
-        }
-
     </style>
 </head>
 <body class="bg-dark-space-gray text-gray-800">
@@ -363,7 +327,6 @@
     </header>
 
     <section id="curated-intro-section" class="relative overflow-hidden z-10">
-        <!-- The background overlay is now a solid dark space gray -->
         <div class="fixed-image-background-overlay"></div>
 
         <section id="about" class="section-py-about-adjusted relative px-4 bg-transparent">
@@ -534,15 +497,6 @@
         </div>
     </section>
 
-    <!-- Fancy Infinity Symbol Divider -->
-    <div class="fancy-divider fade-in-section">
-        <svg viewBox="0 0 100 60" preserveAspectRatio="xMidYMid meet">
-            <!-- Corrected path for a full infinity symbol (sideways 8) -->
-            <path d="M 0 30 C 0 15, 25 0, 50 15 C 75 30, 100 15, 100 30 C 100 45, 75 60, 50 45 C 25 30, 0 45, 0 30 Z" />
-        </svg>
-    </div>
-    <!-- End Fancy Infinity Symbol Divider -->
-
     <section id="contact" class="bg-dark-space-gray px-4 section-py text-center text-gray-900 z-10 fade-in-section">
         <div class="container mx-auto max-w-3xl">
             <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-md leading-tight">
@@ -551,9 +505,7 @@
             <p class="text-lg leading-relaxed mb-10 text-gray-100 drop-shadow">
                 Whether you have questions, wish to inquire about a specific villa, or want to stay updated on exclusive new villa opportunities with high-value entrepreneurs, inquire below. Spots fill fast, don't miss out!
             </p>
-            <!-- Form: Removed action and method, added ID for JavaScript -->
             <form id="contactForm" class="bg-dark-form p-8 md:p-12 rounded-3xl shadow-2xl">
-                <!-- Hidden field for Formspree subject -->
                 <input type="hidden" name="_subject" value="New Website Inquiry/Subscriber!">
                 <div class="mb-6">
                     <input type="text" placeholder="Your Name" class="w-full px-5 py-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200 text-lg input-dark-grey border" name="name">
@@ -569,7 +521,6 @@
                 </button>
             </form>
 
-            <!-- Thank You Message Container (initially hidden) -->
             <div id="thankYouMessage" class="hidden text-white text-3xl font-bold py-16">
                 Thank you for your message! We'll be in touch soon.
             </div>
@@ -791,9 +742,9 @@
                 video.play().catch(error => {
                     console.error("Background video autoplay failed:", video.src, error);
                     video.muted = true;
-                    video.play().catch(e => console.error("Muted background video autoplay failed:", e));
+                    video.play().catch(e => console.error("Muted background video autoplay failed:", video.src, e));
                 });
-            } );
+            });
 
             // --- Formspree AJAX Submission ---
             const contactForm = document.getElementById('contactForm');
