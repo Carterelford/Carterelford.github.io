@@ -19,6 +19,12 @@
             font-family: 'Playfair Display', serif;
         }
 
+        /* NEW custom style for step numbers */
+        .font-number-style {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400; /* Regular weight of Playfair Display to match the '&' symbol */
+        }
+
         /* Hero section specific styles */
         .hero-video-container {
             position: relative;
@@ -298,17 +304,6 @@
                 max-width: 80%; /* Adjust track width for mobile */
             }
         }
-
-        /* --- CUSTOM CSS FOR OMMM.PNG GLOW EFFECT --- */
-        .ommm-glow-effect {
-            transition: filter 0.3s ease-in-out; /* Smooth transition for the glow */
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4)); /* Initial subtle white glow */
-        }
-
-        .ommm-glow-effect:hover {
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8)); /* Stronger white glow on hover */
-        }
-        /* --- END CUSTOM CSS FOR OMMM.PNG GLOW EFFECT --- */
     </style>
 </head>
 <body class="bg-dark-space-gray text-gray-800">
@@ -358,22 +353,22 @@
             <div class="container mx-auto fade-in-section">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-center">
                     <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
-                        <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">1</span>
+                        <span class="text-6xl text-white mb-6 drop-shadow-md font-number-style">1</span>
                         <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Discover</h3>
                         <p class="text-md text-white drop-shadow-md">Browse our upcoming calendar of curated villas designed for connection and growth.</p>
                     </div>
                     <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
-                        <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">2</span>
+                        <span class="text-6xl text-white mb-6 drop-shadow-md font-number-style">2</span>
                         <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Inquire & Apply</h3>
                         <p class="text-md text-white drop-shadow-md">Submit an inquiry for your chosen villa. We'll ensure it's a perfect fit for your goals.</p>
                     </div>
                     <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
-                        <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">3</span>
+                        <span class="text-6xl text-white mb-6 drop-shadow-md font-number-style">3</span>
                         <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Personalize</h3>
                         <p class="text-md text-white drop-shadow-md">Our team will guide you through all logistics and details for a seamless preparation.</p>
                     </div>
                     <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
-                        <span class="text-6xl text-white mb-6 font-bold drop-shadow-md">4</span>
+                        <span class="text-6xl text-white mb-6 drop-shadow-md font-number-style">4</span>
                         <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Experience</h3>
                         <p class="text-md text-white drop-shadow-md">Arrive, relax, connect, and thrive in an inspiring environment crafted just for you.</p>
                     </div>
@@ -440,7 +435,7 @@
 
     <section id="bali-sanctuary" class="video-section">
         <video autoplay loop muted playsinline class="video-background">
-            <source src="trimmed.mp4" type="video/mp4">
+            <source src="bali sanctuary.mp4" type="video/mp4">
             <img src="https://images.unsplash.com/photo-1571003195204-585a0651804f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Bali Entrepreneurial Sanctuary Fallback" class="w-full h-full object-cover">
         </video>
         <div class="video-overlay"></div>
@@ -449,7 +444,9 @@
                 The Bali Entrepreneurial Sanctuary
             </h2>
             <p class="text-base md:text-xl font-extralight italic mb-10 text-white drop-shadow-md max-w-3xl mx-auto">
-                Join like-minded digital innovators in a stunning Balinese villa. Here, you'll live, brainstorm, and push each other forward through shared goals and new perspectives.<span style="display: block; height: 1.25rem;"></span>Experience daily collective wellness sessions at a top-tier facility offering gym, sauna, cold plunge, jacuzzi, breathwork, yoga, and pool access, all designed to amplify your clarity, creativity, and drive.
+                Join like-minded digital innovators in a stunning Balinese villa. Here, you'll live, brainstorm, and push each other forward through shared goals and new perspectives.
+                <br><br>
+                Experience daily collective wellness sessions at a top-tier facility offering gym, sauna, cold plunge, jacuzzi, breathwork, yoga, and pool access, all designed to amplify your clarity, creativity, and drive.
             </p>
             <a href="#contact" class="px-8 py-4 bg-gray-900 text-white font-semibold rounded-full shadow-xl hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out text-lg">
                 Inquire About Bali &rarr;
@@ -468,7 +465,9 @@
                 The Italian Coastal Cliffside
             </h2>
             <p class="text-base md:text-xl font-extralight italic mb-10 text-white drop-shadow-md max-w-3xl mx-auto">
-                Step into an exclusive entrepreneurial haven in a stunning Italian cliffside villa. Here, surrounded by breathtaking ocean views, you'll connect, collaborate, and bring to life your next big idea alongside like-minded visionaries.<span style="display: block; height: 1.25rem;"></span>This escape offers an unparalleled environment for deep focus, shared insights, and a collective drive to achieve breakthroughs.
+                Step into an exclusive entrepreneurial haven in a stunning Italian cliffside villa. Here, surrounded by breathtaking ocean views, you'll connect, collaborate, and bring to life your next big idea alongside like-minded visionaries.
+                <br><br>
+                This escape offers an unparalleled environment for deep focus, shared insights, and a collective drive to achieve breakthroughs.
             </p>
             <a href="#contact" class="px-8 py-4 bg-gray-900 text-white font-semibold rounded-full shadow-xl hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out text-lg">
                 Explore Italian Coast &rarr;
@@ -487,7 +486,9 @@
                 The Dubai Penthouse Innovation Hub
             </h2>
             <p class="text-base md:text-xl font-extralight italic mb-10 text-white drop-shadow-md max-w-3xl mx-auto">
-                Immerse yourself in Dubai, the global epicenter for innovation. Our penthouse offers a strategic base for deep work, high-level networking, and connecting with influential players in this dynamic environment.<span style="display: block; height: 1.25rem;"></span>Elevate your vision with targeted sessions and unparalleled opportunities for collaboration and growth.
+                Immerse yourself in Dubai, the global epicenter for innovation. Our penthouse offers a strategic base for deep work, high-level networking, and connecting with influential players in this dynamic environment.
+                <br><br>
+                Elevate your vision with targeted sessions and unparalleled opportunities for collaboration and growth.
             </p>
             <a href="#contact" class="px-8 py-4 bg-gray-900 text-white font-semibold rounded-full shadow-xl hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out text-lg">
                 Explore Dubai Hub &rarr;
@@ -508,9 +509,12 @@
         </div>
     </section>
 
-    <div class="mb-24 flex justify-center items-center px-4 fade-in-section z-10">
-        <img src="ommm.png" alt="Decorative image" class="w-full max-w-5xl h-auto rounded-3xl shadow-xl border border-gray-700 ommm-glow-effect">
-    </div>
+    <section class="bg-dark-space-gray py-8 px-4 text-center z-10">
+        <div class="container mx-auto">
+            <img src="ommm.png" alt="Decorative Thin White Line"
+                 class="mx-auto w-20 md:w-24 lg:w-[125px] object-contain transition-all duration-300 ease-in-out hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] hover:scale-105 fade-in-section">
+        </div>
+    </section>
 
     <section id="contact" class="bg-dark-space-gray px-4 section-py text-center text-gray-900 z-10 fade-in-section">
         <div class="container mx-auto max-w-3xl">
@@ -518,7 +522,7 @@
                 Connect With Tropicalluxuries
             </h2>
             <p class="text-lg leading-relaxed mb-10 text-gray-100 drop-shadow">
-                Whether you have questions, wish to inquire about a specific villa, or want to stay updated on exclusive new villa opportunities with high-value entrepreneurs, inquire below. Spots fill fast, don't miss out!
+                Whether you have questions, wish to inquire about a specific villa, or want to stay updated on exclusive new villa opportunities with high-value entrepreneurs, inquire below. Spots fill fast, don't miss out.
             </p>
             <form id="contactForm" class="bg-dark-form p-8 md:p-12 rounded-3xl shadow-2xl">
                 <input type="hidden" name="_subject" value="New Website Inquiry/Subscriber!">
