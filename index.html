@@ -148,21 +148,21 @@
             height: 20px;
             border-bottom: 2px solid white;
             border-right: 2px solid white;
-            transform: translateX(-50%) rotate(45deg); /* Centering and rotation applied here */
+            transform: rotate(45deg); /* Rotation only here */
             animation: bounce 2s infinite;
             z-index: 20;
         }
 
-        /* Keyframes for the subtle up-and-down bounce animation */
+        /* Keyframes for the subtle up-and-down bounce animation with horizontal movement */
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0); /* Only animate translateY */
+                transform: translateX(-50%) translateY(0); /* Reverted: translateX part of animation */
             }
             40% {
-                transform: translateY(-8px);
+                transform: translateX(-50%) translateY(-8px); /* Reverted: translateX part of animation */
             }
             60% {
-                transform: translateY(-4px);
+                transform: translateX(-50%) translateY(-4px); /* Reverted: translateX part of animation */
             }
         }
 
