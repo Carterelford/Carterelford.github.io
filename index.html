@@ -298,6 +298,17 @@
                 max-width: 80%; /* Adjust track width for mobile */
             }
         }
+
+        /* --- CUSTOM CSS FOR OMMM.PNG GLOW EFFECT --- */
+        .ommm-glow-effect {
+            transition: filter 0.3s ease-in-out; /* Smooth transition for the glow */
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4)); /* Initial subtle white glow */
+        }
+
+        .ommm-glow-effect:hover {
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8)); /* Stronger white glow on hover */
+        }
+        /* --- END CUSTOM CSS FOR OMMM.PNG GLOW EFFECT --- */
     </style>
 </head>
 <body class="bg-dark-space-gray text-gray-800">
@@ -429,7 +440,7 @@
 
     <section id="bali-sanctuary" class="video-section">
         <video autoplay loop muted playsinline class="video-background">
-            <source src="bali sanctuary.mp4" type="video/mp4">
+            <source src="trimmed.mp4" type="video/mp4">
             <img src="https://images.unsplash.com/photo-1571003195204-585a0651804f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Bali Entrepreneurial Sanctuary Fallback" class="w-full h-full object-cover">
         </video>
         <div class="video-overlay"></div>
@@ -498,7 +509,7 @@
     </section>
 
     <div class="mb-24 flex justify-center items-center px-4 fade-in-section z-10">
-        <img src="https://images.unsplash.com/photo-1599691924045-8c7c9c0c8b0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Beautiful interior with harmonious design" class="w-full max-w-5xl h-auto rounded-3xl shadow-xl border border-gray-700">
+        <img src="ommm.png" alt="Decorative image" class="w-full max-w-5xl h-auto rounded-3xl shadow-xl border border-gray-700 ommm-glow-effect">
     </div>
 
     <section id="contact" class="bg-dark-space-gray px-4 section-py text-center text-gray-900 z-10 fade-in-section">
