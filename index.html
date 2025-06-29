@@ -19,6 +19,12 @@
             font-family: 'Playfair Display', serif;
         }
 
+        /* NEW custom style for step numbers */
+        .font-number-style {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400; /* Regular weight of Playfair Display to match the '&' symbol */
+        }
+
         /* Hero section specific styles */
         .hero-video-container {
             position: relative;
@@ -148,21 +154,21 @@
             height: 20px;
             border-bottom: 2px solid white;
             border-right: 2px solid white;
-            transform: rotate(45deg); /* Rotation only here */
+            transform: translateX(-50%) rotate(45deg); /* Centering and rotation applied here */
             animation: bounce 2s infinite;
             z-index: 20;
         }
 
-        /* Keyframes for the subtle up-and-down bounce animation with horizontal movement */
+        /* Keyframes for the subtle up-and-down bounce animation */
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0); /* Reverted: translateX part of animation */
+                transform: translateY(0); /* Only animate translateY */
             }
             40% {
-                transform: translateX(-50%) translateY(-8px); /* Reverted: translateX part of animation */
+                transform: translateY(-8px);
             }
             60% {
-                transform: translateX(-50%) translateY(-4px); /* Reverted: translateX part of animation */
+                transform: translateY(-4px);
             }
         }
 
@@ -347,22 +353,22 @@
             <div class="container mx-auto fade-in-section">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-center">
                     <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
-                        <span class="text-6xl text-white mb-6 drop-shadow-md font-extrabold">1</span>
+                        <span class="text-6xl text-white mb-6 drop-shadow-md font-number-style">1</span>
                         <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Discover</h3>
                         <p class="text-md text-white drop-shadow-md">Browse our upcoming calendar of curated villas designed for connection and growth.</p>
                     </div>
                     <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
-                        <span class="text-6xl text-white mb-6 drop-shadow-md font-extrabold">2</span>
+                        <span class="text-6xl text-white mb-6 drop-shadow-md font-number-style">2</span>
                         <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Inquire & Apply</h3>
                         <p class="text-md text-white drop-shadow-md">Submit an inquiry for your chosen villa. We'll ensure it's a perfect fit for your goals.</p>
                     </div>
                     <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
-                        <span class="text-6xl text-white mb-6 drop-shadow-md font-extrabold">3</span>
+                        <span class="text-6xl text-white mb-6 drop-shadow-md font-number-style">3</span>
                         <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Personalize</h3>
                         <p class="text-md text-white drop-shadow-md">Our team will guide you through all logistics and details for a seamless preparation.</p>
                     </div>
                     <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
-                        <span class="text-6xl text-white mb-6 drop-shadow-md font-extrabold">4</span>
+                        <span class="text-6xl text-white mb-6 drop-shadow-md font-number-style">4</span>
                         <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Experience</h3>
                         <p class="text-md text-white drop-shadow-md">Arrive, relax, connect, and thrive in an inspiring environment crafted just for you.</p>
                     </div>
@@ -482,7 +488,7 @@
                 The Dubai Penthouse Innovation Hub
             </h2>
             <p class="text-base md:text-xl font-extralight italic text-white drop-shadow-md max-w-3xl mx-auto">
-                Immerse yourself in Dubai, the global epicenter for innovation. Our penthouse offers a strategic base for deep work, high-level networking, and connecting with influential influential players in this dynamic environment.
+                Immerse yourself in Dubai, the global epicenter for innovation. Our penthouse offers a strategic base for deep work, high-level networking, and connecting with influential players in this dynamic environment.
             </p>
             <p class="text-base md:text-xl font-extralight italic mb-10 text-white drop-shadow-md max-w-3xl mx-auto mt-6">
                 Elevate your vision with targeted sessions and unparalleled opportunities for collaboration and growth.
