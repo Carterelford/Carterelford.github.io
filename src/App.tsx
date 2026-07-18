@@ -54,7 +54,7 @@ const DemoOne = () => {
           display: 'flex', justifyContent: 'center',
         }}>
           <a
-            href="/reflection-scroll/index.html?fadein=1"
+            href="/apply/?fadein=1"
             onClick={e => {
               e.preventDefault();
               const overlay = document.createElement('div');
@@ -62,7 +62,7 @@ const DemoOne = () => {
               document.body.appendChild(overlay);
               requestAnimationFrame(() => {
                 overlay.style.opacity = '1';
-                setTimeout(() => { window.location.href = '/reflection-scroll/index.html?fadein=1'; }, 750);
+                setTimeout(() => { window.location.href = '/apply/?fadein=1'; }, 750);
               });
             }}
             style={{
