@@ -237,11 +237,11 @@
 				<div id="apply-form" class="credits" style="margin-bottom:0; text-align:center; scroll-margin-top:80px;">
 					<p style="font-size:1.95rem; letter-spacing:0.18em; margin-bottom:0.5rem; color:#9577cc;">Apply to Join</p>
 					<p style="max-width:600px; margin:0 auto 3rem; line-height:2; opacity:0.85; font-size:1.15rem; letter-spacing:0.05em;">Tell us who you are. We'll be in touch.</p>
-					<form style="max-width:640px; margin:0 auto;" onsubmit="return false;">
-						<input type="text" placeholder="Your Name" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'">
-						<input type="email" placeholder="Your Email" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'">
-						<input type="text" placeholder="Why do you want to join?" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'">
-						<select style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:rgba(149,119,204,0.5); font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block; -webkit-appearance:none; appearance:none; cursor:pointer;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'; this.style.color='#fff'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'; if(this.value==='') this.style.color='rgba(149,119,204,0.5)'">
+					<form id="gc-apply-form" style="max-width:640px; margin:0 auto;">
+						<input type="text" name="name" placeholder="Your Name" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'">
+						<input type="email" name="email" placeholder="Your Email" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'">
+						<input type="text" name="reason" placeholder="Why do you want to join?" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'">
+						<select name="region" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:rgba(149,119,204,0.5); font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block; -webkit-appearance:none; appearance:none; cursor:pointer;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'; this.style.color='#fff'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'; if(this.value==='') this.style.color='rgba(149,119,204,0.5)'">
 							<option value="" disabled selected style="background:#0d0d0d; color:rgba(149,119,204,0.4);">Which region are you able to travel to?</option>
 							<option value="europe" style="background:#0d0d0d; color:#fff;">Europe</option>
 							<option value="middle-east" style="background:#0d0d0d; color:#fff;">Middle East</option>
@@ -249,9 +249,44 @@
 							<option value="americas" style="background:#0d0d0d; color:#fff;">Americas</option>
 							<option value="anywhere" style="background:#0d0d0d; color:#fff;">Open to anywhere</option>
 						</select>
-						<input type="text" placeholder="Is there a time of year calling you?" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:3rem; outline:none; display:block;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'">
+						<input type="text" name="timing" placeholder="Is there a time of year calling you?" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:3rem; outline:none; display:block;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'">
 						<button class="gc-shine" type="submit" style="background:transparent; border:1px solid rgba(149,119,204,0.25); border-radius:100px; color:#9577cc; font-family:'forma-djr-mono',monospace; font-size:1.5rem; letter-spacing:0.18em; text-transform:none; padding:20px 72px; cursor:pointer; transition:border-color 0.3s, background 0.3s; -webkit-appearance:none; appearance:none; -webkit-font-smoothing:antialiased;" onmouseover="this.style.borderColor='rgba(149,119,204,0.7)';this.style.background='rgba(149,119,204,0.06)'" onmouseout="this.style.borderColor='rgba(149,119,204,0.25)';this.style.background='transparent'">Submit</button>
+						<p id="gc-form-msg" style="margin-top:1.5rem; font-family:'forma-djr-mono',monospace; font-size:1rem; letter-spacing:0.12em; display:none;"></p>
 					</form>
+					<script>
+						document.getElementById('gc-apply-form').addEventListener('submit', async function(e) {
+							e.preventDefault();
+							var btn = this.querySelector('button[type=submit]');
+							var msg = document.getElementById('gc-form-msg');
+							btn.disabled = true;
+							btn.textContent = 'Sending...';
+							try {
+								var res = await fetch('https://formspree.io/f/mpwrkplj', {
+									method: 'POST',
+									body: new FormData(this),
+									headers: { 'Accept': 'application/json' }
+								});
+								if (res.ok) {
+									this.style.display = 'none';
+									msg.style.display = 'block';
+									msg.style.color = '#9577cc';
+									msg.textContent = "We'll be in touch.";
+								} else {
+									btn.disabled = false;
+									btn.textContent = 'Submit';
+									msg.style.display = 'block';
+									msg.style.color = 'rgba(255,100,100,0.8)';
+									msg.textContent = 'Something went wrong. Please try again.';
+								}
+							} catch(err) {
+								btn.disabled = false;
+								btn.textContent = 'Submit';
+								msg.style.display = 'block';
+								msg.style.color = 'rgba(255,100,100,0.8)';
+								msg.textContent = 'Something went wrong. Please try again.';
+							}
+						});
+					</script>
 				</div>
 				<div class="credits" style="margin-bottom:0; text-align:center;">
 					<p style="max-width:800px; margin:0 auto 0.4rem; line-height:2; opacity:0.4; font-size:1.25rem; letter-spacing:0.18em;">© 2026 Tropical Luxuries</p>
