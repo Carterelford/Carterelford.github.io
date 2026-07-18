@@ -13,6 +13,7 @@
 		<script>document.documentElement.className="js";</script>
 	<script>
 		if (new URLSearchParams(location.search).get('fadein') === '1') {
+			history.replaceState(null, '', location.pathname);
 			var __fo = document.createElement('div');
 			__fo.style.cssText = 'position:fixed;inset:0;background:#000;opacity:1;z-index:9999;pointer-events:none;transition:opacity 1s ease';
 			document.addEventListener('DOMContentLoaded', function() {
