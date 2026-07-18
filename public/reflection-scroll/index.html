@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+	<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Reflection Scroll Effect | Demo 1 | Codrops</title>
+		<meta name="description" content="A decorative reflection effect where we simulate a reflected page and scroll it along with the content." />
+		<meta name="keywords" content="reflection, scroll, scroll animation, gsap" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="https://use.typekit.net/plq1wge.css">
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<script>document.documentElement.className="js";</script>
+	<script>
+		if (new URLSearchParams(location.search).get('fadein') === '1') {
+			var __fo = document.createElement('div');
+			__fo.style.cssText = 'position:fixed;inset:0;background:#000;opacity:1;z-index:9999;pointer-events:none;transition:opacity 1s ease';
+			document.addEventListener('DOMContentLoaded', function() {
+				document.body.appendChild(__fo);
+				requestAnimationFrame(function() {
+					requestAnimationFrame(function() { __fo.style.opacity = '0'; });
+				});
+				setTimeout(function() { __fo.remove(); }, 1100);
+			});
+		}
+	</script>
+	<style>
+		.wrap { z-index: 10; }
+		.gc-ticker-wrap { overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); }
+		.gc-ticker { display: inline-flex; white-space: nowrap; align-items: center; animation: gc-scroll 45s linear infinite; }
+		@keyframes gc-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+		.gc-verdict-row { display:flex; justify-content:space-between; align-items:flex-start; width:100%; grid-column:1 / -1; padding:2rem 6vw 8rem; }
+		.gc-verdict-stack { display:grid; grid-template-areas:'stack'; place-items:center; }
+		.gc-vc { grid-area:stack; position:relative; width:360px; background:rgba(149,119,204,0.08); border:1px solid rgba(149,119,204,0.28); border-radius:14px; padding:2rem 2.2rem; transition:transform 0.6s cubic-bezier(0.23,1,0.32,1), border-color 0.3s; cursor:default; overflow:hidden; will-change:transform; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
+		.gc-vc:hover { border-color:rgba(149,119,204,0.5); }
+		.gc-vc-icon { display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:rgba(149,119,204,0.15); color:#9577cc; font-size:0.9rem; margin-bottom:0.8rem; }
+		.gc-vc-quote { font-size:1.5rem; line-height:1.8; color:rgba(255,255,255,0.72); font-weight:700; margin:0 0 1rem; }
+		.gc-vc-attr { font-family:'ouma-latin-variable',sans-serif; font-size:0.95rem; letter-spacing:0.16em; color:#9577cc; margin:0; }
+		.gc-verdict-left .gc-vc { transform:skewY(-6deg); }
+		.gc-verdict-left .gc-vc:nth-child(1) { z-index:1; }
+		.gc-verdict-left .gc-vc:nth-child(2) { transform:skewY(-6deg) translateX(55px) translateY(36px); z-index:2; }
+		.gc-verdict-left .gc-vc:nth-child(3) { transform:skewY(-6deg) translateX(110px) translateY(72px); z-index:3; }
+		.gc-verdict-left .gc-vc:nth-child(1):hover { transform:skewY(-6deg) translateY(-44px); }
+		.gc-verdict-left .gc-vc:nth-child(2):hover { transform:skewY(-6deg) translateX(55px) translateY(-8px); }
+		.gc-verdict-left .gc-vc:nth-child(3):hover { transform:skewY(-6deg) translateX(110px) translateY(52px); }
+		.gc-verdict-right .gc-vc { transform:skewY(6deg); }
+		.gc-verdict-right .gc-vc:nth-child(1) { z-index:1; }
+		.gc-verdict-right .gc-vc:nth-child(2) { transform:skewY(6deg) translateX(-55px) translateY(36px); z-index:2; }
+		.gc-verdict-right .gc-vc:nth-child(3) { transform:skewY(6deg) translateX(-110px) translateY(72px); z-index:3; }
+		.gc-verdict-right .gc-vc:nth-child(1):hover { transform:skewY(6deg) translateY(-44px); }
+		.gc-verdict-right .gc-vc:nth-child(2):hover { transform:skewY(6deg) translateX(-55px) translateY(-8px); }
+		.gc-verdict-right .gc-vc:nth-child(3):hover { transform:skewY(6deg) translateX(-110px) translateY(52px); }
+
+		/* Reflection: no hover effects, no transitions */
+		.content--reflection .gc-vc { transition: none; }
+		.content--reflection .gc-vc:hover { border-color:rgba(149,119,204,0.28); }
+		.content--reflection .gc-verdict-left .gc-vc:nth-child(1):hover { transform:skewY(-6deg); }
+		.content--reflection .gc-verdict-left .gc-vc:nth-child(2):hover { transform:skewY(-6deg) translateX(55px) translateY(36px); }
+		.content--reflection .gc-verdict-left .gc-vc:nth-child(3):hover { transform:skewY(-6deg) translateX(110px) translateY(72px); }
+		.content--reflection .gc-verdict-right .gc-vc:nth-child(1):hover { transform:skewY(6deg); }
+		.content--reflection .gc-verdict-right .gc-vc:nth-child(2):hover { transform:skewY(6deg) translateX(-55px) translateY(36px); }
+		.content--reflection .gc-verdict-right .gc-vc:nth-child(3):hover { transform:skewY(6deg) translateX(-110px) translateY(72px); }
+
+		/* Button hover effect */
+		a.gc-shine:hover, button.gc-shine:hover { border-color:rgba(149,119,204,0.7) !important; background:rgba(149,119,204,0.06) !important; }
+		/* Intro section shine */
+		.gc-shine { position:relative; overflow:hidden; }
+		.gc-shine::after { content:''; position:absolute; top:-50%; left:0; width:40%; height:200%; background:linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.18) 50%, transparent 80%); transform:skewX(-15deg) translateX(-300%); animation:gc-shine-sweep 8s ease-in-out infinite; pointer-events:none; }
+		@keyframes gc-shine-sweep { 0%,15% { transform:skewX(-15deg) translateX(-300%); } 65%,100% { transform:skewX(-15deg) translateX(900%); } }
+	</style>
+</head>
+	<body class="demo-1 loading">
+
+		<main>
+			<div class="content" style="padding-bottom:0;">
+				<h2 class="content__title">Tropical Luxuries</h2>
+				<figure class="item" style="width:260px; justify-self:center; margin-top:2.5vh;">
+					<div class="item__inner">
+						<div class="item__img">
+							<div class="item__img-inner" style="background-image:url(img/1.jpg);"></div>
+						</div>
+						<figcaption class="item__caption">
+							<p style="font-size:1.25rem; letter-spacing:0.05em; opacity:0.7; margin:0 0 -0.6rem; line-height:1;">Carter</p>
+							<h3 class="item__caption-title">Strategist</h3>
+						</figcaption>
+					</div>
+				</figure>
+				<figure class="item" style="width:260px; justify-self:center; margin-top:2.5vh;">
+					<div class="item__inner">
+						<div class="item__img">
+							<div class="item__img-inner" style="background-image:url(img/2.jpg);"></div>
+						</div>
+						<figcaption class="item__caption">
+							<p style="font-size:1.25rem; letter-spacing:0.05em; opacity:0.7; margin:0 0 -0.6rem; line-height:1;">Pamela</p>
+							<h3 class="item__caption-title">Founder</h3>
+						</figcaption>
+					</div>
+				</figure>
+				<figure class="item" style="width:260px; justify-self:center; margin-top:2.5vh;">
+					<div class="item__inner">
+						<div class="item__img">
+							<div class="item__img-inner" style="background-image:url(img/3.jpg);"></div>
+						</div>
+						<figcaption class="item__caption">
+							<p style="font-size:1.25rem; letter-spacing:0.05em; opacity:0.7; margin:0 0 -0.6rem; line-height:1;">Celeste</p>
+							<h3 class="item__caption-title">Designer</h3>
+						</figcaption>
+					</div>
+				</figure>
+				<div class="credits" style="margin-bottom:0; margin-top:-2.5vh;">
+					<p style="max-width:800px; margin:0 auto 2rem; line-height:1.7; font-size:1.65rem; letter-spacing:0.18em; color:#9577cc;">Surround yourself with the people<br><em>you've been looking for.</em></p>
+					<p style="max-width:800px; margin:0 auto 1.2rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">We take entrepreneurs, creators, builders, or simply like-minded driven people at any stage of their journey, and bring them together in a luxury villa, somewhere in the world, for up to one month.</p>
+					<p style="max-width:800px; margin:0 auto 1.2rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">The right people, in the right place, at the right time. Because the thing that changes everything isn't a course or a book. It's being in a room where everyone around you is on the same path, already moving, and you have no choice but to move too.</p>					<div style="margin-top:2.5rem;">
+						<a class="gc-shine" href="#apply-form" style="display:inline-block; background:transparent; border:1px solid rgba(149,119,204,0.25); border-radius:100px; color:#9577cc; font-family:’forma-djr-mono’,monospace; font-size:1.5rem; letter-spacing:0.18em; text-transform:none; text-decoration:none; padding:20px 72px; cursor:pointer; transition:border-color 0.3s, background 0.3s; -webkit-font-smoothing:antialiased;" onmouseover="this.style.borderColor=’rgba(149,119,204,0.7)’;this.style.background=’rgba(149,119,204,0.06)’" onmouseout="this.style.borderColor=’rgba(149,119,204,0.25)’;this.style.background=’transparent’">Apply</a>
+						<p style="max-width:600px; margin:3.8rem auto 0.85rem; line-height:2; opacity:0.85; font-size:1.15rem; letter-spacing:0.05em;">built for the ones who know they're meant for more.</p>
+						<p style="font-size:1.95rem; letter-spacing:0.18em; margin:0 auto 0; color:#9577cc;">The Golden Circuit</p>
+					</div>
+				</div>
+				<h2 class="content__title">The Circuit</h2>
+				<div class="credits" style="margin-bottom:0;">
+					<p style="max-width:800px; margin:0 auto 2rem; line-height:1.7; font-size:1.65rem; letter-spacing:0.18em; color:#9577cc;">There are places in the world that only exist at certain times of year.</p>
+					<p style="max-width:800px; margin:0 auto 1.2rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">The circuit already exists, and the wealthy have always followed it. Secretly moving between the world's best places at exactly the right time. Tokyo in spring. The South of France in summer. St. Barths at New Year's. An unspoken calendar, followed by those who know.</p>
+					<p style="max-width:800px; margin:0 auto 1.2rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">There's a world within the world. Most people will never find it. The ones who do know something the rest don't... that the real connections, the real conversations, the real opportunities, have never happened at a networking event. They happen in the right place, at the right time, with the right people around you.</p>
+				</div>
+				<div style="grid-column: 1 / -1; display:flex; flex-direction:column; align-items:center; gap:2vh; margin-top:-4vh;">
+					<figure class="item" style="aspect-ratio:3/2; width:70vw; max-width:1100px; margin:0; display:block;">
+						<div class="item__inner">
+							<div class="item__img">
+								<div class="item__img-inner" style="background-image:url(img/tokyo.jpg);"></div>
+							</div>
+							
+						</div>
+					</figure>
+				</div>
+				<div class="credits" style="margin-bottom:0; margin-top:-6vh;">
+					<p style="max-width:800px; margin:2.5rem auto; line-height:1.7; font-size:1.65rem; letter-spacing:0.18em; color:#9577cc;">The Golden Circuit makes that world accessible...<br>To the right people.</p>
+					<p style="max-width:800px; margin:0 auto 1.2rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">We mapped the circuit. Twelve villas. Twelve cities. Each one placed at the exact intersection of timing, luxury, and proximity that the world's most connected people have quietly followed for years. One villa gets you in, the rest of the circuit opens from there.</p>
+				</div>
+				<div class="credits" style="margin-bottom:0; grid-column: 1 / -1; text-align:center; margin-top:-5vh;">
+					<a class="gc-shine" href="#apply-form" style="display:inline-block; background:transparent; border:1px solid rgba(149,119,204,0.25); border-radius:100px; color:#9577cc; font-family:'forma-djr-mono',monospace; font-size:1.5rem; letter-spacing:0.18em; text-transform:none; text-decoration:none; padding:20px 72px; cursor:pointer; transition:border-color 0.3s, background 0.3s; -webkit-font-smoothing:antialiased;" onmouseover="this.style.borderColor='rgba(149,119,204,0.7)';this.style.background='rgba(149,119,204,0.06)'" onmouseout="this.style.borderColor='rgba(149,119,204,0.25)';this.style.background='transparent'">Apply</a>
+					<p style="line-height:2; opacity:0.45; font-size:1.15rem; letter-spacing:0.05em; margin:3.9rem auto 1.8rem; color:#9577cc;">Glimpse the circuit</p>
+					<div style="display:flex; gap:1.8rem; align-items:center; justify-content:center; width:100%;">
+  <p style="font-family:'ouma-latin-variable',sans-serif; font-size:1.65rem; letter-spacing:0.22em; color:#9577cc; margin:0; font-weight:300;">Monaco</p>
+  <p style="font-family:'ouma-latin-variable',sans-serif; font-size:1.65rem; letter-spacing:0.12em; color:#9577cc; margin:0; font-weight:300; line-height:1;">·</p>
+  <p style="font-family:'ouma-latin-variable',sans-serif; font-size:1.65rem; letter-spacing:0.22em; color:#9577cc; margin:0; font-weight:300;">Bali</p>
+  <p style="font-family:'ouma-latin-variable',sans-serif; font-size:1.65rem; letter-spacing:0.12em; color:#9577cc; margin:0; font-weight:300; line-height:1;">·</p>
+  <p style="font-family:'ouma-latin-variable',sans-serif; font-size:1.65rem; letter-spacing:0.22em; color:#9577cc; margin:0; font-weight:300;">Dubai</p>
+  <p style="font-family:'ouma-latin-variable',sans-serif; font-size:1.65rem; letter-spacing:0.12em; color:#9577cc; margin:0; font-weight:300; line-height:1;">·</p>
+  <p style="font-family:'ouma-latin-variable',sans-serif; font-size:1.65rem; letter-spacing:0.22em; color:#9577cc; margin:0; font-weight:300;">Tokyo</p>
+</div>
+					<p style="white-space:nowrap; margin:2.5rem auto 2rem; line-height:1.7; font-size:1.65rem; letter-spacing:0.18em; color:#9577cc;">full circuit locations revealed to approved members only</p>
+				</div>
+				<h2 class="content__title">Day in the Life</h2>
+				<div class="credits" style="margin-bottom:0;">
+					<p style="max-width:800px; margin:0 auto 1.4rem; line-height:1.7; font-size:2rem; letter-spacing:0.18em; color:#9577cc;">Sunrise</p>
+					<p style="max-width:800px; margin:0 auto 1.4rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">Five entrepreneurs living in a Bali mansion, private pool and rice field views, the kind of place that looks like a luxury spa. You wake up at sunrise, hop on your bikes, and hit a café for a coconut and a bullet coffee. Then ride over to the exclusive wellness facility: cold plunge first, then a workout, then the pool and some sun. From there you head back to the villa to grind some laptop work.</p>
+					<p style="max-width:800px; margin:0 auto 1.4rem; line-height:1.7; font-size:2rem; letter-spacing:0.18em; color:#9577cc;">Afternoon</p>
+					<p style="max-width:800px; margin:0 auto 1.4rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">By midday you take a break for a surf and a jump in the ocean. Then back to work. By 6pm you hit a beach sunset and then head to dinner with friends. Good food, good energy. 9pm you head back to the recovery for a relaxing sauna and jacuzzi. Back to the villa, maybe a game of pool, music on, everyone relaxing just talking about ideas and life. You go to sleep and want to do it all again tomorrow.</p>
+				</div>
+
+				<h2 class="content__title">The Truth</h2>
+				<div class="credits" style="margin-bottom:0;">
+					<p style="font-size:1.65rem; letter-spacing:0.18em; margin-bottom:2rem; color:#9577cc;">The part nobody talks about.</p>
+					<p style="max-width:800px; margin:0 auto 1.2rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">It's not that you're lost. You know exactly where you're going. The problem is everyone around you is standing still.</p>
+					<p style="max-width:800px; margin:0 auto 1.2rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">Your friends are comfortable. Your family means well. But none of them understand why you can't just switch off. Why you're dreaming about a life they don't believe in yet. Why a normal life feels like a slow death.</p>
+					<p style="max-width:800px; margin:0 auto; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">You don't need motivation. You need people who are on the same path.</p>
+				</div>
+				<h2 class="content__title">Who Can Join</h2>
+				<div class="credits" style="margin-bottom:0;">
+					<p style="max-width:800px; margin:0 auto 1.4rem; line-height:1.7; font-size:1.65rem; letter-spacing:0.18em; color:#9577cc;">Everyone is welcome. Not everyone is ready.</p>
+					<p style="max-width:800px; margin:0 auto 1.4rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">The people on The Golden Circuit come from every corner of the online world. E-commerce founders, agency owners, SaaS builders, content creators, high-ticket sales operators, coaches, traders, and freelancers. Some are just getting started and figuring it out. Some are already doing seven figures.</p>
+					<p style="max-width:800px; margin:0 auto 1.4rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">What brings them together is the mindset. Everyone here is building, everyone is moving, and everyone is willing to help. Maybe you don't have a business yet. Maybe you're still figuring it out. That's exactly why this exists, sometimes all it takes is being around the right people to realize what you're capable of.</p>
+				</div>
+					<div class="gc-ticker-wrap" style="grid-column: 1 / -1; padding: 2rem 0; margin-top:-8vh;">
+					<div class="gc-ticker">
+						<span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">E-Commerce</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">SMMA</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">High-Ticket Sales</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Agencies</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">SaaS</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Content Creation</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Creators</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Consulting</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Personal Brand</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Trading</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Real Estate</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Education</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Copywriting</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Brand Building</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">UGC</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Web3</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Software</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Coaching</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Freelance</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Online Services</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span>
+						<span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">E-Commerce</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">SMMA</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">High-Ticket Sales</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Agencies</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">SaaS</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Content Creation</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Creators</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Consulting</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Personal Brand</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Trading</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Real Estate</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Education</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Copywriting</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Brand Building</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">UGC</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Web3</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Software</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Coaching</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Freelance</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Online Services</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span>
+					</div>
+				</div>
+				<div class="credits" style="margin-bottom:0; margin-top:-4vh;">
+					<p style="max-width:800px; margin:0 auto 0.5rem; line-height:1.7; font-size:1.65rem; letter-spacing:0.18em; color:#9577cc;">Meet someone currently on the circuit.</p>
+				</div>
+				<div style="grid-column: 1 / -1; display:flex; flex-direction:column; align-items:center; padding: 0; margin-top:-6vh;">
+					<figure class="item" style="aspect-ratio:2/3; width:80vw; max-width:1200px; margin:0; display:block;">
+						<div class="item__inner">
+							<div class="item__img">
+								<div class="item__img-inner" style="background-image:url(img/10.jpg);"></div>
+							</div>
+						</div>
+					</figure>
+					<div style="text-align:center; padding: 0; margin-top:0; width:80vw; max-width:1200px;">
+						<p style="max-width:800px; margin:0 auto 0.2rem; line-height:1.7; font-size:2.2rem; letter-spacing:0.18em; color:#9577cc;">Nadia</p>
+						<p style="max-width:800px; margin:0 auto 2rem; line-height:2; font-size:1.15rem; letter-spacing:0.05em; color:#9577cc;">3x Founder</p>
+						<p style="max-width:800px; margin:0 auto 1.2rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">Built and exited two e-commerce brands before 28. Now running a high-ticket coaching operation doing $50K/month entirely remote, entirely on her terms. 2+ years on The Golden Circuit.</p>
+						<p  style="font-family:'ouma-latin-variable',sans-serif; font-size:1.1rem; letter-spacing:0.22em; color:#9577cc; margin:0; font-weight:700;">[ e-commerce ]</p>
+					</div>
+				</div>
+				<h2 class="content__title">The Verdict</h2>
+				<div class="gc-verdict-row">
+					<div class="gc-verdict-stack gc-verdict-left">
+						<div class="gc-vc">
+							<div class="gc-vc-icon">✦</div>
+							<p class="gc-vc-quote">"I came expecting a trip. I left with a co-founder."</p>
+							<p class="gc-vc-attr">Rina · Founder, Dreams Overdue · Nomadic</p>
+						</div>
+						<div class="gc-vc">
+							<div class="gc-vc-icon">✦</div>
+							<p class="gc-vc-quote">"Nothing I've ever been to compares. Not even close."</p>
+							<p class="gc-vc-attr">Sofia · E-commerce Founder · Milan, Italy</p>
+						</div>
+						<div class="gc-vc">
+							<div class="gc-vc-icon">✦</div>
+							<p class="gc-vc-quote">"Top five experiences of my life. No question."</p>
+							<p class="gc-vc-attr">Andrew Tran · Founder, Limber · Sydney, Australia</p>
+						</div>
+					</div>
+					<div class="gc-verdict-stack gc-verdict-right">
+						<div class="gc-vc">
+							<div class="gc-vc-icon">✦</div>
+							<p class="gc-vc-quote">"I came expecting a trip. I left with a co-founder."</p>
+							<p class="gc-vc-attr">Rina · Founder, Dreams Overdue · Nomadic</p>
+						</div>
+						<div class="gc-vc">
+							<div class="gc-vc-icon">✦</div>
+							<p class="gc-vc-quote">"Nothing I've ever been to compares. Not even close."</p>
+							<p class="gc-vc-attr">Sofia · E-commerce Founder · Milan, Italy</p>
+						</div>
+						<div class="gc-vc">
+							<div class="gc-vc-icon">✦</div>
+							<p class="gc-vc-quote">"Top five experiences of my life. No question."</p>
+							<p class="gc-vc-attr">Andrew Tran · Founder, Limber · Sydney, Australia</p>
+						</div>
+					</div>
+				</div>
+				<div id="apply-form" class="credits" style="margin-bottom:0; text-align:center; scroll-margin-top:80px;">
+					<p style="font-size:1.95rem; letter-spacing:0.18em; margin-bottom:0.5rem; color:#9577cc;">Apply to Join</p>
+					<p style="max-width:600px; margin:0 auto 3rem; line-height:2; opacity:0.85; font-size:1.15rem; letter-spacing:0.05em;">Tell us who you are. We'll be in touch.</p>
+					<form style="max-width:640px; margin:0 auto;" onsubmit="return false;">
+						<input type="text" placeholder="Your Name" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'">
+						<input type="email" placeholder="Your Email" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'">
+						<input type="text" placeholder="Why do you want to join?" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'">
+						<select style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:rgba(149,119,204,0.5); font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block; -webkit-appearance:none; appearance:none; cursor:pointer;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'; this.style.color='#fff'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'; if(this.value==='') this.style.color='rgba(149,119,204,0.5)'">
+							<option value="" disabled selected style="background:#0d0d0d; color:rgba(149,119,204,0.4);">Which region are you able to travel to?</option>
+							<option value="europe" style="background:#0d0d0d; color:#fff;">Europe</option>
+							<option value="middle-east" style="background:#0d0d0d; color:#fff;">Middle East</option>
+							<option value="asia" style="background:#0d0d0d; color:#fff;">Asia</option>
+							<option value="americas" style="background:#0d0d0d; color:#fff;">Americas</option>
+							<option value="anywhere" style="background:#0d0d0d; color:#fff;">Open to anywhere</option>
+						</select>
+						<input type="text" placeholder="Is there a time of year calling you?" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:3rem; outline:none; display:block;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'">
+						<button class="gc-shine" type="submit" style="background:transparent; border:1px solid rgba(149,119,204,0.25); border-radius:100px; color:#9577cc; font-family:'forma-djr-mono',monospace; font-size:1.5rem; letter-spacing:0.18em; text-transform:none; padding:20px 72px; cursor:pointer; transition:border-color 0.3s, background 0.3s; -webkit-appearance:none; appearance:none; -webkit-font-smoothing:antialiased;" onmouseover="this.style.borderColor='rgba(149,119,204,0.7)';this.style.background='rgba(149,119,204,0.06)'" onmouseout="this.style.borderColor='rgba(149,119,204,0.25)';this.style.background='transparent'">Submit</button>
+					</form>
+				</div>
+				<div class="credits" style="margin-bottom:0; text-align:center;">
+					<p style="max-width:800px; margin:0 auto 0.4rem; line-height:2; opacity:0.4; font-size:1.25rem; letter-spacing:0.18em;">© 2026 Tropical Luxuries</p>
+					<p style="max-width:800px; margin:0 auto; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">Built for the ones who were always meant for more.</p>
+				</div>
+				<h2 class="content__title" style="margin-top:-6vh; margin-bottom:0;">Tropical Luxuries</h2>
+				</div>
+			<div class="wrap">
+												<div class="content content--reflection" style="padding-bottom:0;">
+					<h2 class="content__title">Tropical Luxuries</h2>
+					<figure class="item" style="width:260px; justify-self:center; margin-top:2.5vh;">
+						<div class="item__inner">
+							<div class="item__img"><div class="item__img-inner" style="background-image:url(img/1.jpg);"></div></div>
+							<figcaption class="item__caption"><p style="font-size:1.25rem; letter-spacing:0.05em; opacity:0.7; margin:0 0 -0.6rem; line-height:1;">Carter</p><h3 class="item__caption-title">Strategist</h3></figcaption>
+						</div>
+					</figure>
+					<figure class="item" style="width:260px; justify-self:center; margin-top:2.5vh;">
+						<div class="item__inner">
+							<div class="item__img"><div class="item__img-inner" style="background-image:url(img/2.jpg);"></div></div>
+							<figcaption class="item__caption"><p style="font-size:1.25rem; letter-spacing:0.05em; opacity:0.7; margin:0 0 -0.6rem; line-height:1;">Pamela</p><h3 class="item__caption-title">Founder</h3></figcaption>
+						</div>
+					</figure>
+					<figure class="item" style="width:260px; justify-self:center; margin-top:2.5vh;">
+						<div class="item__inner">
+							<div class="item__img"><div class="item__img-inner" style="background-image:url(img/3.jpg);"></div></div>
+							<figcaption class="item__caption"><p style="font-size:1.25rem; letter-spacing:0.05em; opacity:0.7; margin:0 0 -0.6rem; line-height:1;">Celeste</p><h3 class="item__caption-title">Designer</h3></figcaption>
+						</div>
+					</figure>
+					<div class="credits" style="margin-bottom:0; margin-top:-2.5vh;">
+						<p style="max-width:800px; margin:0 auto 2rem; line-height:1.7; font-size:1.65rem; letter-spacing:0.18em; color:#9577cc;">Surround yourself with the people<br><em>you've been looking for.</em></p>
+						<p style="max-width:800px; margin:0 auto 1.2rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">We take entrepreneurs, creators, builders, or simply like-minded driven people at any stage of their journey, and bring them together in a luxury villa, somewhere in the world, for up to one month.</p>
+						<p style="max-width:800px; margin:0 auto 1.2rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">The right people, in the right place, at the right time. Because the thing that changes everything isn't a course or a book. It's being in a room where everyone around you is on the same path, already moving, and you have no choice but to move too.</p>
+						<div style="margin-top:2.5rem;">
+							<a class="gc-shine" style="display:inline-block; background:transparent; border:1px solid rgba(149,119,204,0.25); border-radius:100px; color:#9577cc; font-family:'forma-djr-mono',monospace; font-size:1.5rem; letter-spacing:0.18em; text-transform:none; text-decoration:none; padding:20px 72px;">Apply</a>
+							<p style="max-width:600px; margin:3.8rem auto 0.85rem; line-height:2; opacity:0.85; font-size:1.15rem; letter-spacing:0.05em;">built for the ones who know they're meant for more.</p>
+							<p style="font-size:1.95rem; letter-spacing:0.18em; margin:0 auto 0; color:#9577cc;">The Golden Circuit</p>
+						</div>
+					</div>
+					<h2 class="content__title">The Circuit</h2>
+					<div class="credits" style="margin-bottom:0;">
+						<p style="max-width:800px; margin:0 auto 2rem; line-height:1.7; font-size:1.65rem; letter-spacing:0.18em; color:#9577cc;">There are places in the world that only exist at certain times of year.</p>
+						<p style="max-width:800px; margin:0 auto 1.2rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">The circuit already exists, and the wealthy have always followed it. Secretly moving between the world's best places at exactly the right time. Tokyo in spring. The South of France in summer. St. Barths at New Year's. An unspoken calendar, followed by those who know.</p>
+						<p style="max-width:800px; margin:0 auto 1.2rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">There's a world within the world. Most people will never find it. The ones who do know something the rest don't... that the real connections, the real conversations, the real opportunities, have never happened at a networking event. They happen in the right place, at the right time, with the right people around you.</p>
+					</div>
+					<div style="grid-column: 1 / -1; display:flex; flex-direction:column; align-items:center; gap:2vh; margin-top:-4vh;">
+						<figure class="item" style="aspect-ratio:3/2; width:70vw; max-width:1100px; margin:0; display:block;">
+							<div class="item__inner">
+								<div class="item__img"><div class="item__img-inner" style="background-image:url(img/tokyo.jpg);"></div></div>
+							</div>
+						</figure>
+					</div>
+					<div class="credits" style="margin-bottom:0; margin-top:-6vh;">
+						<p style="max-width:800px; margin:2.5rem auto; line-height:1.7; font-size:1.65rem; letter-spacing:0.18em; color:#9577cc;">The Golden Circuit makes that world accessible...<br>To the right people.</p>
+						<p style="max-width:800px; margin:0 auto 1.2rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">We mapped the circuit. Twelve villas. Twelve cities. Each one placed at the exact intersection of timing, luxury, and proximity that the world's most connected people have quietly followed for years. One villa gets you in, the rest of the circuit opens from there.</p>
+					</div>
+					<div class="credits" style="margin-bottom:0; grid-column: 1 / -1; text-align:center; margin-top:-5vh;">
+						<a class="gc-shine" style="display:inline-block; background:transparent; border:1px solid rgba(149,119,204,0.25); border-radius:100px; color:#9577cc; font-family:'forma-djr-mono',monospace; font-size:1.5rem; letter-spacing:0.18em; text-transform:none; text-decoration:none; padding:20px 72px;">Apply</a>
+						<p style="line-height:2; opacity:0.45; font-size:1.15rem; letter-spacing:0.05em; margin:3.9rem auto 1.8rem; color:#9577cc;">Glimpse the circuit</p>
+						<div style="display:flex; gap:1.8rem; align-items:center; justify-content:center; width:100%;">
+							<p style="font-family:'ouma-latin-variable',sans-serif; font-size:1.65rem; letter-spacing:0.22em; color:#9577cc; margin:0; font-weight:300;">Monaco</p>
+							<p style="font-family:'ouma-latin-variable',sans-serif; font-size:1.65rem; letter-spacing:0.12em; color:#9577cc; margin:0; font-weight:300; line-height:1;">·</p>
+							<p style="font-family:'ouma-latin-variable',sans-serif; font-size:1.65rem; letter-spacing:0.22em; color:#9577cc; margin:0; font-weight:300;">Bali</p>
+							<p style="font-family:'ouma-latin-variable',sans-serif; font-size:1.65rem; letter-spacing:0.12em; color:#9577cc; margin:0; font-weight:300; line-height:1;">·</p>
+							<p style="font-family:'ouma-latin-variable',sans-serif; font-size:1.65rem; letter-spacing:0.22em; color:#9577cc; margin:0; font-weight:300;">Dubai</p>
+							<p style="font-family:'ouma-latin-variable',sans-serif; font-size:1.65rem; letter-spacing:0.12em; color:#9577cc; margin:0; font-weight:300; line-height:1;">·</p>
+							<p style="font-family:'ouma-latin-variable',sans-serif; font-size:1.65rem; letter-spacing:0.22em; color:#9577cc; margin:0; font-weight:300;">Tokyo</p>
+						</div>
+						<p style="white-space:nowrap; margin:2.5rem auto 2rem; line-height:1.7; font-size:1.65rem; letter-spacing:0.18em; color:#9577cc;">full circuit locations revealed to approved members only</p>
+					</div>
+					<h2 class="content__title">Day in the Life</h2>
+					<div class="credits" style="margin-bottom:0;">
+						<p style="max-width:800px; margin:0 auto 1.4rem; line-height:1.7; font-size:2rem; letter-spacing:0.18em; color:#9577cc;">Sunrise</p>
+						<p style="max-width:800px; margin:0 auto 1.4rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">Five entrepreneurs living in a Bali mansion, private pool and rice field views, the kind of place that looks like a luxury spa. You wake up at sunrise, hop on your bikes, and hit a café for a coconut and a bullet coffee. Then ride over to the exclusive wellness facility: cold plunge first, then a workout, then the pool and some sun. From there you head back to the villa to grind some laptop work.</p>
+						<p style="max-width:800px; margin:0 auto 1.4rem; line-height:1.7; font-size:2rem; letter-spacing:0.18em; color:#9577cc;">Afternoon</p>
+						<p style="max-width:800px; margin:0 auto 1.4rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">By midday you take a break for a surf and a jump in the ocean. Then back to work. By 6pm you hit a beach sunset and then head to dinner with friends. Good food, good energy. 9pm you head back to the recovery for a relaxing sauna and jacuzzi. Back to the villa, maybe a game of pool, music on, everyone relaxing just talking about ideas and life. You go to sleep and want to do it all again tomorrow.</p>
+					</div>
+					<h2 class="content__title">The Truth</h2>
+					<div class="credits" style="margin-bottom:0;">
+						<p style="font-size:1.65rem; letter-spacing:0.18em; margin-bottom:2rem; color:#9577cc;">The part nobody talks about.</p>
+						<p style="max-width:800px; margin:0 auto 1.2rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">It's not that you're lost. You know exactly where you're going. The problem is everyone around you is standing still.</p>
+						<p style="max-width:800px; margin:0 auto 1.2rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">Your friends are comfortable. Your family means well. But none of them understand why you can't just switch off. Why you're dreaming about a life they don't believe in yet. Why a normal life feels like a slow death.</p>
+						<p style="max-width:800px; margin:0 auto; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">You don't need motivation. You need people who are on the same path.</p>
+					</div>
+					<h2 class="content__title">Who Can Join</h2>
+					<div class="credits" style="margin-bottom:0;">
+						<p style="max-width:800px; margin:0 auto 1.4rem; line-height:1.7; font-size:1.65rem; letter-spacing:0.18em; color:#9577cc;">Everyone is welcome. Not everyone is ready.</p>
+						<p style="max-width:800px; margin:0 auto 1.4rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">The people on The Golden Circuit come from every corner of the online world. E-commerce founders, agency owners, SaaS builders, content creators, high-ticket sales operators, coaches, traders, and freelancers. Some are just getting started and figuring it out. Some are already doing seven figures.</p>
+					<p style="max-width:800px; margin:0 auto 1.4rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">What brings them together is the mindset. Everyone here is building, everyone is moving, and everyone is willing to help. Maybe you don't have a business yet. Maybe you're still figuring it out. That's exactly why this exists, sometimes all it takes is being around the right people to realize what you're capable of.</p>
+					</div>
+						<div class="gc-ticker-wrap" style="grid-column: 1 / -1; padding: 2rem 0; margin-top:-8vh;">
+						<div class="gc-ticker">
+						<span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">E-Commerce</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">SMMA</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">High-Ticket Sales</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Agencies</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">SaaS</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Content Creation</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Creators</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Consulting</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Personal Brand</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Trading</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Real Estate</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Education</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Copywriting</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Brand Building</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">UGC</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Web3</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Software</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Coaching</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Freelance</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Online Services</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span>
+						<span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">E-Commerce</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">SMMA</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">High-Ticket Sales</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Agencies</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">SaaS</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Content Creation</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Creators</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Consulting</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Personal Brand</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Trading</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Real Estate</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Education</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Copywriting</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Brand Building</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">UGC</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Web3</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Software</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Coaching</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Freelance</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; letter-spacing:0.22em; text-transform:uppercase; padding: 0 2.5rem; color:rgba(255,255,255,0.48);">Online Services</span><span style="font-family:'forma-djr-mono',monospace; font-size:0.9rem; color:rgba(255,255,255,0.48); padding:0;">·</span>
+					</div>
+					</div>
+					<div class="credits" style="margin-bottom:0; margin-top:-4vh;">
+					<p style="max-width:800px; margin:0 auto 0.5rem; line-height:1.7; font-size:1.65rem; letter-spacing:0.18em; color:#9577cc;">Meet someone currently on the circuit.</p>
+				</div>
+				<div style="grid-column: 1 / -1; display:flex; flex-direction:column; align-items:center; padding: 0; margin-top:-6vh;">
+						<figure class="item" style="aspect-ratio:2/3; width:80vw; max-width:1200px; margin:0; display:block;">
+							<div class="item__inner">
+								<div class="item__img"><div class="item__img-inner" style="background-image:url(img/10.jpg);"></div></div>
+							</div>
+						</figure>
+						<div style="text-align:center; padding: 0; margin-top:0; width:80vw; max-width:1200px;">
+							<p style="max-width:800px; margin:0 auto 0.2rem; line-height:1.7; font-size:2.2rem; letter-spacing:0.18em; color:#9577cc;">Nadia</p>
+							<p style="max-width:800px; margin:0 auto 2rem; line-height:2; font-size:1.15rem; letter-spacing:0.05em; color:#9577cc;">3x Founder</p>
+							<p style="max-width:800px; margin:0 auto 1.2rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">Built and exited two e-commerce brands before 28. Now running a high-ticket coaching operation doing $50K/month entirely remote, entirely on her terms. 2+ years on The Golden Circuit.</p>
+							<p  style="font-family:'ouma-latin-variable',sans-serif; font-size:1.1rem; letter-spacing:0.22em; color:#9577cc; margin:0; font-weight:700;">[ e-commerce ]</p>
+						</div>
+					</div>
+					<h2 class="content__title">The Verdict</h2>
+					<div class="gc-verdict-row">
+						<div class="gc-verdict-stack gc-verdict-left">
+							<div class="gc-vc">
+								<div class="gc-vc-icon">✦</div>
+								<p class="gc-vc-quote">"I came expecting a trip. I left with a co-founder."</p>
+								<p class="gc-vc-attr">Rina · Founder, Dreams Overdue · Nomadic</p>
+							</div>
+							<div class="gc-vc">
+								<div class="gc-vc-icon">✦</div>
+								<p class="gc-vc-quote">"Nothing I've ever been to compares. Not even close."</p>
+								<p class="gc-vc-attr">Sofia · E-commerce Founder · Milan, Italy</p>
+							</div>
+							<div class="gc-vc">
+								<div class="gc-vc-icon">✦</div>
+								<p class="gc-vc-quote">"Top five experiences of my life. No question."</p>
+								<p class="gc-vc-attr">Andrew Tran · Founder, Limber · Sydney, Australia</p>
+							</div>
+						</div>
+						<div class="gc-verdict-stack gc-verdict-right">
+							<div class="gc-vc">
+								<div class="gc-vc-icon">✦</div>
+								<p class="gc-vc-quote">"I came expecting a trip. I left with a co-founder."</p>
+								<p class="gc-vc-attr">Rina · Founder, Dreams Overdue · Nomadic</p>
+							</div>
+							<div class="gc-vc">
+								<div class="gc-vc-icon">✦</div>
+								<p class="gc-vc-quote">"Nothing I've ever been to compares. Not even close."</p>
+								<p class="gc-vc-attr">Sofia · E-commerce Founder · Milan, Italy</p>
+							</div>
+							<div class="gc-vc">
+								<div class="gc-vc-icon">✦</div>
+								<p class="gc-vc-quote">"Top five experiences of my life. No question."</p>
+								<p class="gc-vc-attr">Andrew Tran · Founder, Limber · Sydney, Australia</p>
+							</div>
+						</div>
+					</div>
+					<div class="credits" style="margin-bottom:0; text-align:center;">
+						<p style="font-size:1.95rem; letter-spacing:0.18em; margin-bottom:0.5rem; color:#9577cc;">Apply to Join</p>
+						<p style="max-width:600px; margin:0 auto 3rem; line-height:2; opacity:0.85; font-size:1.15rem; letter-spacing:0.05em;">Tell us who you are. We'll be in touch.</p>
+						<form style="max-width:640px; margin:0 auto;">
+							<input type="text" placeholder="Your Name" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block;">
+							<input type="email" placeholder="Your Email" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block;">
+							<input type="text" placeholder="Why do you want to join?" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block;">
+							<select style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:rgba(149,119,204,0.5); font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block; -webkit-appearance:none; appearance:none;">
+								<option value="" disabled selected style="background:#0d0d0d; color:rgba(149,119,204,0.4);">Which region are you able to travel to?</option>
+								<option value="europe" style="background:#0d0d0d; color:#fff;">Europe</option>
+								<option value="middle-east" style="background:#0d0d0d; color:#fff;">Middle East</option>
+								<option value="asia" style="background:#0d0d0d; color:#fff;">Asia</option>
+								<option value="americas" style="background:#0d0d0d; color:#fff;">Americas</option>
+								<option value="anywhere" style="background:#0d0d0d; color:#fff;">Open to anywhere</option>
+							</select>
+							<input type="text" placeholder="Is there a time of year calling you?" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:3rem; outline:none; display:block;">
+							<button class="gc-shine" type="button" style="background:transparent; border:1px solid rgba(149,119,204,0.25); border-radius:100px; color:#9577cc; font-family:'forma-djr-mono',monospace; font-size:1.5rem; letter-spacing:0.18em; text-transform:none; padding:20px 72px; -webkit-appearance:none; appearance:none; -webkit-font-smoothing:antialiased;">Submit</button>
+						</form>
+					</div>
+					<div class="credits" style="margin-bottom:0; text-align:center;">
+						<p style="max-width:800px; margin:0 auto 0.4rem; line-height:2; opacity:0.4; font-size:1.25rem; letter-spacing:0.18em;">© 2026 Tropical Luxuries</p>
+						<p style="max-width:800px; margin:0 auto; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">Built for the ones who were always meant for more.</p>
+					</div>
+					<h2 class="content__title" style="margin-top:-6vh; margin-bottom:0;">Tropical Luxuries</h2>
+			</div>
+	</main>
+		<script src="js/imagesloaded.pkgd.min.js"></script>
+		<script src="js/gsap.min.js"></script>
+		<script src="js/ScrollTrigger.min.js"></script>
+		<script src="js/lenis.min.js"></script>
+		<script type="module" src="js/demo1/index.js"></script>
+
+
+
+
+	</body>
+</html>

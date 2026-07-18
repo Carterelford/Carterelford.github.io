@@ -1,0 +1,255 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #000;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.hero-container {
+  position: relative;
+  width: 100%;
+  min-height: 300vh;
+}
+
+
+.cosmos-style {
+  background: #000;
+}
+
+/* Canvas is fixed — stays behind everything as you scroll */
+.hero-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+}
+
+/* ── SIDE MENU ── */
+.side-menu {
+  position: fixed;
+  left: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  visibility: hidden;
+}
+
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.menu-icon span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: sans-serif;
+  text-transform: uppercase;
+}
+
+/* ── HERO CONTENT ── */
+/* position: absolute so HORIZON scrolls UP as user scrolls down */
+.hero-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+/* ── TITLE ── */
+.hero-title {
+  font-size: clamp(80px, 18vw, 240px);
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  line-height: 0.88;
+  font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+
+  --hx: 55%;
+  --hy: 40%;
+  --hangle: 138deg;
+
+  background:
+    /* Tight specular — smaller, cooler catch-light */
+    radial-gradient(
+      ellipse 22% 55% at var(--hx) var(--hy),
+      rgba(255, 255, 255, 0.88) 0%,
+      rgba(200, 180, 255, 0.4) 25%,
+      transparent 60%
+    ),
+    /* Subtle counter-light — stays cool/blue */
+    radial-gradient(
+      ellipse 45% 30% at calc(100% - var(--hx)) calc(100% - var(--hy)),
+      rgba(80, 140, 255, 0.15) 0%,
+      transparent 55%
+    ),
+    /* Base palette: deep violet anchor → purple → indigo → electric blue → soft pink accent → back to violet */
+    linear-gradient(
+      var(--hangle),
+      #0a001a 0%,
+      #5b1a9e 14%,
+      #7c3aed 28%,
+      #4f46e5 44%,
+      #3b82f6 58%,
+      #a855f7 72%,
+      #c026d3 84%,
+      #ec4899 93%,
+      #7c3aed 100%
+    );
+  background-size: 260% 260%;
+  background-position: var(--hx) var(--hy);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  filter:
+    drop-shadow(0 1px 0px rgba(0, 0, 0, 0.95))
+    drop-shadow(0 0 28px rgba(124, 58, 237, 0.6))
+    drop-shadow(0 0 80px rgba(79, 70, 229, 0.2));
+  transition: filter 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+  pointer-events: auto;
+  cursor: default;
+}
+
+.title-char {
+  display: inline-block;
+}
+
+/* All titles use same flex column structure */
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stacked-title {
+  gap: 4px;
+}
+
+.title-line {
+  display: block;
+  text-align: center;
+}
+
+/* ── SUBTITLE ── */
+.hero-subtitle {
+  text-align: center;
+}
+
+.cosmos-subtitle .subtitle-line {
+  display: block;
+  font-size: clamp(15px, 1.5vw, 20px);
+  color: rgba(255, 255, 255, 0.9);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 600;
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+}
+
+/* ── SCROLL PROGRESS ── */
+.scroll-progress {
+  position: fixed;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  visibility: hidden;
+  width: min(500px, 80vw);
+}
+
+.scroll-text {
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: sans-serif;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.progress-track {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6);
+  transition: width 0.1s linear;
+}
+
+.section-counter {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: sans-serif;
+  white-space: nowrap;
+}
+
+/* ── SCROLL SECTIONS ── */
+/* Starts right after the hero (100vh down), each section 100vh tall */
+.scroll-sections {
+  position: absolute;
+  top: 100vh;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+/* Each section takes a full viewport height */
+.content-section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  text-align: center;
+  gap: 40px;
+  pointer-events: none;
+}
+

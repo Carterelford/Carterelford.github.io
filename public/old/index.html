@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tropicalluxuries - Elevated Escapes & Harmonious Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            color: #333; /* Darker text for readability - largely overridden by section specific colors */
+            background-color: #1A1A1A; /* Set body background to dark space gray for seamless look */
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* NEW custom style for step numbers */
+        .font-number-style {
+            font-family: 'Inter', sans-serif; /* Changed to Inter for a clean, simple look */
+            font-weight: 700; /* Made bold */
+        }
+
+        /* Hero section specific styles */
+        .hero-video-container {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: brightness(0.6);
+        }
+
+        .hero-overlay {
+            background-color: rgba(0, 0, 0, 0.2);
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        /* --- UPDATED CSS FOR FIXED IMAGE BACKGROUND CONTAINER (NOW SOLID COLOR) --- */
+        #curated-intro-section {
+            position: relative;
+            z-index: 10; /* Ensures it sits above body but below video sections */
+        }
+
+        .fixed-image-background-overlay {
+            position: absolute;
+            inset: 0; /* Cover the entire parent #curated-intro-section */
+            background-color: #1A1A1A; /* Solid dark space gray */
+            z-index: -1; /* Behind the content of the child sections */
+        }
+        /* --- END UPDATED CSS --- */
+
+        /* --- NEW CSS FOR VIDEO SECTIONS --- */
+        .video-section {
+            position: relative;
+            height: 100vh; /* Make each section full viewport height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            z-index: 10; /* Ensure content above other elements */
+        }
+
+        .video-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1; /* Below the overlay and content */
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            filter: brightness(0.7); /* Slightly dimmed video */
+        }
+
+        .video-overlay {
+            background-color: rgba(0, 0, 0, 0.3); /* Dark overlay for readability */
+            position: absolute;
+            inset: 0;
+            z-index: 0; /* Above video, below content */
+        }
+
+        .video-content {
+            position: relative;
+            z-index: 1; /* Above the overlay */
+            max-width: 800px; /* Limit content width */
+            padding: 0 1.5rem; /* Add horizontal padding */
+            margin: auto; /* Center content block */
+        }
+        /* --- END NEW CSS --- */
+
+
+        /* General section padding for consistent spacing */
+        .section-py {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+        }
+
+        /* Reduced top padding for 'About' section to pull it closer to Hero */
+        .section-py-about-adjusted {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+        }
+
+        /* Adjusted top padding for 'How It Works' section to pull it closer to About */
+        .section-py-how-it-works-adjusted {
+            padding-top: 0.5rem; /* Adjusted for closer proximity, can be tweaked */
+            padding-bottom: 6rem;
+        }
+
+        /* For sections that need a more subtle background */
+        .bg-light-cream {
+            background-color: #FDFDF7;
+        }
+
+        /* Custom styling for sleek lines and modern dividers, if needed later */
+        .divider {
+            height: 1px;
+            background-color: #ccc;
+            width: 50%;
+            margin: 2rem auto;
+        }
+        /* New aspect ratio for images in redesigned sections */
+        .md\:aspect-h-10 {
+            padding-bottom: 62.5%;
+        }
+
+        /* CSS for the animated scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            border-bottom: 2px solid white;
+            border-right: 2px solid white;
+            transform: translateX(-50%) rotate(45deg);
+            animation: bounce 2s infinite;
+            z-index: 20;
+        }
+
+        /* Keyframes for the subtle up-and-down bounce animation */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) rotate(45deg) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) rotate(45deg) translateY(-8px);
+            }
+            60% {
+                transform: translateX(-50%) rotate(45deg) translateY(-4px);
+            }
+        }
+
+        /* --- Custom CSS for Step Hover Effect --- */
+        .step-hover-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Added box-shadow to transition */
+        }
+
+        .step-hover-effect:hover {
+            transform: scale(1.03); /* Makes it 3% larger */
+            box-shadow: 0 0 25px 7px rgba(255, 255, 255, 0.6); /* Subtle WHITE glow re-added */
+        }
+        /* --- End Custom CSS --- */
+
+        /* --- Fade-in on Scroll CSS --- */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px); /* Starts slightly below its final position */
+            transition: opacity 1s ease-out, transform 1s ease-out; /* Smooth transition for both */
+            will-change: opacity, transform; /* Optimizes performance */
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* --- End Fade-in on Scroll CSS --- */
+
+        /* --- Custom CSS for Review Carousel --- */
+        .review-display {
+            position: relative;
+            min-height: 120px; /* Default for desktop. Will be overridden by media query for mobile. */
+            display: flex;
+            justify-content: center; /* Center the reviews horizontally */
+            align-items: center;
+            text-align: center;
+            margin-bottom: 2.5rem; /* Space between review and slider */
+            overflow: hidden; /* Crucial to clip content outside the container */
+        }
+
+        .review-text {
+            position: absolute; /* Allows reviews to layer and move independently */
+            width: 100%;
+            max-width: 600px; /* Limit width of the review text */
+            padding: 0 1rem;
+            white-space: normal; /* Allow text to wrap naturally */
+            transition: none; /* Crucial: No CSS transitions here, controlled by JS */
+            will-change: transform, opacity; /* Optimize performance */
+            pointer-events: none; /* Prevent interaction with reviews */
+            /* Start all reviews off-screen initially, overridden by JS */
+            transform: translateX(100%);
+            opacity: 0;
+            /* Adjust line height for better readability, especially on mobile */
+            line-height: 1.6;
+        }
+
+        .custom-scrollbar-track {
+            position: relative;
+            height: 6px; /* Thickness of the bar */
+            background-color: rgba(255, 255, 255, 0.2); /* Light transparent track */
+            border-radius: 3px;
+            max-width: 400px; /* Limit slider bar width */
+            margin: 0 auto; /* Center the slider */
+            cursor: pointer;
+        }
+
+        .custom-scrollbar-thumb {
+            position: absolute;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7); /* Brighter thumb */
+            border-radius: 3px;
+            cursor: grab;
+            will-change: left; /* Optimize for smooth dragging */
+        }
+
+        .custom-scrollbar-thumb:active {
+            cursor: grabbing;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+        /* --- End Custom CSS for Review Carousel --- */
+
+        /* --- NEW CSS for Star Glow --- */
+        .star-svg-glow {
+            transition: filter 0.3s ease-in-out; /* Smooth transition for the filter */
+            filter: url(#shadow); /* Apply initial filter (no glow) */
+            /* IMPORTANT: The #shadow filter needs to be defined in SVG for this to work */
+        }
+
+        .star-svg-glow:hover {
+            filter: url(#starGlowFilter); /* Apply the glow filter on hover */
+        }
+
+        /* Fallback for browsers that don't support SVG filters well or for a subtle effect */
+        .star-svg-glow:hover {
+            -webkit-filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+        }
+        /* --- END NEW CSS for Star Glow --- */
+
+        /* --- NEW GLOBAL DARK SPACE GREY BACKGROUND --- */
+        .bg-dark-space-gray {
+            background-color: #1A1A1A; /* A deep, dark gray */
+        }
+        .bg-dark-form {
+            background-color: #2A2A2A; /* Slightly lighter dark gray for the form */
+        }
+        /* --- NEW Input Field Style --- */
+        .input-dark-grey {
+            background-color: #3A3A3A; /* A lighter gray than the form background */
+            color: #E0E0E0; /* Lighter text for contrast */
+            border-color: #555555; /* A subtle border color */
+        }
+        .input-dark-grey::placeholder {
+            color: #AAAAAA; /* Lighter placeholder text */
+        }
+        /* --- END NEW Input Field Style --- */
+
+        /* --- Mobile Specific Overrides for Review Section --- */
+        @media (max-width: 768px) { /* Targeting typical mobile devices */
+            .review-display {
+                min-height: 200px; /* Increased height for mobile to prevent clipping */
+                margin-bottom: 2rem; /* Slightly less space for compact layout */
+            }
+
+            .review-text {
+                font-size: 1rem; /* Smaller font size for mobile readability */
+                padding: 0 0.5rem; /* Reduced horizontal padding */
+                /* Ensure review text itself has enough space */
+                max-width: 90%; /* Allow reviews to take up more width on smaller screens */
+            }
+
+            .custom-scrollbar-track {
+                max-width: 80%; /* Adjust track width for mobile */
+            }
+        }
+    </style>
+</head>
+<body class="bg-dark-space-gray text-gray-800">
+
+    <header class="hero-video-container relative z-10">
+        <video autoplay loop muted playsinline class="hero-video">
+            <source src="trimmed.mp4" type="video/mp4">
+            <img src="https://images.unsplash.com/photo-1547463569-8973b06c888d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Dreamy Resort View Fallback" class="w-full h-full object-cover">
+        </video>
+        <div class="hero-overlay"></div> <div class="absolute top-8 left-1/2 -translate-x-1/2 z-20">
+            <img src="logoooo.png" onerror="this.onerror=null;this.src='https://placehold.co/120x120/000000/FFFFFF?text=Logo';" alt="Tropical Luxuries Logo" class="w-28 h-28 md:w-36 md:h-36 mx-auto rounded-full shadow-lg object-contain object-center">
+        </div>
+
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 md:px-8 z-10">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 tracking-tight text-white drop-shadow-lg leading-tight">
+                Tropicalluxuries
+            </h1>
+            <p class="text-base md:text-xl font-extralight italic mb-10 text-white drop-shadow-md max-w-3xl mx-auto">
+                Connecting entrepreneurs around the world.
+            </p>
+            <a href="#about" class="px-8 py-4 bg-white text-gray-900 font-semibold rounded-full shadow-xl hover:bg-gray-200 transform hover:scale-105 transition-all duration-300 ease-in-out text-lg">
+                Explore
+            </a>
+        </div>
+
+        <div class="scroll-indicator"></div>
+    </header>
+
+    <section id="curated-intro-section" class="relative overflow-hidden z-10">
+        <div class="fixed-image-background-overlay"></div>
+
+        <section id="about" class="section-py-about-adjusted relative px-4 bg-transparent">
+            <div class="container mx-auto px-4 text-center">
+                <img src="logoooo.png" onerror="this.onerror=null;this.src='https://placehold.co/100x100/000000/FFFFFF?text=Logo';" alt="Tropicalluxuries Logo" class="h-36 md:h-48 mx-auto drop-shadow-md fade-in-section">
+                <h2 class="text-5xl md:text-6xl font-extrabold text-white leading-tight max-w-4xl drop-shadow-md relative z-10 mx-auto mt-0 fade-in-section">
+                    Curating Your Next Breakthrough
+                </h2>
+                <p class="text-xl leading-loose max-w-3xl text-white drop-shadow relative z-10 mx-auto mt-12 fade-in-section">
+                    Tropicalluxuries hosts exclusive villas for entrepreneurs at every stage—whether you’re just beginning or building your empire.
+                    <br><br>
+                    In stunning locations around the world, you’ll live, train, think, and build alongside like-minded individuals who push you forward. With luxury surroundings, deep focus, movement, and shared ambition, every stay is your launchpad for clarity, creativity, and growth.
+                </p>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="px-4 section-py-how-it-works-adjusted bg-transparent z-10">
+            <div class="container mx-auto fade-in-section">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-center">
+                    <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
+                        <span class="text-6xl text-white mb-6 drop-shadow-md font-number-style">1</span>
+                        <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Discover</h3>
+                        <p class="text-md text-white drop-shadow-md">Browse our upcoming calendar of curated villas designed for connection and growth.</p>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
+                        <span class="text-6xl text-white mb-6 drop-shadow-md font-number-style">2</span>
+                        <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Inquire & Apply</h3>
+                        <p class="text-md text-white drop-shadow-md">Submit an inquiry for your chosen villa. We'll ensure it's a perfect fit for your goals.</p>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
+                        <span class="text-6xl text-white mb-6 drop-shadow-md font-number-style">3</span>
+                        <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Personalize</h3>
+                        <p class="text-md text-white drop-shadow-md">Our team will guide you through all logistics and details for a seamless preparation.</p>
+                    </div>
+                    <div class="p-6 rounded-2xl bg-white/10 shadow-xl flex flex-col items-center step-hover-effect">
+                        <span class="text-6xl text-white mb-6 drop-shadow-md font-number-style">4</span>
+                        <h3 class="text-2xl font-semibold mb-3 text-white drop-shadow-md">Experience</h3>
+                        <p class="text-md text-white drop-shadow-md">Arrive, relax, connect, and thrive in an inspiring environment crafted just for you.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-4 pt-6 pb-32 bg-transparent z-10">
+            <div class="container mx-auto text-center fade-in-section">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white leading-tight drop-shadow-md mb-8">
+                    Based on 5-Star Reviews
+                </h2>
+                <div class="flex justify-center items-center space-x-6 mb-6">
+                    <svg height="0" width="0" style="position: absolute; overflow: hidden;">
+                        <filter id="starGlowFilter">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"></feGaussianBlur>
+                            <feComponentTransfer in="blur" result="transfer">
+                                <feFuncA type="linear" slope="1.5" intercept="0"></feFuncA>
+                            </feComponentTransfer>
+                            <feFlood flood-color="white" flood-opacity="0.8" result="color"></feFlood>
+                            <feComposite in="color" in2="transfer" operator="in" result="glow"></feComposite>
+                            <feMerge>
+                                <feMergeNode in="glow"></feMergeNode>
+                                <feMergeNode in="SourceGraphic"></feMergeNode>
+                            </feMerge>
+                        </filter>
+                        <filter id="shadow">
+                           </filter>
+                    </svg>
+
+                    <svg class="w-10 h-10 text-white fill-current star-svg-glow" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                    <svg class="w-10 h-10 text-white fill-current star-svg-glow" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                    <svg class="w-10 h-10 text-white fill-current star-svg-glow" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                    <svg class="w-10 h-10 text-white fill-current star-svg-glow" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                    <svg class="w-10 h-10 text-white fill-current star-svg-glow" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 18.896l-7.416 3.817 1.48-8.279-6.064-5.828 8.332-1.151z"/></svg>
+                </div>
+
+                <div class="review-display">
+                    <p class="review-text text-xl md:text-2xl font-light italic text-white drop-shadow-md max-w-2xl mx-auto" data-review-index="0">
+                        "The Bali experience was transformative. Being surrounded by driven individuals sparked so many new ideas."<br><span class="font-semibold not-italic">- David M., Startup Founder</span>
+                    </p>
+                    <p class="review-text text-xl md:text-2xl font-light italic text-white drop-shadow-md max-w-2xl mx-auto" data-review-index="1">
+                        "I sought clarity in Bali and returned with a concrete plan. The daily motivation from the group and wellness activities was exactly what I needed. Truly inspiring."<br><span class="font-semibold not-italic">- Alex R., Digital Nomad</span>
+                    </p>
+                    <p class="review-text text-xl md:text-2xl font-light italic text-white drop-shadow-md max-w-2xl mx-auto" data-review-index="2">
+                        "The energy in Bali was incredible. We dissected challenges and built momentum through shared gym sessions, sauna, and breathwork."<br><span class="font-italic">- Sarah L., Creative Entrepreneur</span>
+                    </p>
+                    <p class="review-text text-xl md:text-2xl font-light italic text-white drop-shadow-md max-w-2xl mx-auto" data-review-index="3">
+                        "This Bali journey gave me a renewed sense of purpose. Deep conversations and invaluable insights created a collective push for our ideas."<br><span class="font-semibold not-italic">- Omar K., Tech Visionary</span>
+                    </p>
+                    <p class="review-text text-xl md:text-2xl font-2xl font-light italic text-white drop-shadow-md max-w-2xl mx-auto" data-review-index="4">
+                        "The exchange of ideas, genuine support, and commitment to daily wellness fostered an environment where great things happened. Highly recommend!"<br><span class="font-semibold not-italic">- Emily C., Growth Strategist</span>
+                    </p>
+                </div>
+
+                <div class="custom-scrollbar-track">
+                    <div class="custom-scrollbar-thumb" id="custom-scrollbar-thumb"></div>
+                </div>
+
+            </div>
+        </section>
+
+    </section>
+
+    <section id="bali-sanctuary" class="video-section">
+        <video autoplay loop muted playsinline class="video-background">
+            <source src="bali sanctuary.mp4" type="video/mp4">
+            <img src="https://images.unsplash.com/photo-1571003195204-585a0651804f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Bali Entrepreneurial Sanctuary Fallback" class="w-full h-full object-cover">
+        </video>
+        <div class="video-overlay"></div>
+        <div class="video-content fade-in-section">
+            <h2 class="text-5xl md:text-6xl font-bold mb-4 tracking-tight text-white drop-shadow-lg leading-tight">
+                The Bali Entrepreneurial Sanctuary
+            </h2>
+            <p class="text-base md:text-xl font-extralight italic text-white drop-shadow-md max-w-3xl mx-auto">
+                Join like-minded digital innovators in a stunning Balinese villa. Here, you'll live, brainstorm, and push each other forward through shared goals and new perspectives.
+            </p>
+            <p class="text-base md:text-xl font-extralight italic mb-10 text-white drop-shadow-md max-w-3xl mx-auto mt-6">
+                Experience daily collective wellness sessions at a top-tier facility offering gym, sauna, cold plunge, jacuzzi, breathwork, yoga, and pool access, all designed to amplify your clarity, creativity, and drive.
+            </p>
+            <a href="#contact" class="px-8 py-4 bg-gray-900 text-white font-semibold rounded-full shadow-xl hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out text-lg">
+                Inquire About Bali &rarr;
+            </a>
+        </div>
+    </section>
+
+    <section id="coastal-escape" class="video-section">
+        <video autoplay loop muted playsinline class="video-background">
+            <source src="cliffside italy.mp4" type="video/mp4">
+            <img src="https://images.unsplash.com/photo-1549495147-9759c864b2d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Coastal Mastermind Escape Fallback" class="w-full h-full object-cover">
+        </video>
+        <div class="video-overlay"></div>
+        <div class="video-content fade-in-section">
+            <h2 class="text-5xl md:text-6xl font-bold mb-4 tracking-tight text-white drop-shadow-lg leading-tight">
+                The Italian Coastal Cliffside
+            </h2>
+            <p class="text-base md:text-xl font-extralight italic text-white drop-shadow-md max-w-3xl mx-auto">
+                Step into an exclusive entrepreneurial haven in a stunning Italian cliffside villa. Here, surrounded by breathtaking ocean views, you'll connect, collaborate, and bring to life your next big idea alongside like-minded visionaries.
+            </p>
+            <p class="text-base md:text-xl font-extralight italic mb-10 text-white drop-shadow-md max-w-3xl mx-auto mt-6">
+                This escape offers an unparalleled environment for deep focus, shared insights, and a collective drive to achieve breakthroughs.
+            </p>
+            <a href="#contact" class="px-8 py-4 bg-gray-900 text-white font-semibold rounded-full shadow-xl hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out text-lg">
+                Explore Italian Coast &rarr;
+            </a>
+        </div>
+    </section>
+
+    <section id="desert-hub" class="video-section">
+        <video autoplay loop muted playsinline class="video-background">
+            <source src="Dubai penthouse.mp4" type="video/mp4">
+            <img src="https://images.unsplash.com/photo-1563911302823-fd731210639d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80" alt="Serene Desert Innovation Hub Fallback" class="w-full h-full object-cover">
+        </video>
+        <div class="video-overlay"></div>
+        <div class="video-content fade-in-section">
+            <h2 class="text-5xl md:text-6xl font-bold mb-4 tracking-tight text-white drop-shadow-lg leading-tight">
+                The Dubai Penthouse Innovation Hub
+            </h2>
+            <p class="text-base md:text-xl font-extralight italic text-white drop-shadow-md max-w-3xl mx-auto">
+                Immerse yourself in Dubai, the global epicenter for innovation. Our penthouse offers a strategic base for deep work, high-level networking, and connecting with influential players in this dynamic environment.
+            </p>
+            <p class="text-base md:text-xl font-extralight italic mb-10 text-white drop-shadow-md max-w-3xl mx-auto mt-6">
+                Elevate your vision with targeted sessions and unparalleled opportunities for collaboration and growth.
+            </p>
+            <a href="#contact" class="px-8 py-4 bg-gray-900 text-white font-semibold rounded-full shadow-xl hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out text-lg">
+                Explore Dubai Hub &rarr;
+            </a>
+        </div>
+    </section>
+
+    <section class="bg-dark-space-gray px-4 section-py z-10">
+        <div class="container mx-auto text-center fade-in-section">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-10 text-white leading-tight max-w-4xl mx-auto">
+                Harmonizing Spaces: Feng Shui & Inspired Architecture
+            </h2>
+            <p class="text-lg leading-relaxed text-white max-w-4xl mx-auto">
+                At the heart of Tropicalluxuries is an unwavering dedication to the art of Feng Shui. We believe that the spaces you inhabit profoundly impact your well-being, mental clarity, and creative output.
+                <br><br>
+                Each villa is meticulously chosen or adapted to embody Feng Shui principles, ensuring every space is designed to enhance your overall experience.
+            </p>
+        </div>
+    </section>
+
+    <section class="bg-dark-space-gray py-8 px-4 text-center z-10">
+        <div class="container mx-auto">
+            <img src="ommm.png" alt="Decorative Thin White Line"
+                 class="mx-auto w-20 md:w-24 lg:w-[125px] object-contain transition-all duration-300 ease-in-out hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] hover:scale-105 fade-in-section">
+        </div>
+    </section>
+
+    <section id="contact" class="bg-dark-space-gray px-4 section-py text-center text-gray-900 z-10 fade-in-section">
+        <div class="container mx-auto max-w-3xl">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white drop-shadow-md leading-tight">
+                Connect With Tropicalluxuries
+            </h2>
+            <p class="text-lg leading-relaxed mb-10 text-gray-100 drop-shadow">
+                Whether you have questions, wish to inquire about a specific villa, or want to stay updated on exclusive new villa opportunities with high-value entrepreneurs, inquire below. Spots fill fast, don't miss out.
+            </p>
+            <form id="contactForm" class="bg-dark-form p-8 md:p-12 rounded-3xl shadow-2xl">
+                <input type="hidden" name="_subject" value="New Website Inquiry/Subscriber!">
+                <div class="mb-6">
+                    <input type="text" placeholder="Your Name" class="w-full px-5 py-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200 text-lg input-dark-grey border" name="name">
+                </div>
+                <div class="mb-6">
+                    <input type="email" placeholder="Your Email Address" class="w-full px-5 py-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200 text-lg input-dark-grey border" name="email">
+                </div>
+                <div class="mb-8">
+                    <input type="text" placeholder="Subject (e.g., Bali Villa Inquiry, General Question, Stay Updated)" class="w-full px-5 py-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200 text-lg input-dark-grey border" name="subject">
+                </div>
+                <button type="submit" class="w-full px-8 py-5 bg-dark-space-gray text-white font-bold rounded-full shadow-lg hover:bg-gray-700 transform hover:scale-105 transition-all duration-300 ease-in-out text-xl">
+                    Send Message
+                </button>
+            </form>
+
+            <div id="thankYouMessage" class="hidden text-white text-3xl font-bold py-16">
+                Thank you for your message! We'll be in touch soon.
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark-space-gray text-gray-300 px-4 py-12 text-center rounded-t-3xl z-10 fade-in-section">
+        <div class="container mx-auto">
+            <p class="mb-8">&copy; 2025 Tropicalluxuries. All rights reserved.</p>
+            <div class="flex justify-center space-x-8 text-lg mb-8">
+                <a href="https://www.instagram.com/tropicaluxuries/" aria-label="Instagram" class="transition-transform duration-200 hover:scale-110">
+                    <img src="instaa.png" alt="Instagram Logo" class="w-10 h-10 object-contain">
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100082981466707" aria-label="Facebook" class="transition-transform duration-200 hover:scale-110">
+                    <img src="faceboook.png" alt="Facebook Logo" class="w-10 h-10 object-contain">
+                </a>
+            </div>
+            <img src="logoooo.png" onerror="this.onerror=null;this.src='https://placehold.co/240x240/000000/FFFFFF?text=Logo';" alt="Tropical Luxuries Logo" class="w-56 h-56 md:w-72 md:h-72 mx-auto rounded-full shadow-lg object-contain object-center">
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fade-in on Scroll functionality
+            const fadeElements = document.querySelectorAll('.fade-in-section');
+
+            const observerOptions = {
+                root: null, // Use the viewport as the root
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Stop observing once it's visible
+                    }
+                });
+            }, observerOptions);
+
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // --- Review Carousel (Continuous Movement) Functionality ---
+            const reviewDisplay = document.querySelector('.review-display');
+            const reviewTexts = document.querySelectorAll('.review-text');
+            const customThumb = document.getElementById('custom-scrollbar-thumb');
+            const customTrack = customThumb.parentElement;
+
+            let currentSliderProgress = 0; // 0 to 1, representing thumb's position on track
+            let isDraggingThumb = false;
+            let startXThumb;
+            let thumbOffset = 0;
+
+            const totalReviews = reviewTexts.length;
+            const reviewWidthUnit = 100; // Represents the "width" of one review for translation in %
+
+            // Function to update the position and opacity of all reviews based on slider progress
+            function updateReviewPositions() {
+                const trackWidth = customTrack.clientWidth;
+                const thumbWidth = customThumb.clientWidth;
+                const maxThumbLeft = trackWidth - thumbWidth;
+
+                // Calculate progress (0 to 1) based on current thumb position
+                let progress = customThumb.offsetLeft / maxThumbLeft;
+                progress = isNaN(progress) ? 0 : Math.max(0, Math.min(progress, 1)); // Ensure valid range
+
+                currentSliderProgress = progress;
+
+                // Determine the "active" review index based on progress
+                const targetIndex = Math.round(progress * (totalReviews - 1));
+
+                // Calculate the overall translation offset for all reviews
+                // This value shifts the "carousel" of reviews
+                const offsetPercentage = progress * (totalReviews - 1) * reviewWidthUnit;
+
+                reviewTexts.forEach((review, index) => {
+                    // Calculate the individual review's position relative to its "slot"
+                    // Then apply the global offset to move the entire carousel
+                    const initialOffset = (index * reviewWidthUnit); // Position if no slider movement
+                    const translateXValue = initialOffset - offsetPercentage;
+
+                    // Apply transform
+                    review.style.transform = `translateX(${translateXValue}%)`;
+
+                    // Calculate opacity based on distance from the center (0% translateX)
+                    // Reviews are fully opaque when centered, fade out as they move away
+                    const distanceToCenter = Math.abs(index - (progress * (totalReviews - 1)));
+                    const maxDistance = (totalReviews - 1) / 2;
+                    let opacity = 1 - (distanceToCenter / maxDistance) * 0.7; // Fade to 30% opacity
+                    opacity = Math.max(0, Math.min(opacity, 1)); // Ensure valid range
+                    review.style.opacity = opacity;
+
+                    // Make the target review fully opaque
+                    if (index === targetIndex) {
+                        review.style.opacity = 1;
+                    }
+                });
+            }
+
+            // Initialize thumb width based on number of reviews
+            function initializeThumb() {
+                const trackWidth = customTrack.clientWidth;
+                // Thumb width should be a fraction of the track width based on the number of reviews
+                const fixedThumbWidth = Math.min(100, trackWidth / totalReviews); // Max 100px or trackWidth / count
+                customThumb.style.width = `${fixedThumbWidth}px`;
+
+                // Calculate position for the middle review
+                const initialTargetIndex = Math.floor(totalReviews / 2); // Get the middle index
+                const initialProgress = initialTargetIndex / (totalReviews - 1);
+                const maxThumbLeft = trackWidth - customThumb.clientWidth;
+                let initialLeft = initialProgress * maxThumbLeft;
+                initialLeft = Math.max(0, Math.min(initialLeft, maxThumbLeft)); // Ensure valid range
+
+                customThumb.style.left = `${initialLeft}px`;
+
+                updateReviewPositions(); // Initial position update
+            }
+
+            // Handle thumb dragging (Mouse events for desktop)
+            customThumb.addEventListener('mousedown', (e) => {
+                isDraggingThumb = true;
+                startXThumb = e.clientX;
+                thumbOffset = customThumb.offsetLeft;
+                customThumb.style.cursor = 'grabbing';
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDraggingThumb) return;
+                e.preventDefault(); // Prevent text selection during drag
+
+                const trackWidth = customTrack.clientWidth;
+                const thumbWidth = customThumb.clientWidth;
+                const maxThumbLeft = trackWidth - thumbWidth;
+
+                let newLeft = thumbOffset + (e.clientX - startXThumb);
+                newLeft = Math.max(0, Math.min(newLeft, maxThumbLeft)); // Constrain thumb within track
+
+                customThumb.style.left = `${newLeft}px`;
+                updateReviewPositions(); // Update review positions as thumb moves
+            });
+
+            document.addEventListener('mouseup', () => {
+                isDraggingThumb = false;
+                customThumb.style.cursor = 'grab';
+            });
+
+            // Handle thumb dragging (Touch events for mobile)
+            customThumb.addEventListener('touchstart', (e) => {
+                isDraggingThumb = true;
+                startXThumb = e.touches[0].clientX; // Use clientX from the first touch
+                thumbOffset = customThumb.offsetLeft;
+                customThumb.style.cursor = 'grabbing';
+                e.preventDefault(); // Prevent scrolling while dragging thumb
+            }, { passive: false }); // Use passive: false to allow preventDefault
+
+            document.addEventListener('touchmove', (e) => {
+                if (!isDraggingThumb) return;
+                
+                const trackWidth = customTrack.clientWidth;
+                const thumbWidth = customThumb.clientWidth;
+                const maxThumbLeft = trackWidth - thumbWidth;
+
+                let newLeft = thumbOffset + (e.touches[0].clientX - startXThumb); // Use clientX from the first touch
+                newLeft = Math.max(0, Math.min(newLeft, maxThumbLeft));
+
+                customThumb.style.left = `${newLeft}px`;
+                updateReviewPositions();
+                e.preventDefault(); // Prevent scrolling while dragging thumb
+            }, { passive: false });
+
+            document.addEventListener('touchend', () => {
+                isDraggingThumb = false;
+                customThumb.style.cursor = 'grab';
+            });
+
+            // Handle clicking on the track to jump thumb
+            customTrack.addEventListener('click', (e) => {
+                if (e.target === customThumb) return; // Don't trigger if thumb itself is clicked
+
+                const trackRect = customTrack.getBoundingClientRect();
+                const clickX = e.clientX - trackRect.left;
+                const thumbWidth = customThumb.clientWidth;
+                const maxThumbLeft = trackRect.width - thumbWidth;
+
+                let newLeft = clickX - (thumbWidth / 2); // Center thumb on click
+                newLeft = Math.max(0, Math.min(newLeft, maxThumbLeft));
+
+                customThumb.style.left = `${newLeft}px`;
+                updateReviewPositions();
+            });
+
+            // Recalculate on window resize
+            window.addEventListener('resize', () => {
+                initializeThumb();
+            });
+
+            initializeThumb(); // Initial setup
+
+            // Ensure reviews are correctly positioned on load
+            updateReviewPositions();
+
+
+            // Fix for Safari and other browsers not playing videos initially
+            // Check if video elements exist before trying to play
+            const heroVideo = document.querySelector('.hero-video');
+            if (heroVideo) {
+                heroVideo.play().catch(error => {
+                    console.error("Hero video autoplay failed:", error);
+                    // Mute and try playing again for browser policies
+                    heroVideo.muted = true;
+                    heroVideo.play().catch(e => console.error("Muted hero video autoplay failed:", e));
+                });
+            }
+
+            document.querySelectorAll('.video-background').forEach(video => {
+                video.play().catch(error => {
+                    console.error("Background video autoplay failed:", video.src, error);
+                    video.muted = true;
+                    video.play().catch(e => console.error("Muted background video autoplay failed:", video.src, e));
+                });
+            });
+
+            // --- Formspree AJAX Submission ---
+            const contactForm = document.getElementById('contactForm');
+            const thankYouMessage = document.getElementById('thankYouMessage');
+            const formspreeEndpoint = 'https://formspree.io/f/mpwrkplj'; // Your unique Formspree URL
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', async function(event) {
+                    event.preventDefault(); // Prevent the default form submission (which would redirect)
+
+                    const formData = new FormData(contactForm); // Get form data
+                    const response = await fetch(formspreeEndpoint, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json' // Essential for Formspree to return JSON, not redirect
+                        }
+                    });
+
+                    if (response.ok) {
+                        // Submission successful
+                        contactForm.reset(); // Clear the form fields
+                        contactForm.classList.add('hidden'); // Hide the form
+                        thankYouMessage.classList.remove('hidden'); // Show the thank you message
+                    } else {
+                        // Handle errors (optional, but good practice)
+                        console.error('Form submission failed');
+                        alert('Oops! There was a problem submitting your form. Please try again.');
+                        // You could also display a more specific error message on the page
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
