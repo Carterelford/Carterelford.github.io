@@ -237,8 +237,10 @@
 									headers: { 'Accept': 'application/json' }
 								});
 								if (res.ok) {
-									var reflectionFormWrap = document.querySelector('.content--reflection form');
-									if (reflectionFormWrap) reflectionFormWrap.closest('.credits').style.display = 'none';
+									var reflectionForm = document.querySelector('.content--reflection form');
+									if (reflectionForm) reflectionForm.style.display = 'none';
+									var reflectionMsg = document.getElementById('gc-form-msg-reflection');
+									if (reflectionMsg) { reflectionMsg.innerHTML = "<span style=\"font-family:'ivymode',serif;\">✓</span><br><span style=\"font-family:'ouma-latin-variable',sans-serif;\">talk soon.</span>"; reflectionMsg.style.display = 'block'; }
 									form.style.transition = 'opacity 0.4s ease';
 									form.style.opacity = '0';
 									setTimeout(function() {
@@ -433,6 +435,7 @@
 							<input type="text" placeholder="Is there a time of year calling you?" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ivymode',serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:3rem; outline:none; display:block;">
 							<button class="gc-shine" type="button" style="background:transparent; border:1px solid rgba(149,119,204,0.25); border-radius:100px; color:#9577cc; font-family:'forma-djr-mono',monospace; font-size:1.5rem; letter-spacing:0.18em; text-transform:none; padding:20px 72px; -webkit-appearance:none; appearance:none; -webkit-font-smoothing:antialiased;">Submit</button>
 						</form>
+						<p id="gc-form-msg-reflection" style="margin-top:2rem; font-size:1.2rem; letter-spacing:0.06em; color:#9577cc; display:none; line-height:1.9;"></p>
 					</div>
 					<div class="gc-verdict-row">
 						<div class="gc-verdict-stack gc-verdict-left">
