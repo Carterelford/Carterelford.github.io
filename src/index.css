@@ -14,10 +14,6 @@ body {
     overflow-x: hidden;
     max-width: 100vw;
   }
-  /* Match all 3 main titles to same mobile size */
-  h1.font-black.uppercase.leading-none { font-size: clamp(52px, 11vw, 180px) !important; }
-  .hero-title { font-size: clamp(52px, 11vw, 240px) !important; }
-  .parallax__title { font-size: clamp(52px, 11vw, 140px) !important; }
 }
 
 #root {
