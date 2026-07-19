@@ -68,7 +68,7 @@
 		@media (max-width: 768px) { .content > figure:nth-of-type(1), .content > figure:nth-of-type(3) { display: none; } }
 		@media (max-width: 768px) { .content > figure:nth-of-type(2) { grid-column: 1 / -1; justify-self: center; width: 75vw; margin-top: -8vh; } }
 		@media (max-width: 768px) { .content > figure:nth-of-type(2) .item__img-inner { background-image: url(img/Copilot_20260719_121038.jpg) !important; } }
-		@media (max-width: 768px) { #gc-surround-title { font-weight: 700 !important; } #gc-surround-title .gc-s-line { display: block; } #gc-surround-title .gc-hide-mob { display: none; } }
+		@media (max-width: 768px) { #gc-surround-title { display: none !important; } .gc-surround-mob { display: block !important; font-weight: 700; } }
 		/* Keep inputs transparent always, delay autofill color change so it never visually appears */
 		input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active { transition: background-color 9999s ease 0s, color 9999s ease 0s !important; -webkit-text-fill-color: #fff !important; }
 		/* Use ouma-latin-variable to match "3x Founder" style */
@@ -121,7 +121,7 @@
 					</div>
 				</figure>
 				<div class="credits" style="margin-bottom:0; margin-top:-2.5vh;">
-					<p id="gc-surround-title" style="max-width:800px; margin:0 auto 2rem; line-height:1.7; font-size:1.65rem; letter-spacing:0.18em; color:#9577cc;"><span class="gc-hide-mob">Surround yourself with </span><span class="gc-s-line">the people you've</span><span class="gc-s-line"> <em>been looking for.</em></span></p>
+					<p id="gc-surround-title" style="max-width:800px; margin:0 auto 2rem; line-height:1.7; font-size:1.65rem; letter-spacing:0.18em; color:#9577cc;">Surround yourself with the people<br><em>you've been looking for.</em></p><p class="gc-surround-mob" style="max-width:800px; margin:0 auto 2rem; line-height:1.7; font-size:1.65rem; letter-spacing:0.18em; color:#9577cc; display:none;">the people you've<br>been looking for.</p>
 					<p style="max-width:800px; margin:0 auto 1.2rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">We take entrepreneurs, creators, builders, or simply like-minded driven people at any stage of their journey, and bring them together in a luxury villa, somewhere in the world, for up to one month.</p>
 					<p style="max-width:800px; margin:0 auto 1.2rem; line-height:2; opacity:0.95; font-size:1.6rem; font-weight:700;">The right people, in the right place, at the right time. Because the thing that changes everything isn't a course or a book. It's being in a room where everyone around you is on the same path, already moving, and you have no choice but to move too.</p>					<div style="margin-top:2.5rem;">
 						<a class="gc-shine" href="#apply-form" style="display:inline-block; background:transparent; border:1px solid rgba(149,119,204,0.25); border-radius:100px; color:#9577cc; font-family:’forma-djr-mono’,monospace; font-size:1.5rem; letter-spacing:0.18em; text-transform:none; text-decoration:none; padding:20px 72px; cursor:pointer; transition:border-color 0.3s, background 0.3s; -webkit-font-smoothing:antialiased;" onmouseover="this.style.borderColor=’rgba(149,119,204,0.7)’;this.style.background=’rgba(149,119,204,0.06)’" onmouseout="this.style.borderColor=’rgba(149,119,204,0.25)’;this.style.background=’transparent’">Apply</a>
