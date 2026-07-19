@@ -14,6 +14,9 @@ body {
     overflow-x: hidden;
     max-width: 100vw;
   }
+  .hero-title {
+    font-size: 18vw !important;
+  }
 }
 
 #root {
