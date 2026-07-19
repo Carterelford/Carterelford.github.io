@@ -494,6 +494,7 @@ export const Component = () => {
     });
 
     // ── Idle orbit ───────────────────────────────────────────────────────
+    const isMobile = window.matchMedia('(pointer: coarse)').matches;
     const ORBIT_PERIOD = 30000;
     let orbitRaf = 0;
     let startTime = performance.now();
@@ -501,7 +502,7 @@ export const Component = () => {
 
     const orbitTick = (now: number) => {
       orbitRaf = requestAnimationFrame(orbitTick);
-      if (mouseActive) return; // mouse driving gradient; skip orbit
+      if (mouseActive || isMobile) return; // mouse or mobile scroll drives gradient
       const t = ((now - startTime) % ORBIT_PERIOD) / ORBIT_PERIOD;
       const θ = t * Math.PI * 2;
       const hx = 50 + 38 * Math.cos(θ);
@@ -639,6 +640,73 @@ export const Component = () => {
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, [totalSections]);
+
+  // Mobile: parallax drift + gradient shift + shine sweep on scroll
+  useEffect(() => {
+    if (!isReady) return;
+    if (!window.matchMedia('(pointer: coarse)').matches) return;
+
+    const titles = Array.from(
+      document.querySelectorAll('.hero-title')
+    ) as HTMLElement[];
+    const vh = window.innerHeight;
+    let rafId = 0;
+
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+
+        titles.forEach((el, i) => {
+          const rect = el.getBoundingClientRect();
+
+          // 1. Parallax — first title lags behind scroll; others float through viewport
+          const translateY = i === 0
+            ? Math.min(scrollY * 0.12, 60)
+            : (rect.top - vh * 0.45) * 0.09;
+          el.style.transform = `translateY(${translateY}px)`;
+
+          // 2. Gradient color shift tied to scroll position
+          const hx = 50 + 35 * Math.sin(scrollY * 0.004 + i * 2.1);
+          const hy = 40 + 28 * Math.cos(scrollY * 0.003 + i * 1.7);
+          const angle = (scrollY * 0.08 + i * 120) % 360;
+          el.style.setProperty('--hx', `${hx}%`);
+          el.style.setProperty('--hy', `${hy}%`);
+          el.style.setProperty('--hangle', `${angle}deg`);
+          el.style.setProperty('background-position', `${hx}% ${hy}%`);
+        });
+      });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // 3. Shine sweep fires each time a title enters the viewport
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const el = entry.target as HTMLElement;
+        if (entry.isIntersecting) {
+          el.classList.remove('mobile-shine-active');
+          void el.offsetWidth; // force reflow to restart animation
+          el.classList.add('mobile-shine-active');
+        } else {
+          el.classList.remove('mobile-shine-active');
+        }
+      });
+    }, { threshold: 0.5 });
+
+    titles.forEach(t => observer.observe(t));
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('scroll', onScroll);
+      observer.disconnect();
+      titles.forEach(el => {
+        el.style.transform = '';
+        el.classList.remove('mobile-shine-active');
+      });
+    };
+  }, [isReady]);
 
   return (
     <div ref={containerRef} className="hero-container cosmos-style">
