@@ -237,6 +237,8 @@
 									headers: { 'Accept': 'application/json' }
 								});
 								if (res.ok) {
+									var reflectionFormWrap = document.querySelector('.content--reflection form');
+									if (reflectionFormWrap) reflectionFormWrap.closest('.credits').style.display = 'none';
 									form.style.transition = 'opacity 0.4s ease';
 									form.style.opacity = '0';
 									setTimeout(function() {
