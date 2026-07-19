@@ -21,7 +21,6 @@ body {
   }
   .hero-title {
     font-size: 18vw !important;
-    overflow: hidden !important;
     position: relative;
   }
   .hero-title::after {
