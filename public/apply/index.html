@@ -71,8 +71,7 @@
 		input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active { transition: background-color 9999s ease 0s, color 9999s ease 0s !important; -webkit-text-fill-color: #fff !important; }
 		/* Use ouma-latin-variable to match "3x Founder" style */
 		#gc-apply-form input, #gc-apply-form select { font-family: 'ouma-latin-variable', sans-serif !important; font-variation-settings: "wght" 400 !important; }
-		/* Match placeholder text to subtitle style */
-		#gc-apply-form input::placeholder { color: #2935ba; opacity: 0.85; }
+		#gc-apply-form input::placeholder { color: rgba(255,255,255,0.38); }
 		/* Button hover effect */
 		a.gc-shine:hover, button.gc-shine:hover { border-color:rgba(149,119,204,0.7) !important; background:rgba(149,119,204,0.06) !important; }
 		/* Intro section shine */
@@ -215,7 +214,7 @@
 						<input type="text" name="name" placeholder="Your Name" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ouma-latin-variable',sans-serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'">
 						<input type="email" name="email" placeholder="Your Email" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ouma-latin-variable',sans-serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'">
 						<input type="text" name="reason" placeholder="Why do you want to join?" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:#fff; font-family:'ouma-latin-variable',sans-serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'">
-						<select name="region" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:rgba(41,53,186,0.85); font-family:'ouma-latin-variable',sans-serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block; -webkit-appearance:none; appearance:none; cursor:pointer;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'; this.style.color='#fff'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'; if(this.value==='') this.style.color='rgba(41,53,186,0.85)'">
+						<select name="region" style="width:100%; background:transparent; border:none; border-bottom:1px solid rgba(149,119,204,0.2); color:rgba(255,255,255,0.38); font-family:'ouma-latin-variable',sans-serif; font-size:1.3rem; letter-spacing:0.05em; padding:1rem 0; margin-bottom:2rem; outline:none; display:block; -webkit-appearance:none; appearance:none; cursor:pointer;" onfocus="this.style.borderBottomColor='rgba(149,119,204,0.7)'; this.style.color='#fff'" onblur="this.style.borderBottomColor='rgba(149,119,204,0.2)'; if(this.value==='') this.style.color='rgba(255,255,255,0.38)'">
 							<option value="" disabled selected style="background:#0d0d0d; color:rgba(149,119,204,0.4);">Which region are you able to travel to?</option>
 							<option value="europe" style="background:#0d0d0d; color:#fff;">Europe</option>
 							<option value="middle-east" style="background:#0d0d0d; color:#fff;">Middle East</option>
