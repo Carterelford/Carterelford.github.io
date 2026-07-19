@@ -64,10 +64,11 @@
 		.content--reflection .gc-verdict-right .gc-vc:nth-child(3):hover { transform:skewY(6deg) translateX(-110px) translateY(72px); }
 
 		@media (max-width: 768px) { .gc-verdict-right { display: none; } }
-		/* Prevent browser autofill color flash — transition for Chrome, box-shadow for iOS Safari */
-		input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active { -webkit-box-shadow: 0 0 0 1000px rgb(14,3,33) inset !important; -webkit-text-fill-color: #fff !important; transition: background-color 9999s ease-in-out 0s; }
-		/* Prevent inherited uppercase from body on inputs */
-		#gc-apply-form input, #gc-apply-form select { text-transform: none !important; font-family: 'forma-djr-mono', monospace !important; }
+		/* Match autofill background to page — give inputs explicit background so autofill has nothing to change */
+		#gc-apply-form input { background-color: rgb(14,3,33) !important; }
+		input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active { -webkit-box-shadow: 0 0 0 1000px rgb(14,3,33) inset !important; -webkit-text-fill-color: #fff !important; }
+		/* Use ouma-latin-variable to match "3x Founder" style */
+		#gc-apply-form input, #gc-apply-form select { font-family: 'ouma-latin-variable', sans-serif !important; font-variation-settings: "wght" 400 !important; }
 		/* Button hover effect */
 		a.gc-shine:hover, button.gc-shine:hover { border-color:rgba(149,119,204,0.7) !important; background:rgba(149,119,204,0.06) !important; }
 		/* Intro section shine */
