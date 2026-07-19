@@ -243,6 +243,8 @@
 									if (reflectionForm) reflectionForm.style.display = 'none';
 									var reflectionMsg = document.getElementById('gc-form-msg-reflection');
 									if (reflectionMsg) { reflectionMsg.innerHTML = "<span style=\"font-family:'ivymode',serif;\">✓</span><br><span style=\"font-family:'ouma-latin-variable',sans-serif;\">talk soon.</span>"; reflectionMsg.style.display = 'block'; }
+									var applyFormDiv = document.getElementById('apply-form');
+									if (applyFormDiv) applyFormDiv.style.minHeight = applyFormDiv.offsetHeight + 'px';
 									form.style.transition = 'opacity 0.4s ease';
 									form.style.opacity = '0';
 									setTimeout(function() {
