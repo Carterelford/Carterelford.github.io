@@ -670,27 +670,9 @@ export const Component = () => {
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
-    // Shine sweep fires each time a title enters the viewport
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const el = entry.target as HTMLElement;
-        if (entry.isIntersecting) {
-          el.classList.remove('mobile-shine-active');
-          void el.offsetWidth;
-          el.classList.add('mobile-shine-active');
-        } else {
-          el.classList.remove('mobile-shine-active');
-        }
-      });
-    }, { threshold: 0.5 });
-
-    titles.forEach(t => observer.observe(t));
-
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener('scroll', onScroll);
-      observer.disconnect();
-      titles.forEach(el => el.classList.remove('mobile-shine-active'));
     };
   }, [isReady]);
 

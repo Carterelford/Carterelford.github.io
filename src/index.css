@@ -9,11 +9,6 @@ body {
   overflow-x: hidden;
 }
 
-@keyframes mobile-title-shine {
-  from { transform: skewX(-15deg) translateX(-300%); }
-  to   { transform: skewX(-15deg) translateX(900%); }
-}
-
 @media (max-width: 768px) {
   html, body {
     overflow-x: hidden;
@@ -21,22 +16,6 @@ body {
   }
   .hero-title {
     font-size: 18vw !important;
-    position: relative;
-  }
-  .hero-title::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: 0;
-    width: 40%;
-    height: 200%;
-    background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.22) 50%, transparent 80%);
-    transform: skewX(-15deg) translateX(-300%);
-    pointer-events: none;
-    z-index: 1;
-  }
-  .hero-title.mobile-shine-active::after {
-    animation: mobile-title-shine 1.5s ease-out forwards;
   }
 }
 
