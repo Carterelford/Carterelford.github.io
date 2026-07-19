@@ -254,6 +254,14 @@
 										requestAnimationFrame(function() {
 											requestAnimationFrame(function() { msg.style.opacity = '1'; });
 										});
+										// after success msg fades in, smoothly collapse the empty space
+										setTimeout(function() {
+											var afd = document.getElementById('apply-form');
+											if (afd) {
+												afd.style.transition = 'min-height 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+												afd.style.minHeight = '0';
+											}
+										}, 900);
 									}, 400);
 								} else {
 									btn.disabled = false;
