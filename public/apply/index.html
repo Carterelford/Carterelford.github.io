@@ -71,8 +71,8 @@
 		/* Keep inputs transparent always, delay autofill color change so it never visually appears */
 		input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active { transition: background-color 9999s ease 0s, color 9999s ease 0s !important; -webkit-text-fill-color: #fff !important; }
 		/* Use ouma-latin-variable to match "3x Founder" style */
-		#gc-apply-form input, #gc-apply-form select { font-family: 'ouma-latin-variable', sans-serif !important; font-variation-settings: "wght" 400 !important; }
-		#gc-apply-form input::placeholder { color: rgba(255,255,255,0.38); }
+		#gc-apply-form input, #gc-apply-form select { font-family: 'ouma-latin-variable', sans-serif !important; font-variation-settings: "wght" 400 !important; text-transform: uppercase !important; }
+		#gc-apply-form input::placeholder { color: rgba(255,255,255,0.38); text-transform: uppercase; }
 		/* Button hover effect */
 		a.gc-shine:hover, button.gc-shine:hover { border-color:rgba(149,119,204,0.7) !important; background:rgba(149,119,204,0.06) !important; }
 		/* Intro section shine */
