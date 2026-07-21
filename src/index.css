@@ -17,6 +17,9 @@ body {
   .hero-title {
     font-size: 18vw !important;
   }
+  .hero-content {
+    gap: 16px !important;
+  }
 }
 
 #root {
