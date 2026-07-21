@@ -1,8 +1,6 @@
 // Importing utility function for preloading images
 import { preloadImages } from '../utils.js';
 
-const isMobile = window.matchMedia('(pointer: coarse)').matches;
-
 // Variable to store the Lenis smooth scrolling object
 let lenis;
 
@@ -10,7 +8,7 @@ let lenis;
 const contentEl = document.querySelector('.content');
 const reflectionEl = document.querySelector('.content--reflection');
 const contentItems = [...contentEl.querySelectorAll('.item__inner')];
-const reflectionItems = reflectionEl ? [...reflectionEl.querySelectorAll('.item__inner')] : [];
+const reflectionItems = [...reflectionEl.querySelectorAll('.item__inner')];
 
 // Initializes Lenis for smooth scrolling with specific properties
 const initSmoothScrolling = () => {
@@ -31,7 +29,7 @@ const initSmoothScrolling = () => {
         requestAnimationFrame(scrollFn); // Recursively call scrollFn on each frame
 
         // Update translateY property of .content--reflection based on scroll amount
-        if (!isMobile && reflectionEl) reflectionEl.style.transform = `translateY(${-lenis.actualScroll}px)`;
+        reflectionEl.style.transform = `translateY(${-lenis.actualScroll}px)`;
     };
     // Start the animation frame loop
     requestAnimationFrame(scrollFn);
@@ -40,8 +38,8 @@ const initSmoothScrolling = () => {
 // Function to handle scroll-triggered animations
 const scroll = () => {
     contentItems.forEach((item, pos) => {
-        const reflectionItem = isMobile ? null : reflectionItems[pos];
-        
+        const reflectionItem = reflectionItems[pos];
+
         gsap.timeline({
             scrollTrigger: {
                 trigger: item,
@@ -50,7 +48,7 @@ const scroll = () => {
                 scrub: true
             }
         })
-        .fromTo(reflectionItem ? [item, reflectionItem] : [item], {
+        .fromTo([item, reflectionItem], {
             transformOrigin: '50% 120%',
             filter: 'contrast(120%) brightness(100%)'
         }, {
@@ -60,7 +58,7 @@ const scroll = () => {
             scaleY: 0.8,
             filter: 'contrast(65%) brightness(30%)'
         }, 0)
-        .fromTo(reflectionItem ? [item.querySelector('.item__img-inner'), reflectionItem.querySelector('.item__img-inner')] : [item.querySelector('.item__img-inner')], {
+        .fromTo([item.querySelector('.item__img-inner'), reflectionItem.querySelector('.item__img-inner')], {
             scale: 1
         }, {
             ease: 'sine.inOut',
