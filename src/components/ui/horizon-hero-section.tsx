@@ -566,33 +566,12 @@ export const Component = () => {
       setTimeout(() => titles.forEach(el => { el.style.transition = 'none'; }), 1250);
     };
 
-    // ── Mobile scroll tilt ────────────────────────────────────────────────
-    let mobileRaf = 0;
-    if (isMobile) {
-      let tiltX = 0;
-      const mobileTick = () => {
-        mobileRaf = requestAnimationFrame(mobileTick);
-        // Map scroll position within the hero (0..innerHeight) to tilt angle.
-        // Top = +3.5° (lean forward), mid = 0°, bottom = -3.5° (lean back).
-        // Mirrors how desktop maps mouse Y position to the same ±3.5° range.
-        const norm = Math.max(0, Math.min(1, window.scrollY / window.innerHeight));
-        const target = (0.5 - norm) * 7;
-        tiltX += (target - tiltX) * 0.1; // smooth follow, holds at scroll position
-        titles.forEach(el => {
-          el.style.transition = 'none';
-          el.style.transform = `perspective(900px) rotateX(${tiltX.toFixed(3)}deg)`;
-        });
-      };
-      mobileRaf = requestAnimationFrame(mobileTick);
-    } else {
-      window.addEventListener('mousemove', onMove, { passive: true });
-      document.documentElement.addEventListener('mouseleave', onLeaveWindow);
-    }
+    window.addEventListener('mousemove', onMove, { passive: true });
+    document.documentElement.addEventListener('mouseleave', onLeaveWindow);
 
     return () => {
       cancelAnimationFrame(orbitRaf);
       cancelAnimationFrame(globalRaf);
-      cancelAnimationFrame(mobileRaf);
       window.removeEventListener('mousemove', onMove);
       document.documentElement.removeEventListener('mouseleave', onLeaveWindow);
     };
