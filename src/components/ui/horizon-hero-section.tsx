@@ -569,22 +569,19 @@ export const Component = () => {
     // ── Mobile scroll tilt ────────────────────────────────────────────────
     let mobileRaf = 0;
     if (isMobile) {
-      let prevScrollY = window.scrollY;
       let tiltX = 0;
       const mobileTick = () => {
         mobileRaf = requestAnimationFrame(mobileTick);
-        const currY = window.scrollY;
-        const delta = currY - prevScrollY;
-        prevScrollY = currY;
-        // Scrolling down → lean back (negative rx); up → lean forward
-        const target = -Math.max(-3.5, Math.min(3.5, delta * 0.35));
-        tiltX += (target - tiltX) * 0.12;
-        if (Math.abs(tiltX) > 0.015) {
-          titles.forEach(el => {
-            el.style.transition = 'none';
-            el.style.transform = `perspective(900px) rotateX(${tiltX.toFixed(3)}deg)`;
-          });
-        }
+        // Map scroll position within the hero (0..innerHeight) to tilt angle.
+        // Top = +3.5° (lean forward), mid = 0°, bottom = -3.5° (lean back).
+        // Mirrors how desktop maps mouse Y position to the same ±3.5° range.
+        const norm = Math.max(0, Math.min(1, window.scrollY / window.innerHeight));
+        const target = (0.5 - norm) * 7;
+        tiltX += (target - tiltX) * 0.1; // smooth follow, holds at scroll position
+        titles.forEach(el => {
+          el.style.transition = 'none';
+          el.style.transform = `perspective(900px) rotateX(${tiltX.toFixed(3)}deg)`;
+        });
       };
       mobileRaf = requestAnimationFrame(mobileTick);
     } else {
