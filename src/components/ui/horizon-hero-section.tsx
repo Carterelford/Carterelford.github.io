@@ -742,7 +742,7 @@ export const Component = () => {
 
           return (
             <section key={i} className="content-section">
-              <h1 className="hero-title">
+              <h1 className="hero-title" style={i === 1 ? { fontSize: 'clamp(82px, 19.5vw, 250px)' } : undefined}>
                 {titles[i+1] || 'DEFAULT'}
               </h1>
 
