@@ -566,12 +566,36 @@ export const Component = () => {
       setTimeout(() => titles.forEach(el => { el.style.transition = 'none'; }), 1250);
     };
 
-    window.addEventListener('mousemove', onMove, { passive: true });
-    document.documentElement.addEventListener('mouseleave', onLeaveWindow);
+    // ── Mobile scroll tilt ────────────────────────────────────────────────
+    let mobileRaf = 0;
+    if (isMobile) {
+      let prevScrollY = window.scrollY;
+      let tiltX = 0;
+      const mobileTick = () => {
+        mobileRaf = requestAnimationFrame(mobileTick);
+        const currY = window.scrollY;
+        const delta = currY - prevScrollY;
+        prevScrollY = currY;
+        // Scrolling down → lean back (negative rx); up → lean forward
+        const target = -Math.max(-3.5, Math.min(3.5, delta * 0.35));
+        tiltX += (target - tiltX) * 0.12;
+        if (Math.abs(tiltX) > 0.015) {
+          titles.forEach(el => {
+            el.style.transition = 'none';
+            el.style.transform = `perspective(900px) rotateX(${tiltX.toFixed(3)}deg)`;
+          });
+        }
+      };
+      mobileRaf = requestAnimationFrame(mobileTick);
+    } else {
+      window.addEventListener('mousemove', onMove, { passive: true });
+      document.documentElement.addEventListener('mouseleave', onLeaveWindow);
+    }
 
     return () => {
       cancelAnimationFrame(orbitRaf);
       cancelAnimationFrame(globalRaf);
+      cancelAnimationFrame(mobileRaf);
       window.removeEventListener('mousemove', onMove);
       document.documentElement.removeEventListener('mouseleave', onLeaveWindow);
     };
