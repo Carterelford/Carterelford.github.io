@@ -31,7 +31,7 @@
 		.gc-ticker { display: inline-flex; white-space: nowrap; align-items: center; animation: gc-scroll 45s linear infinite; }
 		@keyframes gc-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-		.gc-verdict-row { display:none; opacity:0; transition:opacity 0.6s ease; justify-content:space-between; align-items:flex-start; width:100%; grid-column:1 / -1; padding:2rem 6vw 8rem; }
+		.gc-verdict-row { display:flex; justify-content:space-between; align-items:flex-start; width:100%; grid-column:1 / -1; padding:2rem 6vw 8rem; }
 		.gc-verdict-stack { display:grid; grid-template-areas:'stack'; place-items:center; }
 		.gc-vc { grid-area:stack; position:relative; width:360px; background:rgba(149,119,204,0.08); border:1px solid rgba(149,119,204,0.28); border-radius:14px; padding:2rem 2.2rem; transition:transform 0.6s cubic-bezier(0.23,1,0.32,1), border-color 0.3s; cursor:default; overflow:hidden; will-change:transform; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); }
 		.gc-vc:hover { border-color:rgba(149,119,204,0.5); }
@@ -253,11 +253,9 @@
 										form.style.display = 'none';
 										msg.innerHTML = "<span style=\"font-family:'ivymode',serif;\">✓</span><br><span style=\"font-family:'ouma-latin-variable',sans-serif;\">talk soon.</span>";
 										msg.style.display = 'block';
-										document.querySelectorAll('.gc-verdict-row').forEach(function(vr) { vr.style.display = 'flex'; });
 										requestAnimationFrame(function() {
 											requestAnimationFrame(function() {
 												msg.style.opacity = '1';
-												document.querySelectorAll('.gc-verdict-row').forEach(function(vr) { vr.style.opacity = '1'; });
 											});
 										});
 									}, 400);
