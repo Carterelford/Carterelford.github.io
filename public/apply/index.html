@@ -226,6 +226,9 @@
 						<button class="gc-shine" type="submit" style="background:transparent; border:1px solid rgba(149,119,204,0.25); border-radius:100px; color:#9577cc; font-family:'forma-djr-mono',monospace; font-size:1.5rem; letter-spacing:0.18em; text-transform:none; padding:20px 72px; cursor:pointer; transition:border-color 0.3s, background 0.3s; -webkit-appearance:none; appearance:none; -webkit-font-smoothing:antialiased;" onmouseover="this.style.borderColor='rgba(149,119,204,0.7)';this.style.background='rgba(149,119,204,0.06)'" onmouseout="this.style.borderColor='rgba(149,119,204,0.25)';this.style.background='transparent'">Submit</button>
 					</form>
 					<p id="gc-form-msg" style="margin-top:4rem; text-align:center; display:none; opacity:0; transition:opacity 0.6s ease;"></p>
+					<div id="gc-globe-wrap" style="display:none; width:min(260px,88vw); margin:2.5rem auto 0; opacity:0; transition:opacity 1.2s ease;">
+						<canvas id="gc-globe-canvas" style="display:block; width:100%; height:100%; border-radius:50%;"></canvas>
+					</div>
 					<script>
 						document.getElementById('gc-apply-form').addEventListener('submit', async function(e) {
 							e.preventDefault();
@@ -251,6 +254,7 @@
 									form.style.opacity = '0';
 									setTimeout(function() {
 										form.style.display = 'none';
+										if (applyFormDiv) applyFormDiv.style.minHeight = '';
 										msg.innerHTML = "<span style=\"font-family:'ivymode',serif;\">✓</span><br><span style=\"font-family:'ouma-latin-variable',sans-serif;\">talk soon.</span>";
 										msg.style.display = 'block';
 										requestAnimationFrame(function() {
@@ -258,6 +262,52 @@
 												msg.style.opacity = '1';
 											});
 										});
+										var globeWrap = document.getElementById('gc-globe-wrap');
+										if (globeWrap) {
+											globeWrap.style.display = 'block';
+											import('https://esm.sh/cobe').then(function(m) {
+												var createGlobe = m.default;
+												var canvas = document.getElementById('gc-globe-canvas');
+												var size = globeWrap.offsetWidth;
+												canvas.style.height = size + 'px';
+												var phi = 0;
+												createGlobe(canvas, {
+													devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+													width: size,
+													height: size,
+													phi: 0,
+													theta: 0.35,
+													dark: 1,
+													diffuse: 1.4,
+													mapSamples: 16000,
+													mapBrightness: 7,
+													baseColor: [0.18, 0.1, 0.35],
+													markerColor: [0.58, 0.47, 0.8],
+													glowColor: [0.2, 0.1, 0.38],
+													markers: [
+														{ location: [43.73, 7.42], size: 0.07 },
+														{ location: [-8.34, 115.09], size: 0.07 },
+														{ location: [25.2, 55.27], size: 0.07 },
+														{ location: [35.68, 139.65], size: 0.07 },
+														{ location: [51.51, -0.13], size: 0.07 },
+														{ location: [48.86, 2.35], size: 0.07 },
+														{ location: [40.71, -74.01], size: 0.07 },
+														{ location: [-33.87, 151.21], size: 0.07 },
+														{ location: [1.35, 103.82], size: 0.07 },
+														{ location: [34.05, -118.24], size: 0.07 },
+													],
+													onRender: function(state) {
+														state.phi = phi;
+														phi += 0.003;
+													}
+												});
+												requestAnimationFrame(function() {
+													requestAnimationFrame(function() {
+														globeWrap.style.opacity = '1';
+													});
+												});
+											});
+										}
 									}, 400);
 								} else {
 									btn.disabled = false;
