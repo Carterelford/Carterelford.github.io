@@ -231,7 +231,7 @@
 						<button class="gc-shine" type="submit" style="background:transparent; border:1px solid rgba(149,119,204,0.25); border-radius:100px; color:#9577cc; font-family:'forma-djr-mono',monospace; font-size:1.5rem; letter-spacing:0.18em; text-transform:none; padding:20px 72px; cursor:pointer; transition:border-color 0.3s, background 0.3s; -webkit-appearance:none; appearance:none; -webkit-font-smoothing:antialiased;" onmouseover="this.style.borderColor='rgba(149,119,204,0.7)';this.style.background='rgba(149,119,204,0.06)'" onmouseout="this.style.borderColor='rgba(149,119,204,0.25)';this.style.background='transparent'"><span class="gc-btn-label">Submit</span></button>
 					</form>
 					<p id="gc-form-msg" style="margin-top:4rem; text-align:center; display:none; opacity:0; transition:opacity 0.6s ease;"></p>
-					<img id="gc-signature" src="img/signature.png" alt="" style="display:none; opacity:0; transition:opacity 1s ease; width:min(420px,90vw); margin:2rem auto 0; pointer-events:none; user-select:none;" />
+					<img id="gc-signature" src="img/signaturefounder.png" alt="" style="display:none; opacity:0; transition:opacity 1s ease; width:min(420px,90vw); margin:2rem auto 0; pointer-events:none; user-select:none;" />
 					<script>
 						document.getElementById('gc-apply-form').addEventListener('submit', async function(e) {
 							e.preventDefault();
@@ -249,8 +249,6 @@
 								if (res.ok) {
 									var reflectionForm = document.querySelector('.content--reflection form');
 									if (reflectionForm) reflectionForm.style.display = 'none';
-									var reflectionMsg = document.getElementById('gc-form-msg-reflection');
-									if (reflectionMsg) { reflectionMsg.innerHTML = "<span style=\"font-family:'ivymode',serif;\">✓</span><br><span style=\"font-family:'ouma-latin-variable',sans-serif;\">talk soon.</span>"; reflectionMsg.style.display = 'block'; }
 									var applyFormDiv = document.getElementById('apply-form');
 									if (applyFormDiv) applyFormDiv.style.minHeight = applyFormDiv.offsetHeight + 'px';
 									form.style.transition = 'opacity 0.4s ease';
@@ -258,13 +256,10 @@
 									setTimeout(function() {
 										form.style.display = 'none';
 										if (applyFormDiv) applyFormDiv.style.minHeight = '';
-										msg.innerHTML = "<span style=\"font-family:'ivymode',serif;\">✓</span><br><span style=\"font-family:'ouma-latin-variable',sans-serif;\">talk soon.</span>";
-										msg.style.display = 'block';
 										var sig = document.getElementById('gc-signature');
 										if (sig) sig.style.display = 'block';
 										requestAnimationFrame(function() {
 											requestAnimationFrame(function() {
-												msg.style.opacity = '1';
 												if (sig) sig.style.opacity = '1';
 											});
 										});
