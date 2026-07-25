@@ -86,6 +86,7 @@
 		.gc-shine { position:relative; overflow:hidden; }
 		.gc-shine::after { content:''; position:absolute; top:-50%; left:0; width:40%; height:200%; background:linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.18) 50%, transparent 80%); transform:skewX(-15deg) translateX(-300%); animation:gc-shine-sweep 8s ease-in-out infinite; pointer-events:none; }
 		@keyframes gc-shine-sweep { 0%,15% { transform:skewX(-15deg) translateX(-300%); } 65%,100% { transform:skewX(-15deg) translateX(900%); } }
+		.content--reflection .gc-verdict-row { display:none !important; }
 		/* Purple-pink gradient accent */
 		[style*="color:#9577cc"]:not(.gc-shine) { background:linear-gradient(135deg,#c084f5 0%,#ec4899 100%) !important; -webkit-background-clip:text !important; -webkit-text-fill-color:transparent !important; background-clip:text !important; }
 		.gc-vc-attr { background:linear-gradient(135deg,#c084f5 0%,#ec4899 100%) !important; -webkit-background-clip:text !important; -webkit-text-fill-color:transparent !important; background-clip:text !important; }
