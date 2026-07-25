@@ -252,6 +252,8 @@
 									if (reflectionForm) reflectionForm.style.display = 'none';
 									var applyFormDiv = document.getElementById('apply-form');
 									if (applyFormDiv) applyFormDiv.style.height = applyFormDiv.offsetHeight + 'px';
+									var applyFormRefl = document.getElementById('apply-form-reflection');
+									if (applyFormRefl) applyFormRefl.style.height = applyFormRefl.offsetHeight + 'px';
 									form.style.transition = 'opacity 0.4s ease';
 									form.style.opacity = '0';
 									setTimeout(function() {
@@ -260,10 +262,16 @@
 										if (inboxMsg) inboxMsg.style.display = 'block';
 										var sig = document.getElementById('gc-signature');
 										if (sig) sig.style.display = 'block';
+										var inboxMsgR = document.getElementById('gc-inbox-msg-reflection');
+										if (inboxMsgR) inboxMsgR.style.display = 'block';
+										var sigR = document.getElementById('gc-signature-reflection');
+										if (sigR) sigR.style.display = 'block';
 										requestAnimationFrame(function() {
 											requestAnimationFrame(function() {
 												if (inboxMsg) inboxMsg.style.opacity = '1';
 												if (sig) sig.style.opacity = '1';
+												if (inboxMsgR) inboxMsgR.style.opacity = '1';
+												if (sigR) sigR.style.opacity = '1';
 											});
 										});
 									}, 400);
@@ -425,7 +433,7 @@
 						</div>
 					</div>
 					<h2 class="content__title">The Verdict</h2>
-					<div class="credits" style="margin-bottom:0; text-align:center;">
+					<div id="apply-form-reflection" class="credits" style="margin-bottom:0; text-align:center;">
 						<p style="font-size:1.95rem; letter-spacing:0.18em; margin-bottom:0.5rem; color:#9577cc;">Apply to Join</p>
 						<p style="max-width:600px; margin:0 auto 3rem; line-height:2; opacity:0.85; font-size:1.15rem; letter-spacing:0.05em;">Approved members receive the full circuit map. Twelve cities, twelve windows, and an invitation to change your life.</p>
 						<form style="max-width:640px; margin:0 auto;">
@@ -444,6 +452,8 @@
 							<button class="gc-shine" type="button" style="background:transparent; border:1px solid rgba(149,119,204,0.25); border-radius:100px; color:#9577cc; font-family:'forma-djr-mono',monospace; font-size:1.5rem; letter-spacing:0.18em; text-transform:none; padding:20px 72px; -webkit-appearance:none; appearance:none; -webkit-font-smoothing:antialiased;"><span class="gc-btn-label">Submit</span></button>
 						</form>
 						<p id="gc-form-msg-reflection" style="margin-top:2rem; font-size:1.2rem; letter-spacing:0.06em; color:#9577cc; display:none; line-height:1.9;"></p>
+						<p id="gc-inbox-msg-reflection" style="max-width:600px; margin:4rem auto 0; line-height:2; color:rgba(255,255,255,0.85); opacity:0; font-size:1.15rem; letter-spacing:0.05em; text-align:center; display:none; transition:opacity 0.6s ease;">Keep an eye on your inbox.</p>
+						<img id="gc-signature-reflection" src="img/signaturefounder.png" alt="" style="display:none; opacity:0; transition:opacity 1s ease; width:min(780px,96vw); margin:7rem auto 0; pointer-events:none; user-select:none;" />
 				</div>
 				<div class="gc-verdict-row">
 						<div class="gc-verdict-stack gc-verdict-left">
