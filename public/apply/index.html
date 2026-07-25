@@ -231,7 +231,8 @@
 						<button class="gc-shine" type="submit" style="background:transparent; border:1px solid rgba(149,119,204,0.25); border-radius:100px; color:#9577cc; font-family:'forma-djr-mono',monospace; font-size:1.5rem; letter-spacing:0.18em; text-transform:none; padding:20px 72px; cursor:pointer; transition:border-color 0.3s, background 0.3s; -webkit-appearance:none; appearance:none; -webkit-font-smoothing:antialiased;" onmouseover="this.style.borderColor='rgba(149,119,204,0.7)';this.style.background='rgba(149,119,204,0.06)'" onmouseout="this.style.borderColor='rgba(149,119,204,0.25)';this.style.background='transparent'"><span class="gc-btn-label">Submit</span></button>
 					</form>
 					<p id="gc-form-msg" style="margin-top:4rem; text-align:center; display:none; opacity:0; transition:opacity 0.6s ease;"></p>
-					<img id="gc-signature" src="img/signaturefounder.png" alt="" style="display:none; opacity:0; transition:opacity 1s ease; width:min(780px,96vw); margin:5rem auto 0; pointer-events:none; user-select:none;" />
+					<p id="gc-inbox-msg" style="max-width:600px; margin:4rem auto 0; line-height:2; color:rgba(255,255,255,0.85); opacity:0; font-size:1.15rem; letter-spacing:0.05em; text-align:center; display:none; transition:opacity 0.6s ease;">Keep an eye on your inbox.</p>
+					<img id="gc-signature" src="img/signaturefounder.png" alt="" style="display:none; opacity:0; transition:opacity 1s ease; width:min(780px,96vw); margin:7rem auto 0; pointer-events:none; user-select:none;" />
 					<script>
 						document.getElementById('gc-apply-form').addEventListener('submit', async function(e) {
 							e.preventDefault();
@@ -255,10 +256,13 @@
 									form.style.opacity = '0';
 									setTimeout(function() {
 										form.style.display = 'none';
+										var inboxMsg = document.getElementById('gc-inbox-msg');
+										if (inboxMsg) inboxMsg.style.display = 'block';
 										var sig = document.getElementById('gc-signature');
 										if (sig) sig.style.display = 'block';
 										requestAnimationFrame(function() {
 											requestAnimationFrame(function() {
+												if (inboxMsg) inboxMsg.style.opacity = '1';
 												if (sig) sig.style.opacity = '1';
 											});
 										});
